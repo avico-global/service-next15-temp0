@@ -131,14 +131,14 @@ export default function Banner({ image, data, phone }) {
           <div className="relative flex flex-col justify-center">
             <div className="flex items-center justify-center lg:justify-start mb-8">
               <Image
-                src="/images/google.webp"
+                src="/st-images/google.webp"
                 width={100}
                 height={30}
                 alt="Google"
               />
 
               <Image
-                src="/images/trustpilot.webp"
+                src="/st-images/trustpilot.webp"
                 width={100}
                 height={30}
                 alt="Trustpilot"
@@ -146,7 +146,7 @@ export default function Banner({ image, data, phone }) {
               />
 
               <Image
-                src="/images/capterra.webp"
+                src="/st-images/capterra.webp"
                 width={100}
                 height={30}
                 alt="Capterra"

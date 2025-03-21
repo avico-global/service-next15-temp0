@@ -7,32 +7,50 @@ import CallButton from "../CallButton";
 import QuoteButton from "../QuoteButton";
 import { useRouter } from "next/router";
 
-export default function ServiceBanner({ phone, data }) {
+export default function ServiceBanner({ phone, data, image }) {
   const router = useRouter();
   const { service } = router.query;
 
   return (
-    <FullContainer className="relative min-h-[50vh]">
+    <FullContainer
+      className="relative overflow-hidden"
+      style={{
+        backgroundColor: `rgba(0, 0, 0, ${data?.opacity / 100})`,
+        color: data?.textColor || "white",
+      }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-950/60 to-blue-950/80"></div>
       <Image
-        src="/images/banner.webp"
-        alt="Professional chimney sweep services"
-        priority
-        fill
-        className="object-cover brightness-[0.7] transition-all duration-500"
+        src={image}
+        title={data?.imageTitle || data?.title || "Banner"}
+        alt={data?.altImage || data?.tagline || "No Banner Found"}
+        priority={true}
+        fill={true}
+        loading="eager"
+        className="-z-10 w-full h-52 transition-transform duration-700 hover:scale-105"
+        style={{ objectFit: "cover" }}
+        sizes="(max-width: 320px) 320px,
+             (max-width: 480px) 480px,
+             (max-width: 768px) 768px,
+             (max-width: 1024px) 1024px,
+             (max-width: 1280px) 1280px,
+             (max-width: 1600px) 1600px,
+             (max-width: 1920px) 1920px,
+             (max-width: 2560px) 2560px,
+             (max-width: 3840px) 3840px,
+             100vw"
       />
-
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-950/50 to-blue-950/70"></div>
       <Container className="h-full py-16 flex items-center relative z-10 gap-8 text-center">
         <div className="flex items-center justify-center lg:justify-start">
           <Image
-            src="/images/google.webp"
+            src="/st-images/google.webp"
             width={100}
             height={30}
             alt="Google"
           />
 
           <Image
-            src="/images/trustpilot.webp"
+            src="/st-images/trustpilot.webp"
             width={100}
             height={30}
             alt="Trustpilot"
@@ -40,7 +58,7 @@ export default function ServiceBanner({ phone, data }) {
           />
 
           <Image
-            src="/images/capterra.webp"
+            src="/st-images/capterra.webp"
             width={100}
             height={30}
             alt="Capterra"
