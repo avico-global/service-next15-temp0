@@ -5,6 +5,7 @@ import Navbar from "../../components/container/Navbar/Navbar";
 import ServiceCities from "../../components/container/ServiceCities";
 import Footer from "../../components/container/Footer";
 import ServiceBenefits from "../../components/container/home/ServiceBenefits";
+import Breadcrumbs from "@/components/common/Breadcrumbs";
 
 import {
   callBackendApi,
@@ -18,6 +19,9 @@ import About from "@/components/container/home/About";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import GoogleTagManager from "@/lib/GoogleTagManager";
+import useBreadcrumbs from "@/lib/useBreadcrumbs";
+import FullContainer from "@/components/common/FullContainer";
+import Container from "@/components/common/Container";
 
 export default function Service({
   logo,
@@ -35,6 +39,7 @@ export default function Service({
 }) {
   const router = useRouter();
   const { service } = router.query;
+  const breadcrumbs = useBreadcrumbs();
 
   return (
     <div>
@@ -96,6 +101,11 @@ export default function Service({
         imagePath={imagePath}
         phone={phone}
       />
+      <FullContainer>
+        <Container>
+          <Breadcrumbs breadcrumbs={breadcrumbs} className="pt-7" />
+        </Container>
+      </FullContainer>
       <About
         services={services?.list}
         phone={phone}

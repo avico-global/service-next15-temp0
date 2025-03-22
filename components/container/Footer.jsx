@@ -111,7 +111,7 @@ export default function Footer({ logo, imagePath, data }) {
                   Privacy Policy
                 </Link>
                 <Link
-                  href="/terms-conditions"
+                  href="/terms-and-conditions"
                   className="text-blue-200 hover:text-amber-400 transition-colors"
                 >
                   Terms & Conditions

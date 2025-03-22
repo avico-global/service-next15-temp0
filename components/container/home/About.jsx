@@ -20,7 +20,7 @@ export default function About({ services, phone, data, image }) {
   }, [data?.description]);
 
   return (
-    <FullContainer className="py-24" id="about-us">
+    <FullContainer className="pt-12 pb-20" id="about-us">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
           {/* Image Section */}
