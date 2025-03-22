@@ -56,7 +56,7 @@ export default function Benefits({ phone, data, image }) {
           {/* CTA Buttons */}
           <div className="flex w-full justify-center items-center gap-4 mt-6">
             <CallButton phone={phone} />
-            <QuoteButton />
+            <QuoteButton phone={phone} />
           </div>
         </div>
       </Container>

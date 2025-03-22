@@ -43,7 +43,7 @@ export default function Gallery({ phone, gallery = [], imagePath }) {
 
         <div className="flex w-full justify-center items-center gap-4">
           <CallButton phone={phone} />
-          <QuoteButton />
+          <QuoteButton phone={phone} />
         </div>
       </Container>
     </FullContainer>

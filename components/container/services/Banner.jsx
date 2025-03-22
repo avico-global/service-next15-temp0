@@ -3,8 +3,6 @@ import React from "react";
 import Container from "../../common/Container";
 import Image from "next/image";
 import banner from "../../../public/images/banner.webp";
-import QuoteForm from "../QuoteForm";
-import Button from "../../ui/Button";
 import FullContainer from "../../common/FullContainer";
 
 export default function Banner({ primaryColor, data }) {

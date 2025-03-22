@@ -1,8 +1,6 @@
 import React from "react";
 import Container from "../../common/Container";
 import Image from "next/image";
-import Button from "../../ui/Button";
-import ButtonSecondary from "../../ui/ButtonSecondary";
 import whyChooseImg from "../../../public/images/banner.webp";
 
 import Markdown from "react-markdown";

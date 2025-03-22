@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import Container from "../../common/Container";
 import Link from "next/link";
-import Button from "../../ui/Button";
 import { Phone, ChevronDown, Menu, X } from "lucide-react";
 import FullContainer from "../../common/FullContainer";
-import ButtonSecondary from "../../ui/ButtonSecondary";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Logo from "@/components/Logo";
 import { sanitizeUrl } from "@/lib/myFun";
 
@@ -52,7 +50,7 @@ export default function Navbar({ logo, imagePath, phone, services }) {
   };
 
   return (
-    <FullContainer className="shadow-sm w-full sticky top-0 z-50 bg-white py-1.5">
+    <FullContainer className="shadow-sm w-full sticky top-0 z-20 bg-white py-1.5">
       <Container>
         <div className="flex flex-row justify-between h-full items-center w-full">
           <Logo logo={logo} imagePath={imagePath} />

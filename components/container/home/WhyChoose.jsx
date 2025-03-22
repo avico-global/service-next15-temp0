@@ -68,7 +68,7 @@ export default function WhyChoose({ data, image, phone }) {
 
             <div className="flex flex-wrap w-full justify-start items-center gap-4 mt-10">
               <CallButton phone={phone} />
-              <QuoteButton />
+              <QuoteButton phone={phone} />
             </div>
           </div>
 

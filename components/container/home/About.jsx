@@ -67,7 +67,7 @@ export default function About({ services, phone, data, image }) {
 
             <div className="flex w-full items-center gap-4">
               <CallButton phone={phone} />
-              <QuoteButton />
+              <QuoteButton phone={phone} />
             </div>
           </div>
         </div>

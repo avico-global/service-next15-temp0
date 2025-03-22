@@ -121,7 +121,7 @@ export default function ServiceBanner({ phone, data, image }) {
         <div className="w-full h-px bg-gradient-to-r from-amber-500/0 via-amber-500/50 to-[#90D4E1]/0 mt-10"></div>
         <div className="flex items-center justify-center gap-6">
           <CallButton phone={phone} />
-          <QuoteButton />
+          <QuoteButton phone={phone} />
         </div>
       </Container>
     </FullContainer>

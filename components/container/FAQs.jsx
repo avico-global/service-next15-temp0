@@ -28,7 +28,7 @@ const faqs = [
 ];
 
 export default function Faqs() {
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState(null);
 
   return (
     <FullContainer className="py-20 bg-gray-50" id="faqs">
@@ -46,11 +46,11 @@ export default function Faqs() {
             and maintenance below.
           </p>
 
-          <div className="w-full max-w-3xl mx-auto space-y-3">
+          <div className="w-full max-w-3xl space-y-3">
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
+                className="overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-all duration-300 w-full relative"
               >
                 <button
                   onClick={() =>
@@ -77,19 +77,15 @@ export default function Faqs() {
                   </div>
                 </button>
 
-                <div
-                  className={`overflow-hidden bg-white border-x border-b ${
-                    openIndex === index
-                      ? "border-gray-100 rounded-b-xl"
-                      : "border-transparent"
-                  }`}
-                >
-                  <div className="px-4 py-3">
-                    <p className="text-gray-600 leading-relaxed text-left">
-                      {faq.answer}
-                    </p>
+                {openIndex === index && (
+                  <div className="bg-white border-x border-b border-gray-100 rounded-b-xl">
+                    <div className="px-4 py-3">
+                      <p className="text-gray-600 leading-relaxed text-left">
+                        {faq.answer}
+                      </p>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             ))}
           </div>
