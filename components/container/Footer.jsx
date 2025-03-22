@@ -15,7 +15,7 @@ export default function Footer({ logo, imagePath, data }) {
           alt="Footer Image"
           className="w-full absolute top-0 left-0 h-full object-cover opacity-15"
           fill
-      />
+        />
         <Container className="relative z-10">
           {/* Logo and Company Statement Section */}
           <div className="flex  justify-between w-full">

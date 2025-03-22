@@ -1,24 +1,15 @@
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import Container from "../../common/Container";
-import { Phone, TextQuote } from "lucide-react";
-import FullContainer from "@/components/common/FullContainer";
 import CallButton from "@/components/CallButton";
 import QuoteButton from "@/components/QuoteButton";
+import FullContainer from "@/components/common/FullContainer";
 
 export default function Gallery({ phone, gallery = [], imagePath }) {
   return (
     <FullContainer className="py-20">
       <Container>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center max-w-3xl mx-auto mb-12"
-        >
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="inline-block uppercase text-amber-600 font-medium rounded-full mb-4">
             Gallery
           </span>
@@ -31,7 +22,7 @@ export default function Gallery({ phone, gallery = [], imagePath }) {
             ensures safety, comfort, and lasting results for your chimney and
             fireplace.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 w-full">
           {gallery?.map((image, index) => (

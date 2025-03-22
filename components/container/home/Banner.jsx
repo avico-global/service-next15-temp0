@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import Container from "@/components/common/Container";
 import FullContainer from "@/components/common/FullContainer";
@@ -14,6 +13,7 @@ import {
   Loader,
   MapPin,
 } from "lucide-react";
+import CallButton from "@/components/CallButton";
 
 export default function Banner({ image, data, phone }) {
   const [formData, setFormData] = useState({
@@ -63,7 +63,6 @@ export default function Banner({ image, data, phone }) {
         console.log(data);
       } catch (jsonError) {
         console.warn("API didn't return valid JSON:", jsonError);
-        // Continue with success flow anyway since response.ok was true
       }
 
       // Set form as submitted
@@ -129,7 +128,16 @@ export default function Banner({ image, data, phone }) {
       <Container className="py-20 relative z-10">
         <div className="w-full grid grid-cols-1 md:grid-cols-banner gap-16 text-white lg:min-h-[50vh]">
           <div className="relative flex flex-col justify-center">
-            <div className="flex items-center justify-center lg:justify-start mb-8">
+            <h1 className="font-extrabold uppercase text-5xl md:text-7xl leading-tight text-center lg:text-left text-shadow-lg">
+              {data?.title}
+            </h1>
+            <h2 className="text-5xl md:text-6xl font-bold text-amber-400 text-center lg:text-left mt-2">
+              {data?.tagline}
+            </h2>
+            <p className="text-xl text-center lg:text-left mt-4">
+              {data?.description}
+            </p>
+            <div className="flex items-center justify-center lg:justify-start mt-8">
               <Image
                 src="/st-images/google.webp"
                 width={100}
@@ -153,24 +161,11 @@ export default function Banner({ image, data, phone }) {
                 className="ml-6"
               />
             </div>
-            <h1 className="font-extrabold uppercase text-5xl md:text-6xl leading-tight text-center lg:text-left text-shadow-lg">
-              {data?.title}
-            </h1>
-            <h2 className="text-5xl md:text-6xl font-bold text-amber-400 text-center lg:text-left mt-2">
-              {data?.tagline}
-            </h2>
-            <p className="text-xl text-center lg:text-left mt-4">
-              {data?.description}
-            </p>
-
-            <Link
-              href={`tel:${phone}`}
-              className="bg-primary hover:bg-secondary text-white py-3 px-6 font-bold rounded-full items-center text-xl w-fit my-6 hidden md:flex gap-3"
-            >
-              <Phone className="w-6 h-6" />
-              {phone}
-            </Link>
-            <p className="text-3xl font-bold">Call Us Today</p>
+            <div className="w-full h-px bg-gradient-to-r from-amber-500/50 to-[#90D4E1]/0 mt-12 mb-2"></div>
+            <div className="flex items-center gap-5">
+              <p className="text-3xl font-bold">Call Us Today</p>
+              <CallButton phone={phone} />
+            </div>
           </div>
 
           <div className="flex flex-col justify-center">

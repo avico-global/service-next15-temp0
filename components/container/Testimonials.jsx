@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import FullContainer from "../common/FullContainer";
 import Container from "../common/Container";
 import { Star, ChevronLeft, ChevronRight, User } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 
 // Helper function to render star ratings
 const StarRating = ({ rating }) => {
@@ -57,34 +56,13 @@ export default function Testimonials({ data }) {
     return testimonials?.slice(startIdx, startIdx + itemsPerPage.lg);
   };
 
-  const variants = {
-    enter: (direction) => ({
-      x: direction > 0 ? 200 : -200,
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-    },
-    exit: (direction) => ({
-      x: direction < 0 ? 200 : -200,
-      opacity: 0,
-    }),
-  };
-
   return (
     <FullContainer
       id="testimonials"
       className="bg-gradient-to-b from-white to-gray-50 py-20"
     >
       <Container>
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
+        <div className="text-center mb-16">
           <span className="inline-block uppercase text-amber-600 font-medium rounded-full mb-4">
             {data?.tagline}
           </span>
@@ -92,53 +70,42 @@ export default function Testimonials({ data }) {
             {data?.heading}
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">{data?.description}</p>
-        </motion.div>
+        </div>
 
         <div className="relative">
-          <AnimatePresence initial={false} custom={direction} mode="wait">
-            <motion.div
-              key={currentIndex}
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {getVisibleTestimonials()?.map((testimonial, index) => (
-                <div
-                  key={index}
-                  className="bg-white p-8 rounded-xl shadow-[0_20px_50px_rgba(0,43,91,0.1)] overflow-hidden hover:shadow-[0_25px_60px_rgba(0,43,91,0.15)] transition-all duration-300"
-                >
-                  <div className="flex items-center mb-6">
-                    <div className="bg-primary p-3 rounded-full mr-4">
-                      <User size={24} className="text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-primary">
-                        {testimonial.name}
-                      </h3>
-                      <p className="text-gray-500 text-sm">
-                        {testimonial.location}
-                      </p>
-                      <StarRating rating={testimonial.rating} />
-                    </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {getVisibleTestimonials()?.map((testimonial, index) => (
+              <div
+                key={index}
+                className="bg-white p-8 rounded-xl shadow-[0_20px_50px_rgba(0,43,91,0.1)] overflow-hidden hover:shadow-[0_25px_60px_rgba(0,43,91,0.15)] transition-all duration-300"
+              >
+                <div className="flex items-center mb-6">
+                  <div className="bg-primary p-3 rounded-full mr-4">
+                    <User size={24} className="text-white" />
                   </div>
-
-                  <p className="text-gray-700 italic relative">
-                    <span className="text-[#E56B6F] text-4xl absolute -top-2 -left-1 opacity-20">
-                      "
-                    </span>
-                    <span className="pl-4">{testimonial.quote}</span>
-                    <span className="text-[#E56B6F] text-4xl absolute bottom-0 right-0 opacity-20">
-                      "
-                    </span>
-                  </p>
+                  <div>
+                    <h3 className="text-lg font-bold text-primary">
+                      {testimonial.name}
+                    </h3>
+                    <p className="text-gray-500 text-sm">
+                      {testimonial.location}
+                    </p>
+                    <StarRating rating={testimonial.rating} />
+                  </div>
                 </div>
-              ))}
-            </motion.div>
-          </AnimatePresence>
+
+                <p className="text-gray-700 italic relative">
+                  <span className="text-[#E56B6F] text-4xl absolute -top-2 -left-1 opacity-20">
+                    "
+                  </span>
+                  <span className="pl-4">{testimonial.quote}</span>
+                  <span className="text-[#E56B6F] text-4xl absolute bottom-0 right-0 opacity-20">
+                    "
+                  </span>
+                </p>
+              </div>
+            ))}
+          </div>
 
           <div className="flex justify-center mt-10 gap-4">
             <button

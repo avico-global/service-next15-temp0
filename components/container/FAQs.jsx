@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import Container from "../common/Container";
 import { Plus, Minus } from "lucide-react";
 import FullContainer from "../common/FullContainer";
-import { motion } from "framer-motion";
 
 const faqs = [
   {
@@ -34,13 +33,7 @@ export default function Faqs() {
   return (
     <FullContainer className="py-20 bg-gray-50" id="faqs">
       <Container>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-14"
-        >
+        <div className="text-center mb-14">
           <span className="inline-block uppercase text-amber-600 font-semibold rounded-full mb-5">
             Frequently Asked Questions
           </span>
@@ -55,13 +48,9 @@ export default function Faqs() {
 
           <div className="w-full max-w-3xl mx-auto space-y-3">
             {faqs.map((faq, index) => (
-              <motion.div
+              <div
                 key={index}
                 className="overflow-hidden rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                viewport={{ once: true }}
               >
                 <button
                   onClick={() =>
@@ -88,10 +77,7 @@ export default function Faqs() {
                   </div>
                 </button>
 
-                <motion.div
-                  initial={{ height: 0 }}
-                  animate={{ height: openIndex === index ? "auto" : 0 }}
-                  transition={{ duration: 0.3 }}
+                <div
                   className={`overflow-hidden bg-white border-x border-b ${
                     openIndex === index
                       ? "border-gray-100 rounded-b-xl"
@@ -103,11 +89,11 @@ export default function Faqs() {
                       {faq.answer}
                     </p>
                   </div>
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </Container>
     </FullContainer>
   );

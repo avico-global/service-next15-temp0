@@ -1,8 +1,7 @@
 import React from "react";
-import Container from "../common/Container";
-import { MapPin } from "lucide-react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { MapPin } from "lucide-react";
+import Container from "../common/Container";
 import FullContainer from "../common/FullContainer";
 
 export default function ServiceCities({ data }) {
@@ -16,23 +15,17 @@ export default function ServiceCities({ data }) {
       {/* Background Map */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/map.webp"
+          src="/st-images/map.webp"
           alt="Service Cities"
           className="w-full h-full object-cover object-center opacity-10"
           fill
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/80 to-white/50"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-white/30"></div>
       </div>
 
       <Container className="relative z-10">
         {/* Header Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-14"
-        >
+        <div className="text-center mb-14">
           <span className="inline-block uppercase text-amber-600 font-semibold mb-5">
             {data?.tagline}
           </span>
@@ -42,19 +35,12 @@ export default function ServiceCities({ data }) {
           </h2>
 
           <p className="text-gray-600 max-w-2xl mx-auto">{data?.description}</p>
-        </motion.div>
+        </div>
 
         {/* Simple City Listing with grid-cols-4 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 w-full">
           {cities.map((city, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.03 }}
-              viewport={{ once: true }}
-              className="group flex items-center gap-3"
-            >
+            <div key={index} className="group flex items-center gap-3">
               <div
                 className="min-w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 
                   group-hover:bg-[#002B5B] transition-all duration-300 shadow-sm"
@@ -64,7 +50,7 @@ export default function ServiceCities({ data }) {
               <span className="text-gray-700 group-hover:text-[#002B5B] font-medium transition-all duration-300">
                 {city}
               </span>
-            </motion.div>
+            </div>
           ))}
         </div>
 
@@ -78,13 +64,7 @@ export default function ServiceCities({ data }) {
         </div>
 
         {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          viewport={{ once: true }}
-          className="mt-12 text-center"
-        >
+        <div className="mt-12 text-center">
           <p className="text-lg text-[#002B5B]/80 font-medium">
             Don't see your city?{" "}
             <a
@@ -95,7 +75,7 @@ export default function ServiceCities({ data }) {
             </a>{" "}
             to check if we serve your area!
           </p>
-        </motion.div>
+        </div>
       </Container>
     </FullContainer>
   );
