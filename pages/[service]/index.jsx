@@ -15,6 +15,9 @@ import {
 import ServiceBanner from "@/components/container/ServiceBanner";
 import Gallery from "@/components/container/home/Gallery";
 import About from "@/components/container/home/About";
+import { useRouter } from "next/router";
+import Head from "next/head";
+import GoogleTagManager from "@/lib/GoogleTagManager";
 
 export default function Service({
   logo,
@@ -26,9 +29,61 @@ export default function Service({
   gallery,
   footer,
   about,
+  meta,
+  domain,
+  favicon,
 }) {
+  const router = useRouter();
+  const { service } = router.query;
+
   return (
-    <main>
+    <div>
+      <Head>
+        <meta charSet="UTF-8" />
+        <title>
+          {meta?.title?.replaceAll(
+            "##service##",
+            service?.replaceAll("-", " ")
+          )}
+        </title>
+        <meta
+          name="description"
+          content={meta?.description.replaceAll(
+            "##service##",
+            service?.replaceAll("-", " ")
+          )}
+        />
+        <link rel="author" href={`https://www.${domain}`} />
+        <link rel="publisher" href={`https://www.${domain}`} />
+        <link rel="canonical" href={`https://www.${domain}/${service}`} />
+        <meta name="theme-color" content="#008DE5" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <GoogleTagManager />
+        <meta
+          name="google-site-verification"
+          content="zbriSQArMtpCR3s5simGqO5aZTDqEZZi9qwinSrsRPk"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href={`${process.env.NEXT_PUBLIC_SITE_MANAGER}/images/${imagePath}/${favicon}`}
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href={`${process.env.NEXT_PUBLIC_SITE_MANAGER}/images/${imagePath}/${favicon}`}
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href={`${process.env.NEXT_PUBLIC_SITE_MANAGER}/images/${imagePath}/${favicon}`}
+        />
+      </Head>
+
       <Navbar
         logo={logo}
         imagePath={imagePath}
@@ -76,7 +131,7 @@ export default function Service({
         <ServiceCities />
       </div>
       <Footer /> */}
-    </main>
+    </div>
   );
 }
 
@@ -95,7 +150,7 @@ export async function getServerSideProps({ req, params }) {
     const about = await callBackendApi({ domain, tag: "about" });
     const benefits = await callBackendApi({ domain, tag: "benefits" });
     const testimonials = await callBackendApi({ domain, tag: "testimonials" });
-    const meta = await callBackendApi({ domain, tag: "meta_home" });
+    const meta = await callBackendApi({ domain, tag: "meta_service" });
     const favicon = await callBackendApi({ domain, tag: "favicon" });
     const footer = await callBackendApi({ domain, tag: "footer" });
 
