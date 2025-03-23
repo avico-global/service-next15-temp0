@@ -43,7 +43,7 @@ export default function Home({
   locations,
 }) {
   return (
-    <div>
+    <div className="bg-white">
       <Head>
         <meta charSet="UTF-8" />
         <title>{meta?.title}</title>
