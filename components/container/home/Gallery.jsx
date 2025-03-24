@@ -28,7 +28,7 @@ export default function Gallery({ phone, gallery = [], imagePath }) {
           {gallery?.map((image, index) => (
             <div
               key={index}
-              className="relative rounded-xl aspect-square overflow-hidden h-64 w-full"
+              className="relative rounded-t-xl aspect-square overflow-hidden h-64 w-full"
             >
               <Image
                 src={`${imagePath}/${image.image}`}

@@ -95,49 +95,22 @@ export default function Banner({ image, data, phone }) {
       [name]: value,
     }));
   };
-
+  console.log("image", image);
   return (
-    <FullContainer
-      className="relative overflow-hidden"
-      style={{
-        backgroundColor: `rgba(0, 0, 0, ${data?.opacity / 100})`,
-        color: data?.textColor || "white",
-      }}
-    >
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-950/60 to-blue-950/80"></div>
+    <FullContainer className="relative overflow-hidden">
       <Image
         src={image}
         title={data?.imageTitle || data?.title || "Banner"}
         alt={data?.altImage || data?.tagline || "No Banner Found"}
         priority={true}
         fill={true}
-        loading="eager"
-        className="-z-10 w-full h-52 transition-transform duration-700 hover:scale-105"
-        style={{ objectFit: "cover" }}
-        sizes="(max-width: 320px) 320px,
-               (max-width: 480px) 480px,
-               (max-width: 768px) 768px,
-               (max-width: 1024px) 1024px,
-               (max-width: 1280px) 1280px,
-               (max-width: 1600px) 1600px,
-               (max-width: 1920px) 1920px,
-               (max-width: 2560px) 2560px,
-               (max-width: 3840px) 3840px,
-               100vw"
+        className="object-cover object-left"
       />
+      <div className="absolute inset-0 bg-gray-900/50"></div>
       <Container className="py-20 relative z-10">
         <div className="w-full grid grid-cols-1 md:grid-cols-banner gap-16 text-white lg:min-h-[50vh]">
           <div className="relative flex flex-col justify-center">
-            <h1 className="font-extrabold uppercase text-5xl md:text-7xl leading-tight text-center lg:text-left text-shadow-lg">
-              {data?.title}
-            </h1>
-            <h2 className="text-5xl md:text-6xl font-bold text-amber-400 text-center lg:text-left mt-2">
-              {data?.tagline}
-            </h2>
-            <p className="text-xl text-center lg:text-left mt-4">
-              {data?.description}
-            </p>
-            <div className="flex items-center justify-center lg:justify-start mt-8">
+          <div className="flex items-center justify-center lg:justify-start mb-4">
               <Image
                 src="/st-images/google.webp"
                 width={100}
@@ -161,6 +134,16 @@ export default function Banner({ image, data, phone }) {
                 className="ml-6"
               />
             </div>
+            <h1 className="font-extrabold uppercase text-5xl md:text-7xl leading-tight text-center lg:text-left text-shadow-lg">
+              {data?.title}
+            </h1>
+            <h2 className="text-5xl md:text-6xl font-bold text-amber-400 text-center lg:text-left mt-2">
+              {data?.tagline}
+            </h2>
+            <p className="text-xl text-center lg:text-left mt-4">
+              {data?.description}
+            </p>
+            
             <div className="w-full h-px bg-gradient-to-r from-amber-500/50 to-[#90D4E1]/0 mt-12 mb-2"></div>
             <div className="flex items-center gap-5">
               <p className="text-3xl font-bold">Call Us Today</p>

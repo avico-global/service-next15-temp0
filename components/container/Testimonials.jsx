@@ -1,149 +1,79 @@
-import React, { useState } from "react";
-import FullContainer from "../common/FullContainer";
-import Container from "../common/Container";
-import { Star, ChevronLeft, ChevronRight, User } from "lucide-react";
+import React, { useState } from 'react';
+import Container from '../common/Container';
 
-// Helper function to render star ratings
-const StarRating = ({ rating }) => {
+// Sample testimonials data matching exactly what's in the image
+const testimonialData = [
+  {
+    name: "Linda",
+    location: "Tampa, FL",
+    text: "Tampa Chimney Services saved us! They repaired our cracked chimney crown and stopped water leaks. Professional, fast, and affordable. Highly recommend!"
+  },
+  {
+    name: "Tom Peterson",
+    location: "Riverview, FL",
+    text: "Great experience! They cleaned our flue, installed a new cap, and explained everything. Fair prices and top-notch service. Will definitely use them again!"
+  },
+  // You can add more testimonials here for pagination
+];
+
+const Testimonials = ({ testimonials = testimonialData }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  
+  // Calculate the number of pages (showing 2 testimonials per page)
+  const pageCount = Math.ceil(testimonials.length / 2);
+  
+  // Generate array for pagination dots
+  const paginationDots = Array.from({ length: pageCount }, (_, i) => i);
+  
+  // Get current page testimonials
+  const getCurrentPageTestimonials = () => {
+    const startIndex = activeIndex * 2;
+    return testimonials.slice(startIndex, startIndex + 2);
+  };
+  
   return (
-    <div className="flex mt-2">
-      {[...Array(5)].map((_, i) => (
-        <Star
-          key={i}
-          size={16}
-          fill={i < rating ? "#FBBF24" : "none"}
-          stroke={i < rating ? "#FBBF24" : "#D1D5DB"}
-          className="mr-1"
-        />
-      ))}
-    </div>
+    <section className="testimonials-section py-16">
+      <Container className=" mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center  text-blue-900 mb-3">Our Happy Clients</h2>
+        
+        <div className="flex flex-col md:flex-row gap-4 mb-10">
+          {getCurrentPageTestimonials().map((testimonial, index) => (
+            <div 
+              key={index} 
+              className="flex-1 py-8 px-10 border border-primary  rounded-3xl flex flex-col"
+            >
+              <p className="text-center text-gray-900 italic mb-8 text-lg lg:text-xl leading-relaxed">
+                "{testimonial.text}"
+              </p>
+              
+              <div className="mt-auto text-center">
+                <h4 className="text-2xl text-blue-800 font-bold mb-1">{testimonial.name}</h4>
+                <p className="text-gray-600">{testimonial.location}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        {/* Pagination dots */}
+        {pageCount > 1 && (
+          <div className="flex justify-center gap-3">
+            {paginationDots.map((dotIndex) => (
+              <button
+                key={dotIndex}
+                onClick={() => setActiveIndex(dotIndex)}
+                className={`h-2 rounded-full transition-all ${
+                  activeIndex === dotIndex 
+                    ? 'bg-gray-800 w-3' 
+                    : 'bg-gray-300 w-2'
+                }`}
+                aria-label={`Go to page ${dotIndex + 1}`}
+              />
+            ))}
+          </div>
+        )}
+      </Container>
+    </section>
   );
 };
 
-export default function Testimonials({ data }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
-
-  // Number of testimonials to show per page based on screen size
-  const itemsPerPage = {
-    sm: 1,
-    md: 2,
-    lg: 3,
-  };
-
-  const testimonials = data?.list || [];
-
-  // Calculate total pages
-  const totalPages = Math.ceil(testimonials?.length / itemsPerPage.lg) || 0;
-
-  const nextTestimonial = () => {
-    setDirection(1);
-    setCurrentIndex((prevIndex) =>
-      prevIndex === totalPages - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  const prevTestimonial = () => {
-    setDirection(-1);
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? totalPages - 1 : prevIndex - 1
-    );
-  };
-
-  // Get current visible testimonials
-  const getVisibleTestimonials = () => {
-    const startIdx = currentIndex * itemsPerPage.lg;
-    return testimonials?.slice(startIdx, startIdx + itemsPerPage.lg);
-  };
-
-  return (
-    <FullContainer
-      id="testimonials"
-      className="bg-gradient-to-b from-white to-gray-50 py-20"
-    >
-      <Container>
-        <div className="text-center mb-16">
-          <span className="inline-block uppercase text-amber-600 font-medium rounded-full mb-4">
-            {data?.tagline}
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-            {data?.heading}
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">{data?.description}</p>
-        </div>
-
-        <div className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {getVisibleTestimonials()?.map((testimonial, index) => (
-              <div
-                key={index}
-                className="bg-white p-8 rounded-xl shadow-[0_20px_50px_rgba(0,43,91,0.1)] overflow-hidden hover:shadow-[0_25px_60px_rgba(0,43,91,0.15)] transition-all duration-300"
-              >
-                <div className="flex items-center mb-6">
-                  <div className="bg-primary p-3 rounded-full mr-4">
-                    <User size={24} className="text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-primary">
-                      {testimonial.name}
-                    </h3>
-                    <p className="text-gray-500 text-sm">
-                      {testimonial.location}
-                    </p>
-                    <StarRating rating={testimonial.rating} />
-                  </div>
-                </div>
-
-                <p className="text-gray-700 italic relative">
-                  <span className="text-[#E56B6F] text-4xl absolute -top-2 -left-1 opacity-20">
-                    "
-                  </span>
-                  <span className="pl-4">{testimonial.quote}</span>
-                  <span className="text-[#E56B6F] text-4xl absolute bottom-0 right-0 opacity-20">
-                    "
-                  </span>
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex justify-center mt-10 gap-4">
-            <button
-              onClick={prevTestimonial}
-              className="p-2 rounded-full bg-[#002B5B] text-white hover:bg-[#002B5B]/80 transition-colors"
-              aria-label="Previous testimonials"
-            >
-              <ChevronLeft size={20} />
-            </button>
-
-            <div className="flex gap-2 items-center">
-              {[...Array(totalPages)]?.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => {
-                    setDirection(idx > currentIndex ? 1 : -1);
-                    setCurrentIndex(idx);
-                  }}
-                  className={`h-2.5 rounded-full transition-all duration-300 ${
-                    currentIndex === idx
-                      ? "w-6 bg-[#002B5B]"
-                      : "w-2.5 bg-gray-300"
-                  }`}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
-              ))}
-            </div>
-
-            <button
-              onClick={nextTestimonial}
-              className="p-2 rounded-full bg-[#002B5B] text-white hover:bg-[#002B5B]/80 transition-colors"
-              aria-label="Next testimonials"
-            >
-              <ChevronRight size={20} />
-            </button>
-          </div>
-        </div>
-      </Container>
-    </FullContainer>
-  );
-}
+export default Testimonials;

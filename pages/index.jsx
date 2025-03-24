@@ -99,7 +99,7 @@ export default function Home({
       />
       <Gallery phone={phone} gallery={gallery} imagePath={imagePath} />
       <FullContainer className="py-20 bg-gray-50">
-        <Container className="md:flex-row md:justify-between">
+        <Container className="flex t md:flex-row md:justify-between">
           {[
             {
               title: "Number Of Clients",

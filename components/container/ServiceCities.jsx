@@ -23,7 +23,7 @@ export default function ServiceCities({ data }) {
         <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-white/30"></div>
       </div>
 
-      <Container className="relative z-10">
+      <Container className="relative z-10 ">
         {/* Header Section */}
         <div className="text-center mb-14">
           <span className="inline-block uppercase text-amber-600 font-semibold mb-5">
@@ -38,18 +38,18 @@ export default function ServiceCities({ data }) {
         </div>
 
         {/* Simple City Listing with grid-cols-4 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 w-full">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-y-1">
           {cities.map((city, index) => (
-            <div key={index} className="group flex items-center gap-3">
-              <div
-                className="min-w-8 h-8 rounded-full flex items-center justify-center bg-gray-50 
-                  group-hover:bg-[#002B5B] transition-all duration-300 shadow-sm"
+            <div key={index} className="flex items-center">
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 24 24" 
+                fill="currentColor" 
+                className="w-5 h-5 text-primary mr-2 flex-shrink-0"
               >
-                <MapPin className="w-4 h-4 text-[#002B5B] group-hover:text-white transition-colors" />
-              </div>
-              <span className="text-gray-700 group-hover:text-[#002B5B] font-medium transition-all duration-300">
-                {city}
-              </span>
+                <path fillRule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
+              </svg>
+              <span className="text-primary transition-colors font-semibold cursor-pointer">{city}</span>
             </div>
           ))}
         </div>
