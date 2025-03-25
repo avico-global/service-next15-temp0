@@ -17,7 +17,7 @@ export default function Banner({ primaryColor, data }) {
       />
 
       <div className="absolute inset-0 bg-gradient-to-b  from-black/60 via-black/40 to-black/70"></div>
-      <Container className="h-full py-10 flex items-center justify-center">
+      <Container className="h-full py-10 flex flex-col items-center justify-center">
         <div className="flex flex-col items-center justify-center text-left md:text-center">
           <div className="flex flex-col gap-4 max-w-2xl ">
             <h1 className="flex flex-col gap-4 text-4xl  md:text-5xl lg:text-6xl font-bold text-white">

@@ -40,7 +40,7 @@ export default function ServiceBanner({ phone, data, image }) {
              (max-width: 3840px) 3840px,
              100vw"
       />
-      <Container className="h-full py-16 flex items-center relative z-10 gap-8 text-center">
+      <Container className="h-full py-16 flex flex-col items-center relative z-10 gap-8 text-center">
         <div className="flex items-center justify-center lg:justify-start">
           <Image
             src="/st-images/google.webp"

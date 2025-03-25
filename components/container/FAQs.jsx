@@ -31,9 +31,9 @@ export default function Faqs() {
   };
 
   return (
-    <FullContainer className="py-20 bg-gray-50" id="faqs">
+    <FullContainer className="py-10 bg-gray-50" id="faqs">
       <Container className="px-4">
-        <div className="text-center mb-14">
+        <div className="text-center ">
           <span className="inline-block uppercase text-amber-600 font-semibold rounded-full mb-5">
             Frequently Asked Questions
           </span>
@@ -68,6 +68,7 @@ export default function Faqs() {
                         strokeWidth="2" 
                         strokeLinecap="round" 
                         strokeLinejoin="round"
+                        className="transition-transform duration-500 ease-in-out"
                       >
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                       </svg>
@@ -82,6 +83,7 @@ export default function Faqs() {
                         strokeWidth="2" 
                         strokeLinecap="round" 
                         strokeLinejoin="round"
+                        className="transition-transform duration-500 ease-in-out"
                       >
                         <line x1="12" y1="5" x2="12" y2="19"></line>
                         <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -93,7 +95,7 @@ export default function Faqs() {
                 
                 {/* Answer panel with smooth transition */}
                 <div 
-                  className={`transition-all bduration-500 ease-in-out overflow-hidden  ${
+                  className={`overflow-hidden transition-all duration-500 ease-in-out ${
                     activeIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                   }`}
                 >
