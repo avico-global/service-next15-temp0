@@ -15,6 +15,7 @@ export default function ServiceCities({ data }) {
       {/* Background Map */}
       <div className="absolute inset-0 z-0">
         <Image
+          title="Service Cities Map"
           src="/st-images/map.webp"
           alt="Service Cities"
           className="w-full h-full object-cover object-center opacity-10"

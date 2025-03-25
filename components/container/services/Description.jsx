@@ -24,6 +24,7 @@ export default function Description({ service }) {
         </div>
         <div className="w-full hidden lg:block overflow-hidden">
           <Image
+            title="Description Image"
             src={whyChooseImg}
             alt="Professional chimney services"
             className="object-cover h-full w-full"
@@ -54,8 +55,9 @@ function About({ service, images }) {
             className=" rounded-t-2xl  aspect-9/6 overflow-hidden"
           >
             <Image
+              title={`About Image ${index + 1}`}
               src={image.src}
-              alt={image.alt}
+              alt="About Image"
               className="object-cover aspect-9/6 hover:scale-105 transition-transform duration-500"
             />
           </div>

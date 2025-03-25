@@ -11,6 +11,7 @@ export default function Footer({ logo, imagePath, data }) {
     <footer>
       <FullContainer className="bg-gradient-to-b from-slate-900 to-primary py-20 relative">
         <Image
+          title="Footer Image"
           src={`${imagePath}/${data?.file_name}`}
           alt="Footer Image"
           className="w-full absolute top-0 left-0 h-full object-cover opacity-15"

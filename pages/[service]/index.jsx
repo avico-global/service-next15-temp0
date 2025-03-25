@@ -144,63 +144,45 @@ export default function Service({
   );
 }
 
-export async function getServerSideProps({ req, params }) {
-  try {
-    const domain = getDomain(req?.headers?.host);
-    const logo = await callBackendApi({ domain, tag: "logo" });
-    const project_id = logo?.data[0]?.project_id || null;
-    const imagePath = await getImagePath(project_id, domain);
+export async function getServerSideProps({ req }) {
+  const domain = getDomain(req?.headers?.host);
+  const logo = await callBackendApi({ domain, tag: "logo" });
+  const project_id = logo?.data[0]?.project_id || null;
+  const imagePath = await getImagePath(project_id, domain);
 
-    const banner = await callBackendApi({ domain, tag: "service_banner" });
-    const phone = await callBackendApi({ domain, tag: "phone" });
-    const services = await callBackendApi({ domain, tag: "services_list" });
-    const features = await callBackendApi({ domain, tag: "features" });
-    const gallery = await callBackendApi({ domain, tag: "gallery" });
-    const about = await callBackendApi({ domain, tag: "about" });
-    const benefits = await callBackendApi({ domain, tag: "benefits" });
-    const testimonials = await callBackendApi({ domain, tag: "testimonials" });
-    const meta = await callBackendApi({ domain, tag: "meta_service" });
-    const favicon = await callBackendApi({ domain, tag: "favicon" });
-    const footer = await callBackendApi({ domain, tag: "footer" });
+  const banner = await callBackendApi({ domain, tag: "banner" });
+  const phone = await callBackendApi({ domain, tag: "phone" });
+  const services = await callBackendApi({ domain, tag: "services_list" });
+  const features = await callBackendApi({ domain, tag: "features" });
+  const gallery = await callBackendApi({ domain, tag: "gallery" });
+  const about = await callBackendApi({ domain, tag: "about" });
+  const benefits = await callBackendApi({ domain, tag: "benefits" });
+  const testimonials = await callBackendApi({ domain, tag: "testimonials" });
+  const meta = await callBackendApi({ domain, tag: "meta_home" });
+  const favicon = await callBackendApi({ domain, tag: "favicon" });
+  const footer = await callBackendApi({ domain, tag: "footer" });
+  const locations = await callBackendApi({ domain, tag: "locations" });
 
-    // Get service data based on the URL parameter
-    const serviceData = data.find(
-      (item) =>
-        item?.title?.toLowerCase().replace(/\s+/g, "-") === params?.services
-    );
+  robotsTxt({ domain });
 
-    robotsTxt({ domain });
-
-    return {
-      props: {
-        domain,
-        imagePath,
-        logo: logo?.data[0] || null,
-        banner: banner?.data[0] || null,
-        phone: phone?.data[0]?.value || null,
-        services: services?.data[0]?.value || [],
-        features: features?.data[0] || [],
-        gallery: gallery?.data[0]?.value || [],
-        about: about?.data[0] || null,
-        benefits: benefits?.data[0] || [],
-        testimonials: testimonials?.data[0]?.value || [],
-        meta: meta?.data[0]?.value || null,
-        favicon: favicon?.data[0]?.file_name || null,
-        serviceData: serviceData || null,
-        footer: footer?.data[0] || null,
-      },
-    };
-  } catch (error) {
-    console.error("Error in getServerSideProps:", error);
-    return {
-      props: {
-        serviceData: null,
-        logo: null,
-        imagePath: null,
-        banner: null,
-        phone: null,
-        services: [],
-      },
-    };
-  }
+  return {
+    props: {
+      domain,
+      imagePath,
+      logo: logo?.data[0] || null,
+      banner: banner?.data[0] || null,
+      phone: phone?.data[0]?.value || null,
+      services: services?.data[0]?.value || [],
+      features: features?.data[0] || [],
+      gallery: gallery?.data[0]?.value || [],
+      about: about?.data[0] || null,
+      benefits: benefits?.data[0] || [],
+      testimonials: testimonials?.data[0]?.value || [],
+      meta: meta?.data[0]?.value || null,
+      favicon: favicon?.data[0]?.file_name || null,
+      footer: footer?.data[0] || null,
+      locations: locations?.data[0]?.value || [],
+    },
+  };
 }
+

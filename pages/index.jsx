@@ -155,6 +155,7 @@ export default function Home({
       <FAQs />
       <ServiceCities data={locations} />
       <Footer data={footer} logo={logo} imagePath={imagePath} />
+      
     </div>
   );
 }

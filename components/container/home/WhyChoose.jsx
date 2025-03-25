@@ -73,6 +73,7 @@ export default function WhyChoose({ data, image, phone }) {
           <div className="flex-1 w-full md:w-1/2 lg:w-3/5 h-full relative">
             <div className="overflow-hidden rounded-md shadow-2xl h-[360px] w-full relative">
               <Image
+                title="Why Choose Image"
                 src={image}
                 alt="Professional chimney services"
                 className="object-cover transition-transform duration-700 hover:scale-105"

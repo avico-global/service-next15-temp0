@@ -9,6 +9,7 @@ export default function Banner({ primaryColor, data }) {
   return (
     <FullContainer className="relative h-[780px]">
       <Image
+        title="Banner Image"
         src={banner}
         alt="Professional chimney sweep services"
         priority

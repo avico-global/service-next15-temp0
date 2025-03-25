@@ -19,6 +19,7 @@ export default function About({ image, data }) {
           {/* Image with overlay */}
           <div className="relative">
             <Image 
+              title="About Image"
               src={image} 
               alt="About" 
               width={1500} 

@@ -34,10 +34,11 @@ export default function Gallery({ phone, gallery = [], imagePath }) {
               className="relative rounded-t-xl aspect-square overflow-hidden h-64 w-full"
             >
               <Image
+                title={`Gallery Image ${index + 1}`}
                 src={`${imagePath}/${image.image}`}
-                title={image.title}
-                alt={image.alt}
-                fill
+                alt={`Gallery Image ${index + 1}`}
+                height={1000}
+                width={1000}
                 className="object-cover aspect-square hover:scale-105 transition-transform duration-500"
               />
             </div>

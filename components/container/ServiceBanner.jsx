@@ -43,6 +43,7 @@ export default function ServiceBanner({ phone, data, image }) {
       <Container className="h-full py-16 flex flex-col items-center relative z-10 gap-8 text-center">
         <div className="flex items-center justify-center lg:justify-start">
           <Image
+          title="Google"
             src="/st-images/google.webp"
             width={100}
             height={30}
@@ -50,6 +51,8 @@ export default function ServiceBanner({ phone, data, image }) {
           />
 
           <Image
+          
+            title="Trustpilot"
             src="/st-images/trustpilot.webp"
             width={100}
             height={30}
@@ -58,6 +61,7 @@ export default function ServiceBanner({ phone, data, image }) {
           />
 
           <Image
+            title="Capterra"
             src="/st-images/capterra.webp"
             width={100}
             height={30}

@@ -17,6 +17,7 @@ export default function Benefits({ phone, data, image }) {
         <div className="grid grid-cols-1 md:grid-cols-services xl:grid-cols-services2 gap-4">
           <div className=" md:w-[111%] rounded-md relative bg-blue-500 h-full overflow-hidden">
             <Image
+              title="Service Background"
               src={image}
               alt="Service Background"
               fill
