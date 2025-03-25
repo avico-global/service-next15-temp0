@@ -16,7 +16,12 @@ import FullContainer from "@/components/common/FullContainer";
 import Link from "next/link";
 import CallButton from "@/components/CallButton";
 import QuoteButton from "@/components/QuoteButton";
-
+import { Montserrat } from "next/font/google";
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-montserrat",
+});
 const iconMapping = {
   Award: Award,
   Clock: Clock,
@@ -29,58 +34,58 @@ const iconMapping = {
 
 export default function WhyChoose({ data, image, phone }) {
   return (
-    <FullContainer className="bg-gray-50 py-24">
-      <Container>
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-          <div className="md:col-span-6 p-8 md:p-10">
+    <FullContainer className="bg-gray-50 py-10">
+      <Container className="">
+        <div className="flex flex-col md:flex-row h-fit gap-8 items-center">
+          <div className="w-fit md:pr-10">
             <span className="inline-block py-1 uppercase text-amber-600 font-medium rounded-full mb-4">
               {data?.tagline}
             </span>
 
-            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-8">
+            <h2 className={`text-2xl md:text-3xl font-bold ${montserrat.className} text-primary mb-4`}>
               {data?.heading}
             </h2>
 
-            <div className="space-y-6">
+            <div className="space-y-1">
               {data?.features?.map((feature, index) => {
                 // Get the actual icon component from the mapping
                 const IconComponent = iconMapping[feature.icon] || Award; // Fallback to Award if not found
 
                 return (
-                  <div key={index} className="flex items-start gap-4 group">
-                    <div className="w-12 h-12 flex items-center justify-center rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                  <div key={index} className="flex items-center gap-4 group">
+                    <div className="w-6 h-6 flex items-center justify-center rounded-full text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
                       <IconComponent className="w-6 h-6" />
                     </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-800 mb-1 group-hover:text-primary transition-colors duration-300">
+                    <div className="flex flex-col">
+                      <h3 className={`text-lg md:text-xl text-primary font-extralight mb-1`}>
                         {feature.title}
                       </h3>
-                      {feature.description && (
+                      {/* {feature.description && (
                         <p className="text-gray-600 text-sm">
                           {feature.description}
                         </p>
-                      )}
+                      )} */}
                     </div>
                   </div>
                 );
               })}
             </div>
 
-            <div className="flex flex-wrap w-full justify-start items-center gap-4 mt-10">
+            <div className="flex flex-wrap w-full justify-start items-center gap-4">
               <CallButton phone={phone} />
               <QuoteButton phone={phone} />
             </div>
           </div>
 
-          <div className="md:col-span-6 relative h-full min-h-[500px]">
-            <div className="absolute top-6 left-6 right-6 bottom-6 z-10 border-4 border-white/80 rounded-3xl"></div>
-            <div className="overflow-hidden rounded-3xl shadow-2xl h-full relative">
+          <div className="flex-1 w-full md:w-1/2 lg:w-3/5 h-full relative">
+            <div className="overflow-hidden rounded-md shadow-2xl h-[360px] w-full relative">
               <Image
                 src={image}
                 alt="Professional chimney services"
-                className="object-cover h-full w-full transition-transform duration-700 hover:scale-105"
+                className="object-cover transition-transform duration-700 hover:scale-105"
                 priority
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
           </div>

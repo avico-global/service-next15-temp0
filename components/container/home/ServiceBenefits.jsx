@@ -11,52 +11,37 @@ export default function Benefits({ phone, data, image }) {
   const benefits = data?.list || [];
 
   return (
-    <FullContainer className="relative py-16 overflow-hidden">
-      <div className="absolute inset-0 z-0">
-        <Image
-          src={image}
-          alt="Service Background"
-          className="object-cover"
-          fill
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-80"></div>
-      </div>
-
-      <Container>
-        <div className="relative z-10 flex flex-col items-center w-full">
-          {/* Header */}
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <span className="inline-block uppercase text-amber-400 font-medium rounded-full mb-4">
-              {data?.tagline}
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              {data?.heading}
+    <FullContainer className="py-10 overflow-hidden">
+      <Container className="">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className=" md:w-[111%] rounded-md relative bg-blue-500 h-full overflow-hidden">
+            <Image
+              src={image}
+              alt="Service Background"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className=" px-10 py-8 rounded-2xl shadow-[0_0_5px_rgba(0,0,0,0.4)] bg-white z-10 my-7">
+            <h2 className="text-2xl md:text-3xl font-bold text-blue-900 mb-6">
+              Chimney Services Benefits
             </h2>
-            <p className="text-gray-100 text-lg">{data?.description}</p>
-          </div>
 
-          {/* Benefits Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
-            {benefits?.map((benefit, index) => (
-              <div
-                key={index}
-                className="bg-white/95 backdrop-blur-sm p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
-              >
-                <div className="bg-secondary rounded-full p-3 w-12 h-12 flex items-center justify-center mb-4">
-                  <ChevronRight className="w-6 h-6 text-white" />
+            {/* Benefits List */}
+            <div className="flex flex-col space-y-[6px] ">
+              {benefits?.map((benefit, index) => (
+                <div key={index} className="flex items-start">
+                  <ChevronRight className="w-5 h-5 text-primary flex-shrink-0 stroke-[4] mt-1" />
+                  <span className="ml-2 text-lg md:text-xl text-blue-900">
+                    {benefit?.title}
+                  </span>
                 </div>
-                <h3 className="text-primary font-bold text-xl mb-2">
-                  {benefit?.title}
-                </h3>
-                <p className="text-gray-600">{benefit?.description}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="flex w-full justify-center items-center gap-4 mt-6">
+              ))}
+            </div>
+            <div className="flex w-full justify-start items-center gap-4">
             <CallButton phone={phone} />
             <QuoteButton phone={phone} />
+          </div>
           </div>
         </div>
       </Container>

@@ -25,8 +25,7 @@ export default function About({ services, phone, data, image }) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
           {/* Image Section */}
           <div className="relative h-full min-h-[700px]">
-            <div className="absolute top-6 left-6 right-6 bottom-6 z-10 border-4 border-white/80 rounded-3xl"></div>
-            <div className="overflow-hidden rounded-3xl shadow-2xl h-full relative">
+            <div className="overflow-hidden rounded-md shadow-2xl h-full relative">
               <Image
                 src={image}
                 alt="Professional chimney services"

@@ -365,7 +365,7 @@ export default function QuoteButton({ phone }) {
 
       <button
         onClick={openModal}
-        className="px-8 py-3 w-auto inline-flex min-w-[220px] bg-amber-500 rounded-full text-lg font-semibold text-black transition-colors hover:bg-amber-400"
+        className="px-8 py-3 w-auto inline-flex min-w-[220px] bg-[#6B9FE4] rounded-full text-lg font-semibold text-black transition-colors hover:bg-[#6B9FE4]/80"
       >
         <div className="flex items-center gap-2">
           <TextQuote className="w-6 h-6" />

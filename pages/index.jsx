@@ -24,7 +24,14 @@ import {
   robotsTxt,
 } from "@/lib/myFun";
 import GoogleTagManager from "@/lib/GoogleTagManager";
+import { Montserrat } from "next/font/google";
 
+const  montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-montserrat",
+
+}); 
 export default function Home({
   logo,
   imagePath,
@@ -42,6 +49,7 @@ export default function Home({
   footer,
   locations,
 }) {
+
   return (
     <div className="bg-white">
       <Head>
