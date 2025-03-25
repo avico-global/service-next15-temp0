@@ -53,8 +53,8 @@ const Logo = ({ logo, imagePath }) => {
       : Math.floor((logoWidth / logoHeight) * dynamicLogoHeight);
 
   const logoStyle = {
-    height: `${dynamicLogoHeight}px`,
-    width: windowWidth >= 1200 ? `${logoWidth}px` : "auto",
+    height: windowWidth >= 768 ? `${dynamicLogoHeight}px` : "auto",
+    width: windowWidth >= 768 ? `${logoWidth}px` : 148,
     maxWidth: "100%",
   };
 
@@ -62,7 +62,7 @@ const Logo = ({ logo, imagePath }) => {
     <Link
       title={`Logo - ${hostName}`}
       href="/"
-      className="flex items-center justify-center mr-10"
+      className="flex items-center justify-center "
     >
       {logoType === "image" ? (
         <Image

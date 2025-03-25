@@ -15,7 +15,7 @@ import {
   MapPin,
 } from "lucide-react";
 import Link from "next/link";
-
+import Heading from "../common/Heading";
 export default function Contact({ phone }) {
   const [formData, setFormData] = useState({
     name: "",
@@ -61,7 +61,7 @@ export default function Contact({ phone }) {
   };
 
   return (
-    <FullContainer id="contact-us" className="py-16 relative">
+    <FullContainer id="contact-us" className="py-16 relative ">
       <div className="absolute inset-0 z-0 overflow-hidden">
         <img
           src="https://media.istockphoto.com/id/187515483/photo/look-up-of-cleaner-cleaning-brick-chimney.webp?a=1&b=1&s=612x612&w=0&k=20&c=1j3L9kRE9krjQEgbYXUYjR6oJPyIBVpey4UK79-6oLY="
@@ -74,16 +74,7 @@ export default function Contact({ phone }) {
       <Container className="relative z-10">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10">
-            <span className="inline-block px-4 uppercase text-amber-400 font-medium rounded-full mb-3">
-              Contact Us
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Get in Touch
-            </h2>
-            <p className="text-blue-100 text-xl max-w-2xl mx-auto">
-              Request a free consultation and receive a personalized quote for
-              your project
-            </p>
+            <Heading text="Contact Us" className="pb-6 !text-white"/>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-0 bg-white rounded-2xl overflow-hidden shadow-2xl mb-5">

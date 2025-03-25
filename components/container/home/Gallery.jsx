@@ -4,19 +4,22 @@ import Container from "../../common/Container";
 import CallButton from "@/components/CallButton";
 import QuoteButton from "@/components/QuoteButton";
 import FullContainer from "@/components/common/FullContainer";
+import Heading from "@/components/common/Heading";
+import { Barlow } from "next/font/google";
+const barlow = Barlow({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export default function Gallery({ phone, gallery = [], imagePath }) {
   return (
-    <FullContainer className="py-10">
+    <FullContainer className="py-8">
       <Container className="">
         <div className="text-center mx-auto mb-12">
-          <span className="inline-block uppercase text-amber-600 font-medium rounded-full mb-4">
-            Gallery
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-            Committed to Excellence
-          </h2>
-          <p className="text-gray-900 text-lg md:text-xl">
+
+           <Heading text="Committed to Excellence" className="mb-2" />
+
+          <p className={`text-gray-900 text-lg md:leading-none md:text-2xl ${barlow.className}`}>
             We deliver top-quality chimney solutions with precision and care.
             From cleaning and repairs to expert installations, our skilled team
             ensures safety, comfort, and lasting results for your chimney and

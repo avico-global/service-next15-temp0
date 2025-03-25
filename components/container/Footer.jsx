@@ -18,10 +18,12 @@ export default function Footer({ logo, imagePath, data }) {
         />
         <Container className="relative z-10">
           {/* Logo and Company Statement Section */}
-          <div className="flex  justify-between w-full">
+          <div className="flex md:gap-4 flex-col md:flex-row  justify-between w-full">
             {/* Company Logos and Statement */}
-            <div className="max-w-lg">
+            <div className="max-w-lg pb-4">
+              <div className="flex jjustify-start">
               <Logo logo={logo} imagePath={imagePath} />
+              </div>
               <p className="text-blue-100 text-lg leading-relaxed">
                 {data?.value}
               </p>
@@ -33,7 +35,7 @@ export default function Footer({ logo, imagePath, data }) {
                 Contact Info
                 <span className="absolute -bottom-3 left-0 w-12 h-1 bg-amber-400"></span>
               </h3>
-              <ul className="space-y-6 mt-8">
+              <ul className="space-y-2 md:space-y-6  mt-8">
                 <li className="flex items-center gap-4">
                   <div className="bg-blue-600/20 p-2.5 rounded-full">
                     <Phone className="w-5 h-5 text-blue-300" />

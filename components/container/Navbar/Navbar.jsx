@@ -6,6 +6,13 @@ import FullContainer from "../../common/FullContainer";
 import { useRouter } from "next/navigation";
 import Logo from "@/components/Logo";
 import { sanitizeUrl } from "@/lib/myFun";
+import { Barlow_Condensed } from "next/font/google";
+import CallButton from "@/components/CallButton";
+
+const barlow = Barlow_Condensed({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+});
 
 export default function Navbar({ logo, imagePath, phone, services }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,12 +57,14 @@ export default function Navbar({ logo, imagePath, phone, services }) {
   };
 
   return (
-    <FullContainer className="shadow-sm w-full sticky top-0 z-20 bg-white py-1.5">
+    <FullContainer className="shadow-sm w-full sticky top-0 z-20 bg-white py-2 h-[80px] md:h-[112px]">
       <Container>
         <div className="flex flex-row justify-between h-full items-center w-full">
-          <Logo logo={logo} imagePath={imagePath} />
+          <div className="h-full flex items-center justify-center ">
+            <Logo logo={logo} imagePath={imagePath} />
+          </div>
 
-          <div className="hidden md:flex items-center justify-center font-semibold gap-4 ">
+          <div className="hidden lg:flex items-center text-[26px] font-barlow justify-center font-semibold gap-4 ">
             <div
               className="relative h-full"
               onMouseEnter={() => setShowServices(true)}
@@ -102,72 +111,94 @@ export default function Navbar({ logo, imagePath, phone, services }) {
             ))}
           </div>
 
-          <div className=" flex items-center justify-end">
-            <Link
-              href={`tel:${phone}`}
-              className="bg-primary hover:bg-secondary text-white py-2.5 px-6 font-bold rounded-full items-center text-xl w-fit hidden md:flex gap-2"
-            >
-              <Phone className="w-6 h-6 mr-2" />
-              {phone}
-            </Link>
+          <div className=" flex items-center justify-end flex-row">
+            <div className="flex flex-col md:gap-2 justify-center items-center">
+              <div className="">
+                <CallButton phone={phone} />
+              </div>
+              <h2
+                className={`text-primary font-bold text-lg md:text-[25px] ${barlow.className}`}
+              >
+                Call Us Today
+              </h2>
+            </div>
 
-            <div className="lg:hidden text-gray-600 pl-5" onClick={toggleMenu}>
+            <div className="lg:hidden text-gray-600 pl-5 cursor-pointer" onClick={toggleMenu}>
               {isOpen ? (
                 <X className="w-6 h-6" />
               ) : (
-                <Menu className="w-6 h-6" />
+                <div className="bg-primary text-white p-1">
+                  <Menu className="w-6 h-6" />
+                </div>
               )}
             </div>
           </div>
         </div>
       </Container>
 
-      {isOpen && (
-        <div className="md:hidden bg-white h-[100vh] transition-all duration-1000 ease-in-out mt-8 text-2xl pb-4">
-          <div className="flex flex-col gap-4">
-            <Link
-              href="/"
-              className="text-gray-600 hover:text-[#002B5B] px-4"
-              onClick={() => setIsOpen(false)}
-            >
-              Home
-            </Link>
-            <Link
-              href="/about"
-              className="text-gray-600 hover:text-[#002B5B] px-4"
-              onClick={() => setIsOpen(false)}
-            >
-              About
-            </Link>
-            <Link
-              href="/services"
-              className="text-gray-600 hover:text-[#002B5B] px-4"
-              onClick={() => setIsOpen(false)}
+      {/* Mobile Menu */}
+      <div className={`lg:hidden bg-white absolute top-[80px] left-0 right-0 w-full transition-all duration-300 ${isOpen ? 'h-screen opacity-100 visible' : 'h-0 opacity-0 invisible overflow-hidden'}`}>
+        <div className="flex flex-col gap-4 p-4">
+          <Link
+            href="/"
+            className="text-gray-600 hover:text-[#002B5B] px-4"
+            onClick={() => setIsOpen(false)}
+          >
+            Home
+          </Link>
+          
+          <div className="px-4">
+            <div 
+              className="text-gray-600 hover:text-[#002B5B] flex items-center gap-1 cursor-pointer"
+              onClick={() => setShowServices(!showServices)}
             >
               Services
-            </Link>
-            <Link
-              href="/contact"
-              className="text-gray-600 hover:text-[#002B5B] px-4 pb-10"
-              onClick={() => setIsOpen(false)}
-            >
-              Contact
-            </Link>
-            <div className="flex flex-col gap-4 px-4">
-              <Button>
-                <a
-                  href="tel:(656) 245-0412"
-                  className="flex items-center gap-2"
-                >
-                  <Phone className="w-4 h-4" />
-                  (656) 245-0412
-                </a>
-              </Button>
-              <ButtonSecondary>GET A QUOTE</ButtonSecondary>
+              <ChevronDown className="w-4 h-4" />
             </div>
+            
+            {showServices && (
+              <div className="pl-4 mt-2 flex flex-col gap-2">
+                {services?.map((service, index) => (
+                  <Link
+                    key={index}
+                    href={sanitizeUrl(service?.title)}
+                    className="text-gray-600 hover:text-primary text-lg"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {service?.title}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+          
+          {navLinks.map((item, index) => (
+            <button
+              key={index}
+              className="text-gray-600 hover:text-[#002B5B] px-4 text-left"
+              onClick={() => {
+                handleNavigation(item.link);
+                setIsOpen(false);
+              }}
+            >
+              {item.title}
+            </button>
+          ))}
+          
+          <div className="flex flex-col gap-4 px-4 mt-4">
+            <button>
+              <a
+                href={`tel:${phone}`}
+                className="flex items-center gap-2"
+              >
+                <Phone className="w-4 h-4" />
+                {phone}
+              </a>
+            </button>
+            <button className="bg-primary text-white px-4 py-2 rounded-md">GET A QUOTE</button>
           </div>
         </div>
-      )}
+      </div>
     </FullContainer>
   );
 }

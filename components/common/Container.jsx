@@ -5,7 +5,7 @@ export default function Container({ children, className, style }) {
     <div
       style={style}
       className={cn(
-        " max-w-[1270px] w-full px-4",
+        " max-w-[1270px] w-full px-3 md:px-4",
         className
       )}
     >

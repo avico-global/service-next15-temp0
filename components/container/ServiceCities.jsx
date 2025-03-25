@@ -3,13 +3,13 @@ import Image from "next/image";
 import { MapPin } from "lucide-react";
 import Container from "../common/Container";
 import FullContainer from "../common/FullContainer";
-
+import Heading from "../common/Heading";
 export default function ServiceCities({ data }) {
   const cities = data?.list || [];
 
   return (
     <FullContainer
-      className="py-24 bg-gradient-to-b from-white to-gray-100 relative overflow-hidden"
+      className="py-8 bg-gradient-to-b from-white to-gray-100 relative overflow-hidden"
       id="locations"
     >
       {/* Background Map */}
@@ -25,19 +25,8 @@ export default function ServiceCities({ data }) {
 
       <Container className="relative z-10 ">
         {/* Header Section */}
-        <div className="text-center mb-14">
-          <span className="inline-block uppercase text-amber-600 font-semibold mb-5">
-            {data?.tagline}
-          </span>
+        <Heading text="Service Cities" className="pb-6"/>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-primary mb-5">
-            {data?.heading}
-          </h2>
-
-          <p className="text-gray-600 max-w-2xl mx-auto">{data?.description}</p>
-        </div>
-
-        {/* Simple City Listing with grid-cols-4 */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-y-1">
           {cities.map((city, index) => (
             <div key={index} className="flex items-center">

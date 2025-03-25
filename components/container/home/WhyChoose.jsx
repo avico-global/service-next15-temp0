@@ -16,12 +16,8 @@ import FullContainer from "@/components/common/FullContainer";
 import Link from "next/link";
 import CallButton from "@/components/CallButton";
 import QuoteButton from "@/components/QuoteButton";
-import { Montserrat } from "next/font/google";
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-montserrat",
-});
+import Heading from "@/components/common/Heading";
+
 const iconMapping = {
   Award: Award,
   Clock: Clock,
@@ -34,18 +30,13 @@ const iconMapping = {
 
 export default function WhyChoose({ data, image, phone }) {
   return (
-    <FullContainer className="bg-gray-50 py-10">
+    <FullContainer className="py-8">
       <Container className="">
         <div className="flex flex-col md:flex-row h-fit gap-8 items-center">
-          <div className="w-fit md:pr-10">
-            <span className="inline-block py-1 uppercase text-amber-600 font-medium rounded-full mb-4">
-              {data?.tagline}
-            </span>
-
-            <h2 className={`text-2xl md:text-3xl font-bold ${montserrat.className} text-primary mb-4`}>
-              {data?.heading}
-            </h2>
-
+          <div className="w-fit flex flex-col gap-4 md:pr-10">
+            <div className="flex justify-start">
+              <Heading text={data?.heading} className="" />
+            </div>
             <div className="space-y-1">
               {data?.features?.map((feature, index) => {
                 // Get the actual icon component from the mapping
@@ -57,7 +48,9 @@ export default function WhyChoose({ data, image, phone }) {
                       <IconComponent className="w-6 h-6" />
                     </div>
                     <div className="flex flex-col">
-                      <h3 className={`text-lg md:text-xl text-primary font-extralight mb-1`}>
+                      <h3
+                        className={`text-lg md:text-xl text-primary font-extralight mb-1`}
+                      >
                         {feature.title}
                       </h3>
                       {/* {feature.description && (

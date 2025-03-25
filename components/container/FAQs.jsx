@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Container from "../common/Container";
 import { Plus, Minus } from "lucide-react";
 import FullContainer from "../common/FullContainer";
-
+import Heading from "../common/Heading";
 const faqs = [
   {
     question: "What is included in a chimney inspection?",
@@ -34,24 +34,13 @@ export default function Faqs() {
     <FullContainer className="py-10 bg-gray-50" id="faqs">
       <Container className="px-4">
         <div className="text-center ">
-          <span className="inline-block uppercase text-amber-600 font-semibold rounded-full mb-5">
-            Frequently Asked Questions
-          </span>
-
-          <h2 className="text-4xl sm:text-5xl font-bold text-center text-[#002B5B] mb-6">
-            Got Questions?
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto mb-14">
-            Find answers to the most common questions about our chimney services
-            and maintenance below.
-          </p>
-
+          <Heading text="FAQs" className="pb-6"/>
           <div className="mx-auto">
             {faqs.map((faq, index) => (
               <div key={index} className="mb-3">
                 <button
-                  className={`w-full text-left py-3 px-4 bg-blue-900 text-white rounded-md flex items-center focus:outline-none ${
-                    activeIndex === index ? 'bg-blue-800' : 'bg-blue-900'
+                  className={`w-full text-left py-3 px-4 bg-primary text-white rounded-md flex items-center focus:outline-none ${
+                    activeIndex === index ? 'bg-secondary/80' : 'bg-secondary'
                   }`}
                   onClick={() => toggleFAQ(index)}
                   aria-expanded={activeIndex === index}

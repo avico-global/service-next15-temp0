@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Container from '../common/Container';
+import Heading from '../common/Heading';
 
 // Sample testimonials data matching exactly what's in the image
 const testimonialData = [
@@ -144,7 +145,7 @@ const Testimonials = ({ testimonials = testimonialData }) => {
   return (
     <section className="testimonials-section py-16 overflow-hidden">
       <Container className=" mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center text-blue-900 mb-12">Our Happy Clients</h2>
+        <Heading text="Our Happy Clients" className="pb-6"/>
         
         <div 
           ref={sliderRef}

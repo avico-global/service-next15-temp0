@@ -106,8 +106,8 @@ export default function Home({
         phone={phone}
       />
       <Gallery phone={phone} gallery={gallery} imagePath={imagePath} />
-      <FullContainer className="py-20 bg-gray-50">
-        <Container className="flex t md:flex-row md:justify-between">
+      <FullContainer className="pt-8 pb-2">
+        <Container className="grid grid-cols-2 md:grid-cols-4 md:justify-between px-16">
           {[
             {
               title: "Number Of Clients",
@@ -142,7 +142,6 @@ export default function Home({
 
       <About
         services={services?.list}
-        phone={phone}
         data={about?.value}
         image={`${imagePath}/${about?.file_name}`}
       />

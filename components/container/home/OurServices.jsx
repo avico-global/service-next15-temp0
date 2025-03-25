@@ -3,7 +3,8 @@ import Link from "next/link";
 import { sanitizeUrl } from "@/lib/myFun";
 import Container from "../../common/Container";
 import FullContainer from "../../common/FullContainer";
-import {} from "lucide-react";
+import Heading from "../../common/Heading";
+
 
 const chimneyIcons = [
   {
@@ -175,27 +176,15 @@ const OurServices = ({ data }) => {
   return (
     <section className="services-section py-12">
       <Container className="container mx-auto px-4">
-        {tagline || heading || description ? (
-          <div className="text-center mb-12">
-            {tagline && (
-              <p className="text-primary font-medium mb-2">{tagline}</p>
-            )}
-            {heading && (
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">{heading}</h2>
-            )}
-            {description && (
-              <p className="max-w-3xl mx-auto text-gray-600">{description}</p>
-            )}
-          </div>
-        ) : null}
+      <Heading text="Services Provided" className="mb-12" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-2 gap-x-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-y-2 gap-x-6">
           {list.map((service) => (
             <div
               key={service.id}
-              className="service-item flex items-center bg-white text-primary rounded-full py-2 px-5 shadow-[0_0_10px_rgba(0,0,0,0.1)] shadow-black/20 transition-all duration-300"
+              className="service-item flex items-center bg-white text-primary rounded-full py-1 md:py-2 px-2 shadow-[0_0_15px_rgba(0,0,0,0.3)] transition-all duration-300"
             >
-              <div className="service-icon mr-3 text-primary">
+              <div className="service-icon mr-1 md:mr-3 text-primary ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 60 60"
@@ -210,7 +199,7 @@ const OurServices = ({ data }) => {
                   <path d={serviceIcons[service.title] || ""} />
                 </svg>
               </div>
-              <span className="font-medium">{service.title}</span>
+              <span className="font-medium leading-none text-md md:text-lg">{service.title}</span>
             </div>
           ))}
         </div>

@@ -108,14 +108,15 @@ export default function Banner({ image, data, phone }) {
       />
       <div className="absolute inset-0 bg-gray-900/50"></div>
       <Container className="py-20 relative z-10">
-        <div className="w-full grid grid-cols-1 md:grid-cols-banner gap-16 text-white lg:min-h-[50vh]">
-          <div className="relative flex flex-col justify-center">
-          <div className="flex items-center justify-center lg:justify-start mb-4">
+        <div className="w-full grid grid-cols-1 md:grid-cols-banner gap-16 text-white lg:min-h-[630px]">
+          <div className="relative flex flex-col lg:pr-10 justify-center">
+            <div className="flex items-center md:items-start  justify-center md:justify-start mb-4">
               <Image
                 src="/st-images/google.webp"
                 width={100}
                 height={30}
                 alt="Google"
+                className="w-[75px] md:w-[100px] h-[25px] md:h-[30px]"
               />
 
               <Image
@@ -123,7 +124,7 @@ export default function Banner({ image, data, phone }) {
                 width={100}
                 height={30}
                 alt="Trustpilot"
-                className="ml-6"
+                className="ml-6 w-[75px] md:w-[100px] h-[25px] md:h-[30px]"
               />
 
               <Image
@@ -131,23 +132,23 @@ export default function Banner({ image, data, phone }) {
                 width={100}
                 height={30}
                 alt="Capterra"
-                className="ml-6"
+                className="ml-6 w-[75px] md:w-[100px] h-[25px] md:h-[30px]"
               />
             </div>
-            <h1 className="font-extrabold uppercase text-5xl md:text-7xl leading-tight text-center lg:text-left text-shadow-lg">
+            <h1 className="font-extrabold uppercase text-3xl md:text-6xl leading-tight text-center md:text-start lg:text-left text-shadow-lg">
               {data?.title}
             </h1>
-            <h2 className="text-5xl md:text-6xl font-bold text-amber-400 text-center lg:text-left mt-2">
+              <h2 className="text-3xl md:text-6xl font-bold text-[#90D4E1] text-center md:text-start lg:text-left mt-2">
               {data?.tagline}
             </h2>
-            <p className="text-xl text-center lg:text-left mt-4">
+            <p className="text-sm md:text-3xl text-center md:text-start lg:text-left mt-4">
               {data?.description}
             </p>
-            
-            <div className="w-full h-px bg-gradient-to-r from-amber-500/50 to-[#90D4E1]/0 mt-12 mb-2"></div>
-            <div className="flex items-center gap-5">
-              <p className="text-3xl font-bold">Call Us Today</p>
+            <div className="flex flex-col items-center md:items-start pt-3">
               <CallButton phone={phone} />
+              <p className="text-xl md:text-3xl leading-none mt-2 font-bold">
+                Call Us Today
+              </p>
             </div>
           </div>
 

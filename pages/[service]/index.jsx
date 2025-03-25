@@ -1,4 +1,3 @@
-import data from "../../json/data.json";
 import FAQs from "../../components/container/FAQs";
 import Contact from "../../components/container/Contact";
 import Navbar from "../../components/container/Navbar/Navbar";
