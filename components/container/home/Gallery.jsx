@@ -13,12 +13,10 @@ const barlow = Barlow({
 
 export default function Gallery({ phone, gallery = [], imagePath }) {
   return (
-    <FullContainer className="py-8">
+    <FullContainer className="py-4">
       <Container className="">
-        <div className="text-center mx-auto mb-12">
-
-           <Heading text="Committed to Excellence" className="mb-2" />
-
+        <div className="text-center mx-auto mb-10">
+           <Heading text="Committed to Excellence" className="mb-4" />
           <p className={`text-gray-900 text-lg md:leading-none md:text-2xl ${barlow.className}`}>
             We deliver top-quality chimney solutions with precision and care.
             From cleaning and repairs to expert installations, our skilled team
@@ -27,7 +25,7 @@ export default function Gallery({ phone, gallery = [], imagePath }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 w-full md:px-5">
           {gallery?.map((image, index) => (
             <div
               key={index}

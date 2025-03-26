@@ -56,10 +56,20 @@ export default function Navbar({ logo, imagePath, phone, services }) {
     }
   };
 
+  const scrollDropdown = () => {
+    const dropdown = document.querySelector('.dropdown-services-container');
+    if (dropdown) {
+      dropdown.scrollBy({
+        top: 200,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <FullContainer className="shadow-sm w-full sticky top-0 z-20 bg-white py-2 h-[80px] md:h-[112px]">
       <Container>
-        <div className="flex flex-row justify-between h-full items-center w-full">
+        <div className="flex flex-row justify-between h-full items-center w-full pr-8">
           <div className="h-full flex items-center justify-center ">
             <Logo logo={logo} imagePath={imagePath} />
           </div>
@@ -80,23 +90,39 @@ export default function Navbar({ logo, imagePath, phone, services }) {
               </button>
 
               <div
-                className={`absolute top-full left-0 w-auto min-w-[500px] bg-white shadow-2xl py-4 px-5 rounded-md
-                transition-all duration-300 ease-in-out grid grid-cols-2 gap-1
+                className={`absolute top-full left-0 w-auto min-w-[300px] bg-white shadow-[0_0_10px_rgba(0,0,0,0.5)] py-4 
+                transition-all duration-300 ease-in-out flex flex-col lg:max-h-[540px]
                 ${
                   showServices
                     ? "opacity-100 visible transform translate-y-0"
                     : "opacity-0 invisible transform -translate-y-2"
                 }`}
               >
-                {services?.map((service, index) => (
-                  <Link
-                    key={index}
-                    href={sanitizeUrl(service?.title)}
-                    className="hover:underline text-gray-600 font-medium text-sm hover:text-primary cursor-pointer transition-all duration-100"
+                <div className="flex-grow dropdown-services-container overflow-y-auto scrollbar-hide" 
+                     style={{ 
+                       scrollbarWidth: 'none', 
+                       msOverflowStyle: 'none',
+                       '::-webkit-scrollbar': { display: 'none' } 
+                     }}>
+                  {services?.map((service, index) => (
+                    <Link
+                      key={index}
+                      href={sanitizeUrl(service?.title)}
+                      className="text-black text-xl py-1 font-medium px-4 hover:bg-primary hover:text-white cursor-pointer transition-all duration-100 block"
+                    >
+                      {service?.title}
+                    </Link>
+                  ))}
+                </div>
+                
+                <div className="sticky bottom-0 w-full bg-white py-2 mt-2 flex justify-center border-t">
+                  <div 
+                    className="w-8 h-8 rounded-full bg-primary flex items-center justify-center cursor-pointer hover:bg-[#002B5B] transition-colors"
+                    onClick={scrollDropdown}
                   >
-                    {service?.title}
-                  </Link>
-                ))}
+                    <ChevronDown className="w-5 h-5 text-white" />
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -117,7 +143,7 @@ export default function Navbar({ logo, imagePath, phone, services }) {
                 <CallButton phone={phone} />
               </div>
               <h2
-                className={`text-primary font-bold text-lg md:text-[25px] ${barlow.className}`}
+                className={`text-primary font-bold text-lg md:text-[25px] leading-none`}
               >
                 Call Us Today
               </h2>

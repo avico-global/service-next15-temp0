@@ -12,7 +12,7 @@ export default function Benefits({ phone, data, image }) {
   const benefits = data?.list || [];
 
   return (
-    <FullContainer className="pt-10 overflow-hidden ">
+    <FullContainer className="py-8 overflow-hidden ">
       <Container className="">
         <div className="grid grid-cols-1 md:grid-cols-services xl:grid-cols-services2 gap-4">
           <div className=" md:w-[111%] rounded-md relative bg-blue-500 h-full overflow-hidden">

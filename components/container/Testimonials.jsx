@@ -143,7 +143,7 @@ const Testimonials = ({ testimonials = testimonialData }) => {
   };
   
   return (
-    <section className="testimonials-section py-16 overflow-hidden">
+    <section className="testimonials-section py-8  overflow-hidden">
       <Container className=" mx-auto px-4">
         <Heading text="Our Happy Clients" className="pb-6"/>
         

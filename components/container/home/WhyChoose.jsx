@@ -64,14 +64,14 @@ export default function WhyChoose({ data, image, phone }) {
               })}
             </div>
 
-            <div className="flex flex-wrap w-full justify-start items-center gap-4">
+            <div className="flex flex-wrap w-full justify-start items-center gap-4 lg:gap-7">
               <CallButton phone={phone} />
               <QuoteButton phone={phone} />
             </div>
           </div>
 
           <div className="flex-1 w-full md:w-1/2 lg:w-3/5 h-full relative">
-            <div className="overflow-hidden rounded-md shadow-2xl h-[360px] w-full relative">
+            <div className="overflow-hidden rounded-md h-[360px] w-full relative">
               <Image
                 title="Why Choose Image"
                 src={image}

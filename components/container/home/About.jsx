@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import FullContainer from '@/components/common/FullContainer'
 import Container from '@/components/common/Container'
-import { Montserrat, Barlow } from 'next/font/google'
+import { Montserrat, Barlow, Inter } from 'next/font/google'
 const montserrat = Montserrat({
   weight: ["400", "500", "600", "800"],
   subsets: ["latin"],
@@ -10,6 +10,11 @@ const montserrat = Montserrat({
 const barlow = Barlow({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
 });
 export default function About({ image, data }) {
   return (
@@ -32,7 +37,7 @@ export default function About({ image, data }) {
           
           {/* Centered heading */}
           <div className="absolute inset-0 flex items-center justify-center px-4 flex-col gap-4 text-center">
-            <h2 className={`text-white text-[26px] md:text-3xl font-bold z-10 ${montserrat.className}`}>{data?.heading}</h2>
+            <h2 className={`text-white text-[26px] md:text-[28px] font-bold z-10 ${inter.className}`}>{data?.heading}</h2>
             <p className={`text-white text-[22px] leading-none z-10 ${barlow.className}`}>{data?.description1}</p>
             <p className={`text-white text-[22px] leading-none z-10 ${barlow.className}`}>{data?.description2}</p>
           </div>

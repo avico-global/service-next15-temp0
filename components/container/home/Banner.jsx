@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Container from "@/components/common/Container";
 import FullContainer from "@/components/common/FullContainer";
-
+import { Barlow_Condensed } from "next/font/google";
 import {
   Phone,
   User,
@@ -14,6 +14,10 @@ import {
   MapPin,
 } from "lucide-react";
 import CallButton from "@/components/CallButton";
+const Barlow = Barlow_Condensed({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export default function Banner({ image, data, phone }) {
   const [formData, setFormData] = useState({
@@ -107,9 +111,9 @@ export default function Banner({ image, data, phone }) {
         className="object-cover object-left"
       />
       <div className="absolute inset-0 bg-gray-900/50"></div>
-      <Container className="py-20 relative z-10">
-        <div className="w-full grid grid-cols-1 md:grid-cols-banner gap-16 text-white lg:min-h-[630px]">
-          <div className="relative flex flex-col lg:pr-10 justify-center">
+      <Container className="py-20  relative z-10">
+        <div className="w-full grid grid-cols-1 md:grid-cols-banner gap-[66px] text-white lg:min-h-[630px]">
+          <div className="relative -mt-10 flex flex-col lg:pr-10 justify-center">
             <div className="flex items-center md:items-start  justify-center md:justify-start mb-4">
               <Image
                 title="Google"
@@ -138,29 +142,29 @@ export default function Banner({ image, data, phone }) {
                 className="ml-6 w-[75px] md:w-[100px] h-[25px] md:h-[30px]"
               />
             </div>
-            <h1 className="font-extrabold uppercase text-3xl md:text-6xl leading-tight text-center md:text-start lg:text-left text-shadow-lg">
+            <h1 className="font-[900] uppercase text-3xl md:text-6xl leading-tight text-center md:text-start lg:text-left text-shadow-lg">
               {data?.title}
             </h1>
-              <h2 className="text-3xl md:text-6xl font-bold text-[#90D4E1] text-center md:text-start lg:text-left mt-2">
+            <h2 className="text-3xl md:text-6xl uppercase font-[900] text-[#90D4E1] text-center md:text-start lg:text-left mt-2">
               {data?.tagline}
             </h2>
-            <p className="text-sm md:text-3xl text-center md:text-start lg:text-left mt-4">
+            <p className="text-sm md:text-3xl text-center md:text-start lg:text-left mt-4 mb-1">
               {data?.description}
             </p>
             <div className="flex flex-col items-center md:items-start pt-3">
               <CallButton phone={phone} />
-              <p className="text-xl md:text-3xl leading-none mt-2 font-bold">
+              <p className="text-xl md:text-4xl leading-none mt-2 font-bold">
                 Call Us Today
               </p>
             </div>
           </div>
 
           <div className="flex flex-col justify-center">
-            <div className="bg-white rounded-xl p-8">
-              <h3 className="text-2xl font-bold text-center mb-2 text-primary">
+            <div className="bg-white rounded-[20px] px-12 pb-12 pt-16">
+              <h3 className="text-4xl leading-7 font-bold text-center mb-2 text-primary">
                 10% Off Total Price for Online Booking
               </h3>
-              <h4 className="text-xl font-bold text-center mb-6 text-gray-800">
+              <h4 className="text-4xl pt-4 font-extrabold text-center mb-6 text-[#11121A]">
                 Request a Quote
               </h4>
 
@@ -179,31 +183,29 @@ export default function Banner({ image, data, phone }) {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-3 text-black">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-[10px]">
                     <div>
                       <label
                         htmlFor="first_name"
-                        className="block text-sm mb-1 text-gray-700 font-medium"
+                        className="block text-md font-thin mb-1 text-gray-700 "
                       >
                         First Name
                       </label>
                       <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <User className="h-4 w-4 text-blue-500" />
-                        </div>
+                        <div className="absolute inset-y-0 left-0 pl-3  pointer-events-none"></div>
                         <input
                           type="text"
                           id="first_name"
                           name="first_name"
                           value={formData.first_name}
                           onChange={handleChange}
-                          className="w-full pl-10 py-2 bg-gray-50 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-500 shadow-sm"
+                          className="w-full pl-3 py-2 bg-white border border-gray-200 rounded-md outline-none "
                           placeholder="First name"
                           required
                         />
                       </div>
                     </div>
-                    <div>
+                    {/* <div>
                       <label
                         htmlFor="last_name"
                         className="block text-sm mb-1 text-gray-700 font-medium"
@@ -225,52 +227,69 @@ export default function Banner({ image, data, phone }) {
                           required
                         />
                       </div>
-                    </div>
-                  </div>
+                    </div> */}
 
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label
-                        htmlFor="email"
-                        className="block text-sm mb-1 text-gray-700 font-medium"
-                      >
-                        Email
-                      </label>
-                      <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <Mail className="h-4 w-4 text-blue-500" />
-                        </div>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          className="w-full pl-10 py-2 bg-gray-50 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-500 shadow-sm"
-                          placeholder="your@email.com"
-                          required
-                        />
-                      </div>
-                    </div>
+                  
                     <div>
                       <label
                         htmlFor="phone"
-                        className="block text-sm mb-1 text-gray-700 font-medium"
+                        className="block text-md font-thin mb-1 text-gray-700 "
                       >
                         Phone Number
                       </label>
                       <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <Phone className="h-4 w-4 text-blue-500" />
-                        </div>
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"></div>
                         <input
                           type="tel"
                           id="phone"
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full pl-10 py-2 bg-gray-50 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-500 shadow-sm"
+                          className="w-full pl-3 py-2 bg-white border border-gray-200 rounded-md outline-none "
                           placeholder="(123) 456-7890"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="zip"
+                        className="block text-md font-thin mb-1 text-gray-700 "
+                      >
+                        Zip Code
+                      </label>
+                      <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"></div>
+                        <input
+                          type="text"
+                          id="zip"
+                          name="zip"
+                          value={formData.zip}
+                          onChange={handleChange}
+                          className="w-full pl-3 py-2 bg-white border border-gray-200 rounded-md outline-none "
+                          placeholder="Zip Code"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="email"
+                        className="block text-md font-thin mb-1 text-gray-700 "
+                      >
+                        Email
+                      </label>
+                      <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"></div>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          className="w-full pl-3 py-2 bg-white border border-gray-200 rounded-md outline-none "
+                          placeholder="your@email.com"
                           required
                         />
                       </div>
@@ -279,38 +298,13 @@ export default function Banner({ image, data, phone }) {
 
                   <div>
                     <label
-                      htmlFor="zip"
-                      className="block text-sm mb-1 text-gray-700 font-medium"
-                    >
-                      Zip Code
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <MapPin className="h-4 w-4 text-blue-500" />
-                      </div>
-                      <input
-                        type="text"
-                        id="zip"
-                        name="zip"
-                        value={formData.zip}
-                        onChange={handleChange}
-                        className="w-full pl-10 py-2 bg-gray-50 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-500 shadow-sm"
-                        placeholder="Zip Code"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label
                       htmlFor="message"
-                      className="block text-sm mb-1 text-gray-700 font-medium"
+                      className="block text-md font-thin mb-1 text-gray-700 "
                     >
                       Message
                     </label>
                     <div className="relative">
                       <div className="absolute top-3 left-3 pointer-events-none">
-                        <MessageSquare className="h-4 w-4 text-blue-500" />
                       </div>
                       <textarea
                         id="message"
@@ -318,8 +312,8 @@ export default function Banner({ image, data, phone }) {
                         value={formData.message}
                         onChange={handleChange}
                         rows="3"
-                        className="w-full pl-10 py-2 bg-gray-50 border border-gray-200 rounded-md focus:ring-2 focus:ring-blue-500 shadow-sm"
-                        placeholder="Describe your project needs..."
+                        className="w-full pl-3 py-2 max-h-[75px] bg-white border border-gray-200 rounded-md outline-none "
+                        placeholder="Message"
                         required
                       ></textarea>
                     </div>
@@ -334,7 +328,7 @@ export default function Banner({ image, data, phone }) {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-primary hover:bg-secondary text-white py-2.5 px-6 rounded-md font-medium transition-colors duration-200 flex items-center justify-center gap-2"
+                    className="w-full bg-[#6B9FE4] hover:bg-[#5B88C4] text-black py-3 px-6 rounded-md font-medium transition-colors duration-200 flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <>

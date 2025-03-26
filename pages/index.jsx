@@ -24,7 +24,7 @@ import {
   robotsTxt,
 } from "@/lib/myFun";
 import GoogleTagManager from "@/lib/GoogleTagManager";
-import { Montserrat } from "next/font/google";
+import { Montserrat, Inter, Barlow } from "next/font/google";
 
 const  montserrat = Montserrat({
   subsets: ["latin"],
@@ -32,6 +32,15 @@ const  montserrat = Montserrat({
   variable: "--font-montserrat",
 
 }); 
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
+});
+const barlow = Barlow({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700" , "900"],
+});
 export default function Home({
   logo,
   imagePath,
@@ -106,7 +115,7 @@ export default function Home({
         phone={phone}
       />
       <Gallery phone={phone} gallery={gallery} imagePath={imagePath} />
-      <FullContainer className="pt-8 pb-2">
+      <FullContainer className="pt-10 pb-6">
         <Container className="grid grid-cols-2 md:grid-cols-4 md:justify-between px-16">
           {[
             {
@@ -128,10 +137,10 @@ export default function Home({
           ].map((item, index) => (
             <div key={index}>
               <div className="flex flex-col items-center justify-center">
-                <h3 className="font-bold text-center text-primary relative z-10">
+                <h3 className={`font-[900]  text-center text-[#082347] relative z-10 ${barlow.className}`}>
                   <Counter targetNumber={item.number} duration={3000} />
                 </h3>
-                <h2 className="text-base sm:text-lg md:text-xl font-medium text-center text-[#002B5B] relative z-10 mt-2">
+                <h2 className={`text-base sm:text-lg md:text-xl capitalize font-medium text-center text-[#082347] relative z-10 mt-2 ${inter.className}`}>
                   {item.title}
                 </h2>
               </div>

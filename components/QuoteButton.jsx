@@ -369,7 +369,7 @@ export default function QuoteButton({ phone }) {
       >
         <div className="flex items-center gap-2 ">
           <TextQuote className="w-6 h-6 " />
-          <h2 className="text-md md:text-2xl">
+          <h2 className="text-md font-thin md:text-2xl">
             GET A QUOTE
           </h2>
         </div>

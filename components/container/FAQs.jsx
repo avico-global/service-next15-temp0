@@ -31,7 +31,7 @@ export default function Faqs() {
   };
 
   return (
-    <FullContainer className="py-10 bg-gray-50" id="faqs">
+    <FullContainer className="py-4" id="faqs">
       <Container className="px-4">
         <div className="text-center ">
           <Heading text="FAQs" className="pb-6"/>
