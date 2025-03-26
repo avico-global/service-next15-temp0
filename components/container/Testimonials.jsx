@@ -2,31 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import Container from '../common/Container';
 import Heading from '../common/Heading';
 
-// Sample testimonials data matching exactly what's in the image
-const testimonialData = [
-  {
-    name: "Linda",
-    location: "Tampa, FL",
-    text: "Tampa Chimney Services saved us! They repaired our cracked chimney crown and stopped water leaks. Professional, fast, and affordable. Highly recommend!"
-  },
-  {
-    name: "Tom Peterson",
-    location: "Riverview, FL",
-    text: "Great experience! They cleaned our flue, installed a new cap, and explained everything. Fair prices and top-notch service. Will definitely use them again!"
-  },
-  {
-    name: "Sarah Johnson",
-    location: "Clearwater, FL",
-    text: "We had a major chimney leak during a storm. They responded quickly, fixed the issue, and even helped with insurance paperwork. Outstanding service!"
-  },
-  {
-    name: "Mike Davis",
-    location: "St. Petersburg, FL",
-    text: "They rebuilt our chimney that was damaged in a storm. The work was meticulous and the crew was professional. Very impressed with their attention to detail."
-  }
-];
-
-const Testimonials = ({ testimonials = testimonialData }) => {
+const Testimonials = ({ data }) => {
+  // Use the API data directly from the data prop
+  const testimonials = data?.list || [];
+  
   const [activeIndex, setActiveIndex] = useState(0);
   const [slideDirection, setSlideDirection] = useState('');
   const [isDragging, setIsDragging] = useState(false);
@@ -143,9 +122,9 @@ const Testimonials = ({ testimonials = testimonialData }) => {
   };
   
   return (
-    <section className="testimonials-section py-8  overflow-hidden">
-      <Container className=" mx-auto px-4">
-        <Heading text="Our Happy Clients" className="pb-6"/>
+    <section className="testimonials-section py-8 overflow-hidden">
+      <Container className="mx-auto px-4">
+        <Heading text={data?.heading || "Our Happy Clients"} className="pb-4"/>
         
         <div 
           ref={sliderRef}
@@ -158,19 +137,19 @@ const Testimonials = ({ testimonials = testimonialData }) => {
           onMouseUp={handleDragEnd}
           onMouseLeave={handleMouseLeave}
         >
-          <div className="slider-content flex flex-col borders md:flex-row gap-8 mb-10">
+          <div className="slider-content flex flex-col borders md:flex-row gap-3 mb-10">
             {getCurrentPageTestimonials().map((testimonial, index) => (
               <div 
                 key={index} 
-                className="flex-1 py-8 px-10 border border-blue-900  rounded-3xl flex flex-col"
+                className="flex-1 py-8 px-10 border border-blue-900 rounded-3xl flex flex-col"
               >
-                <p className="text-center text-gray-900 italic  mb-8 text-lg md:text-xl  leading-relaxed">
-                  "{testimonial.text}"
+                <p className="text-center text-gray-900 italic mb-8 text-lg md:text-xl leading-relaxed">
+                  "{testimonial.quote || testimonial.text}"
                 </p>
                 
-                <div className="mt-auto text-center">
-                  <h4 className="text-2xl text-blue-800 font-bold mb-1">{testimonial.name}</h4>
-                  <p className="text-gray-600">{testimonial.location}</p>
+                <div className="mt-auto text-center ">
+                  <h4 className="text-4xl text-blue-800 font-bold  leading-none">{testimonial.name}</h4>
+                  <p className="text-primary text-xl leading-none">{testimonial.location}</p>
                 </div>
               </div>
             ))}
@@ -263,6 +242,6 @@ const Testimonials = ({ testimonials = testimonialData }) => {
       `}</style>
     </section>
   );
-};
+};      
 
 export default Testimonials;

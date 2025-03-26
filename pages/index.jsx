@@ -58,7 +58,6 @@ export default function Home({
   footer,
   locations,
 }) {
-
   return (
     <div className="bg-white">
       <Head>
@@ -159,7 +158,9 @@ export default function Home({
         data={benefits?.value}
         image={`${imagePath}/${benefits?.file_name}`}
       />
-      <Testimonials data={testimonials} />
+      {testimonials && (
+        <Testimonials data={testimonials} />
+      )}
       <Contact phone={phone} />
       <FAQs />
       <ServiceCities data={locations} />

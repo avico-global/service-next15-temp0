@@ -35,7 +35,10 @@ export default function Service({
   meta,
   domain,
   favicon,
+  locations,
+  service_banner,
 }) {
+
   const router = useRouter();
   const { service } = router.query;
   const breadcrumbs = useBreadcrumbs();
@@ -95,8 +98,8 @@ export default function Service({
         services={services?.list}
       />
       <ServiceBanner
-        data={banner?.value}
-        image={`${imagePath}/${banner?.file_name}`}
+        data={service_banner?.value}
+        image={`${imagePath}/${service_banner?.file_name}`}
         imagePath={imagePath}
         phone={phone}
       />
@@ -120,7 +123,7 @@ export default function Service({
 
       <Contact phone={phone} />
       <FAQs />
-      <ServiceCities />
+      <ServiceCities data={locations} />
       <Footer data={footer} logo={logo} imagePath={imagePath} />
 
       {/* <FullContainer>
@@ -162,11 +165,14 @@ export async function getServerSideProps({ req }) {
   const favicon = await callBackendApi({ domain, tag: "favicon" });
   const footer = await callBackendApi({ domain, tag: "footer" });
   const locations = await callBackendApi({ domain, tag: "locations" });
+  const service_banner = await callBackendApi({ domain, tag: "service_banner" });
+  
 
   robotsTxt({ domain });
 
   return {
     props: {
+      service_banner: service_banner?.data[0] || null,
       domain,
       imagePath,
       logo: logo?.data[0] || null,

@@ -11,6 +11,7 @@ export default function ServiceBanner({ phone, data, image }) {
   const router = useRouter();
   const { service } = router.query;
 
+  console.log("data", data);
   return (
     <FullContainer
       className="relative overflow-hidden"
@@ -19,7 +20,7 @@ export default function ServiceBanner({ phone, data, image }) {
         color: data?.textColor || "white",
       }}
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-950/60 to-blue-950/80"></div>
+      <div className="absolute inset-0 bg-gray-900/60"></div>
       <Image
         src={image}
         title={data?.imageTitle || data?.title || "Banner"}
@@ -40,8 +41,8 @@ export default function ServiceBanner({ phone, data, image }) {
              (max-width: 3840px) 3840px,
              100vw"
       />
-      <Container className="h-full py-16 flex flex-col items-center relative z-10 gap-8 text-center">
-        <div className="flex items-center justify-center lg:justify-start">
+      <Container className="h-full py-20 flex flex-col items-center relative lg:min-h-[735px] z-10 gap-6 text-center">
+        <div className="flex items-center justify-center lg:justify-start pt-16">
           <Image
           title="Google"
             src="/st-images/google.webp"
@@ -70,13 +71,13 @@ export default function ServiceBanner({ phone, data, image }) {
           />
         </div>
 
-        <h1 className="flex flex-col gap-4 text-4xl md:text-5xl lg:text-6xl font-bold ">
-          <span className="text-amber-400 drop-shadow-lg animate-fadeIn capitalize">
+        <h1 className="flex flex-col text-4xl md:text-5xl lg:text-6xl font-bold ">
+          <span className="text-3xl md:text-6xl uppercase font-[900] text-[#89CFF0] text-center md:text-start lg:text-left mt-2">
             {service?.replace(/-/g, " ")}
           </span>
         </h1>
 
-        <span className="block mb-3 text-3xl md:text-4xl lg:text-5xl font-semibold drop-shadow-lg text-white">
+        <span className="block mb-3 max-w-3xl capitalize text-3xl lg:leading-[55px] md:text-4xl lg:text-[50px] font-semibold drop-shadow-lg text-white">
           <span className="text-white">
             {data?.heading?.replaceAll(
               "##service##",
@@ -85,45 +86,10 @@ export default function ServiceBanner({ phone, data, image }) {
           </span>
         </span>
 
-        <p className="text-xl md:text-2xl text-white font-light drop-shadow-md max-w-2xl">
-          {data?.description}
+        <p className="text-xl md:text-3xl text-white font-light drop-shadow-md max-w-2xl">
+          {data?.tagline}
         </p>
-
-        <div className="flex flex-wrap gap-4 mt-2 justify-start md:justify-center">
-          {[
-            { text: "Licensed", color: "amber" },
-            { text: "Insured", color: "blue" },
-            { text: "24/7 Service", color: "amber" },
-            { text: "Free Estimates", color: "blue" },
-          ].map((item) => (
-            <div key={item.text} className="flex items-center gap-2">
-              <div
-                className={`${
-                  item.color === "amber" ? "text-amber-400" : "text-[#90D4E1]"
-                }`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-              <span className="text-white/90 text-sm font-medium">
-                {item.text}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        <div className="w-full h-px bg-gradient-to-r from-amber-500/0 via-amber-500/50 to-[#90D4E1]/0 mt-10"></div>
-        <div className="flex items-center justify-center gap-6">
+        <div className="flex items-center justify-center gap-6  pt-6">
           <CallButton phone={phone} />
           <QuoteButton phone={phone} />
         </div>

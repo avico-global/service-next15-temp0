@@ -29,12 +29,54 @@ export default function Banner({ image, data, phone }) {
     message: "",
   });
 
+  const [fieldErrors, setFieldErrors] = useState({
+    phone: ""
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [error, setError] = useState(null);
 
+  // Validate phone number
+  const validatePhone = (phoneNumber) => {
+    const phoneRegex = /^\d{10}$/;
+    return phoneRegex.test(phoneNumber);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    // Validate phone field as user types
+    if (name === 'phone') {
+      if (value.length > 0 && !validatePhone(value)) {
+        setFieldErrors(prev => ({
+          ...prev,
+          phone: "Phone number must be exactly 10 digits"
+        }));
+      } else {
+        setFieldErrors(prev => ({
+          ...prev,
+          phone: ""
+        }));
+      }
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validate phone before submission
+    if (!validatePhone(formData.phone)) {
+      setFieldErrors(prev => ({
+        ...prev,
+        phone: "Phone number must be exactly 10 digits"
+      }));
+      return; // Prevent form submission
+    }
+    
     setIsSubmitting(true);
     setError(null);
 
@@ -92,13 +134,6 @@ export default function Banner({ image, data, phone }) {
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
   console.log("image", image);
   return (
     <FullContainer className="relative overflow-hidden">
@@ -245,11 +280,14 @@ export default function Banner({ image, data, phone }) {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full pl-3 py-2 bg-white border border-gray-200 rounded-md outline-none "
+                          className={`w-full pl-3 py-2 bg-white border ${fieldErrors.phone ? 'border-red-500' : 'border-gray-200'} rounded-md outline-none`}
                           placeholder="(123) 456-7890"
                           required
                         />
                       </div>
+                      {fieldErrors.phone && (
+                        <p className="text-red-500 text-xs mt-1">{fieldErrors.phone}</p>
+                      )}
                     </div>
 
                     <div>
