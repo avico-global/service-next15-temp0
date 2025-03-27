@@ -13,7 +13,7 @@ const barlow = Barlow({
 
 export default function Gallery({ contact_info, gallery = [], imagePath }) {
   return (
-    <FullContainer className="py-4">
+    <FullContainer className="pt-4 pb-12">
       <Container className="">
         <div className="text-center mx-auto mb-10">
            <Heading text="Committed to Excellence" className="mb-4" />
