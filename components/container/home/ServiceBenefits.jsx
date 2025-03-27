@@ -8,7 +8,7 @@ import CallButton from "@/components/CallButton";
 import Heading from "@/components/common/Heading";
 import QuoteButton from "@/components/QuoteButton";
 
-export default function Benefits({ phone, data, image }) {
+export default function Benefits({ contact_info, data, image }) {
   const benefits = data?.list || [];
 
   return (
@@ -39,8 +39,8 @@ export default function Benefits({ phone, data, image }) {
               ))}
             </div>
             <div className="w-full gap-2 justify-start hidden md:flex  flex-col lg:flex-row items-start lg:items-center lg:gap-4">
-              <CallButton phone={phone} />
-              <QuoteButton phone={phone} />
+              <CallButton phone={contact_info?.phone} />
+              <QuoteButton phone={contact_info?.phone} />
             </div>
           </div>
         </div>

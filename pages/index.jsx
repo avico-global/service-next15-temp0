@@ -42,10 +42,10 @@ const barlow = Barlow({
   weight: ["400", "500", "600", "700" , "900"],
 });
 export default function Home({
+  contact_info,
   logo,
   imagePath,
   banner,
-  phone,
   services,
   features,
   gallery,
@@ -58,6 +58,7 @@ export default function Home({
   footer,
   locations,
 }) {
+  console.log("contact_info", contact_info);
   return (
     <div className="bg-white">
       <Head>
@@ -98,22 +99,22 @@ export default function Home({
       <Navbar
         logo={logo}
         imagePath={imagePath}
-        phone={phone}
+        contact_info={contact_info}
         services={services?.list}
       />
       <Banner
         data={banner?.value}
         image={`${imagePath}/${banner?.file_name}`}
         imagePath={imagePath}
-        phone={phone}
+        contact_info={contact_info}
       />
       <OurServices data={services} />
       <WhyChoose
         data={features?.value}
         image={`${imagePath}/${features?.file_name}`}
-        phone={phone}
+        contact_info={contact_info}
       />
-      <Gallery phone={phone} gallery={gallery} imagePath={imagePath} />
+      <Gallery gallery={gallery} imagePath={imagePath} />
       <FullContainer className="pt-10 pb-6">
         <Container className="grid grid-cols-2 md:grid-cols-4 md:justify-between px-16">
           {[
@@ -154,17 +155,17 @@ export default function Home({
         image={`${imagePath}/${about?.file_name}`}
       />
       <ServiceBenefits
-        phone={phone}
+        contact_info={contact_info}
         data={benefits?.value}
         image={`${imagePath}/${benefits?.file_name}`}
       />
       {testimonials && (
         <Testimonials data={testimonials} />
       )}
-      <Contact phone={phone} />
+      <Contact contact_info={contact_info} />
       <FAQs />
       <ServiceCities data={locations} />
-      <Footer data={footer} logo={logo} imagePath={imagePath} />
+      <Footer data={footer} logo={logo} imagePath={imagePath} contact_info={contact_info} />
       
     </div>
   );
@@ -172,12 +173,12 @@ export default function Home({
 
 export async function getServerSideProps({ req }) {
   const domain = getDomain(req?.headers?.host);
+  const contact_info = await callBackendApi({ domain, tag: "contact_info" });
   const logo = await callBackendApi({ domain, tag: "logo" });
   const project_id = logo?.data[0]?.project_id || null;
   const imagePath = await getImagePath(project_id, domain);
 
   const banner = await callBackendApi({ domain, tag: "banner" });
-  const phone = await callBackendApi({ domain, tag: "phone" });
   const services = await callBackendApi({ domain, tag: "services_list" });
   const features = await callBackendApi({ domain, tag: "features" });
   const gallery = await callBackendApi({ domain, tag: "gallery" });
@@ -193,11 +194,11 @@ export async function getServerSideProps({ req }) {
 
   return {
     props: {
+      contact_info: contact_info?.data[0]?.value || null,
       domain,
       imagePath,
       logo: logo?.data[0] || null,
       banner: banner?.data[0] || null,
-      phone: phone?.data[0]?.value || null,
       services: services?.data[0]?.value || [],
       features: features?.data[0] || [],
       gallery: gallery?.data[0]?.value || [],

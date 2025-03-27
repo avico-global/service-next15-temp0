@@ -349,6 +349,7 @@ export default function QuoteButton({ phone }) {
                     <p className="text-sm text-gray-500 text-center pt-3">
                       By submitting, you agree to our{" "}
                       <Link
+                        title="terms & privacy policy"
                         href="#"
                         className="text-blue-600 hover:underline font-medium"
                       >

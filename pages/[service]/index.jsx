@@ -23,8 +23,8 @@ import FullContainer from "@/components/common/FullContainer";
 import Container from "@/components/common/Container";
 
 export default function Service({
+  contact_info,
   logo,
-  phone,
   banner,
   services,
   imagePath,
@@ -94,14 +94,14 @@ export default function Service({
       <Navbar
         logo={logo}
         imagePath={imagePath}
-        phone={phone}
+        contact_info={contact_info}
         services={services?.list}
       />
       <ServiceBanner
         data={service_banner?.value}
         image={`${imagePath}/${service_banner?.file_name}`}
         imagePath={imagePath}
-        phone={phone}
+        contact_info={contact_info}
       />
       <FullContainer>
         <Container>
@@ -110,21 +110,20 @@ export default function Service({
       </FullContainer>
       <About
         services={services?.list}
-        phone={phone}
         data={about?.value}
         image={`${imagePath}/${about?.file_name}`}
       />
       <ServiceBenefits
-        phone={phone}
+        contact_info={contact_info}
         data={benefits?.value}
         image={`${imagePath}/${benefits?.file_name}`}
       />
-      <Gallery phone={phone} gallery={gallery} imagePath={imagePath} />
+      <Gallery contact_info={contact_info} gallery={gallery} imagePath={imagePath} />
 
-      <Contact phone={phone} />
+      <Contact contact_info={contact_info} />
       <FAQs />
       <ServiceCities data={locations} />
-      <Footer data={footer} logo={logo} imagePath={imagePath} />
+      <Footer data={footer} logo={logo} imagePath={imagePath} contact_info={contact_info} />
 
       {/* <FullContainer>
         <Container>
@@ -149,12 +148,12 @@ export default function Service({
 
 export async function getServerSideProps({ req }) {
   const domain = getDomain(req?.headers?.host);
+  const contact_info = await callBackendApi({ domain, tag: "contact_info" });
   const logo = await callBackendApi({ domain, tag: "logo" });
   const project_id = logo?.data[0]?.project_id || null;
   const imagePath = await getImagePath(project_id, domain);
 
   const banner = await callBackendApi({ domain, tag: "banner" });
-  const phone = await callBackendApi({ domain, tag: "phone" });
   const services = await callBackendApi({ domain, tag: "services_list" });
   const features = await callBackendApi({ domain, tag: "features" });
   const gallery = await callBackendApi({ domain, tag: "gallery" });
@@ -172,12 +171,12 @@ export async function getServerSideProps({ req }) {
 
   return {
     props: {
+      contact_info: contact_info?.data[0]?.value || null,
       service_banner: service_banner?.data[0] || null,
       domain,
       imagePath,
       logo: logo?.data[0] || null,
       banner: banner?.data[0] || null,
-      phone: phone?.data[0]?.value || null,
       services: services?.data[0]?.value || [],
       features: features?.data[0] || [],
       gallery: gallery?.data[0]?.value || [],

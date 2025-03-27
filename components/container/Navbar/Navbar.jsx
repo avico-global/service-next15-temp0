@@ -14,7 +14,7 @@ const barlow = Barlow_Condensed({
   subsets: ["latin"],
 });
 
-export default function Navbar({ logo, imagePath, phone, services }) {
+export default function Navbar({ logo, imagePath, contact_info, services }) {
   const [isOpen, setIsOpen] = useState(false);
   const [showServices, setShowServices] = useState(false);
 
@@ -69,7 +69,7 @@ export default function Navbar({ logo, imagePath, phone, services }) {
   return (
     <FullContainer className="shadow-sm w-full sticky top-0 z-20 bg-white py-2 h-[80px] md:h-[112px]">
       <Container>
-        <div className="flex flex-row justify-between h-full items-center w-full pr-8">
+        <div className="flex flex-row justify-between h-full items-center w-full  md:pr-8">
           <div className="h-full flex items-center justify-center ">
             <Logo logo={logo} imagePath={imagePath} />
           </div>
@@ -106,6 +106,7 @@ export default function Navbar({ logo, imagePath, phone, services }) {
                      }}>
                   {services?.map((service, index) => (
                     <Link
+                      title={service?.title}
                       key={index}
                       href={sanitizeUrl(service?.title)}
                       className="text-black text-xl py-1 font-medium px-4 hover:bg-primary hover:text-white cursor-pointer transition-all duration-100 block"
@@ -140,7 +141,7 @@ export default function Navbar({ logo, imagePath, phone, services }) {
           <div className=" flex items-center justify-end flex-row">
             <div className="flex flex-col md:gap-2 justify-center items-center">
               <div className="">
-                <CallButton phone={phone} />
+                <CallButton phone={contact_info?.phone} />
               </div>
               <h2
                 className={`text-primary font-bold text-lg md:text-[25px] leading-none`}
@@ -166,6 +167,7 @@ export default function Navbar({ logo, imagePath, phone, services }) {
       <div className={`lg:hidden bg-white absolute top-[80px] left-0 right-0 w-full transition-all duration-300 ${isOpen ? 'h-screen opacity-100 visible' : 'h-0 opacity-0 invisible overflow-hidden'}`}>
         <div className="flex flex-col gap-4 p-4">
           <Link
+            title="Home"
             href="/"
             className="text-gray-600 hover:text-[#002B5B] px-4"
             onClick={() => setIsOpen(false)}
@@ -186,6 +188,7 @@ export default function Navbar({ logo, imagePath, phone, services }) {
               <div className="pl-4 mt-2 flex flex-col gap-2">
                 {services?.map((service, index) => (
                   <Link
+                    title={service?.title}
                     key={index}
                     href={sanitizeUrl(service?.title)}
                     className="text-gray-600 hover:text-primary text-lg"
@@ -212,13 +215,13 @@ export default function Navbar({ logo, imagePath, phone, services }) {
           ))}
           
           <div className="flex flex-col gap-4 px-4 mt-4">
-            <button>
+            <button title="Call Button">
               <a
-                href={`tel:${phone}`}
+                href={`tel:${contact_info?.phone}`}
                 className="flex items-center gap-2"
               >
                 <Phone className="w-4 h-4" />
-                {phone}
+                {contact_info?.phone}
               </a>
             </button>
             <button className="bg-primary text-white px-4 py-2 rounded-md">GET A QUOTE</button>

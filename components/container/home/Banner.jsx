@@ -19,7 +19,7 @@ const Barlow = Barlow_Condensed({
   weight: ["400", "500", "600", "700"],
 });
 
-export default function Banner({ image, data, phone }) {
+export default function Banner({ image, data, contact_info }) {
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -187,7 +187,7 @@ export default function Banner({ image, data, phone }) {
               {data?.description}
             </p>
             <div className="flex flex-col items-center md:items-start pt-3">
-              <CallButton phone={phone} />
+              <CallButton phone={contact_info?.phone} />
               <p className="text-xl md:text-4xl leading-none mt-2 font-bold">
                 Call Us Today
               </p>
