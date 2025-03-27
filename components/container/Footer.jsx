@@ -3,121 +3,121 @@ import FullContainer from "../common/FullContainer";
 import Container from "../common/Container";
 import Link from "next/link";
 import Image from "next/image";
-import { Phone } from "lucide-react";
+import { Clock4, Mail, Phone } from "lucide-react";
 import Logo from "../Logo";
+import image1 from "../../public/st-images/footer1.png";
+import image2 from "../../public/st-images/footer2.png";
+import image3 from "../../public/st-images/footer3.png";
+import image4 from "../../public/st-images/footer4.png";
+import image5 from "../../public/st-images/footer5.png";
+import { Barlow_Condensed, Montserrat, Inter } from "next/font/google";
 
-export default function Footer({ logo, imagePath, data }) {
+const barlow = Barlow_Condensed({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+export default function Footer({ logo, imagePath, data, contact_info }) {
+  console.log("contact_info", contact_info);
+  const companies = [image1, image2, image3, image4, image5];
   return (
     <footer>
-      <FullContainer className="bg-gradient-to-b from-slate-900 to-primary py-20 relative">
+      <FullContainer
+        className={`bg-[#1E1B21] py-[52px] relative ${inter.className}`}
+      >
         <Image
           title="Footer Image"
           src={`${imagePath}/${data?.file_name}`}
           alt="Footer Image"
-          className="w-full absolute top-0 left-0 h-full object-cover opacity-15"
+          className="w-full absolute top-0 left-0 h-full object-cover opacity-25"
           fill
         />
-        <Container className="relative z-10">
-          {/* Logo and Company Statement Section */}
-          <div className="flex md:gap-4 flex-col md:flex-row  justify-between w-full">
+        <Container className="relative z-10 ">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-24 justify-between w-full">
             {/* Company Logos and Statement */}
-            <div className="max-w-lg pb-4">
-              <div className="flex jjustify-start">
-              <Logo logo={logo} imagePath={imagePath} />
+            <div className="max-w-[395px] md:px-2">
+              <div className="flex gap-1 mb-2">
+                {companies.map((company, index) => (
+                  <div
+                    key={index}
+                    className="w-full h-full  aspect-square flex items-center justify-center overflow-hidden bg-white rounded-full"
+                  >
+                    <Image
+                      title="company logo"
+                      src={company}
+                      alt="Company Logo"
+                      className="h-[80%] w-[80%] object-contain"
+                    />
+                  </div>
+                ))}
               </div>
-              <p className="text-blue-100 text-lg leading-relaxed">
+              <p className="text-white text-sm md:text-[15px] leading-relaxed">
                 {data?.value}
               </p>
             </div>
 
             {/* Contact Info */}
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-8 relative">
-                Contact Info
-                <span className="absolute -bottom-3 left-0 w-12 h-1 bg-amber-400"></span>
-              </h3>
-              <ul className="space-y-2 md:space-y-6  mt-8">
-                <li className="flex items-center gap-4">
-                  <div className="bg-blue-600/20 p-2.5 rounded-full">
-                    <Phone className="w-5 h-5 text-blue-300" />
-                  </div>
-                  <Link
-                    href="tel:(656) 245-0412"
-                    className="text-white hover:text-amber-400 transition-colors text-lg"
-                  >
-                    (656) 245-0412
-                  </Link>
-                </li>
-                <li className="flex items-center gap-4">
-                  <div className="bg-blue-600/20 p-2.5 rounded-full">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="w-5 h-5 text-blue-300"
+            <div className="flex flex-row justify-center items-center md:px-2">
+              <div className="pl-4 lg:pl-[170px] w-full">
+                <h3 className="text-xl font-bold text-white relative">
+                  Contact Info
+                </h3>
+                <ul className="space-y-2 md:space-y-3  mt-5">
+                  <li className="flex items-center gap-1.5">
+                    <div className=" text-white">
+                      <Phone className="w-5 h-5 " />
+                    </div>
+                    <Link
+                      title="Call Button"
+                      href={`tel:${contact_info?.phone}`}
+                      className="text-white text-sm md:text-[15px]"
                     >
-                      <rect width="20" height="16" x="2" y="4" rx="2" />
-                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                    </svg>
-                  </div>
-                  <Link
-                    href="mailto:sales@tampa-chimney.com"
-                    className="text-white hover:text-amber-400 transition-colors text-lg"
-                  >
-                    sales@tampa-chimney.com
-                  </Link>
-                </li>
-                <li className="flex items-center gap-4">
-                  <div className="bg-blue-600/20 p-2.5 rounded-full">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="w-5 h-5 text-blue-300"
+                      {contact_info?.phone || "(656) 245-0412"}
+                    </Link>
+                  </li>
+                  <li className="flex items-center gap-1.5">
+                    <div className=" text-white">
+                      <Mail className="w-5 h-5" />
+                    </div>
+                    <Link
+                      title="Email Button"
+                      href={`mailto:${contact_info?.email}`}
+                      className="text-white  text-sm md:text-[15px]"
                     >
-                      <circle cx="12" cy="12" r="10" />
-                      <polyline points="12 6 12 12 16 14" />
-                    </svg>
-                  </div>
-                  <span className="text-white text-lg">
-                    Monday - Friday: 7AM - 8PM
-                  </span>
-                </li>
-              </ul>
+                      {contact_info?.email || "sales@tampa-chimney.com"}
+                    </Link>
+                  </li>
+                  <li className="flex items-center gap-1.5">
+                    <div className=" text-white">
+                      <Clock4 className="w-5 h-5" />
+                    </div>
+                    <span className="text-white text-sm md:text-[15px]">
+                      {contact_info?.working_hours || "Monday - Friday: 7AM - 8PM"}
+                    </span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 
           {/* Bottom Bar */}
-          <div className="mt-12 pt-8 border-t border-white/10 w-full">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-              <p className="text-blue-200">
-                &copy; {new Date().getFullYear()} Tampa Chimney. All rights
-                reserved.
-              </p>
+          <div className="mt-6 pt-4 border-t border-white/30 w-full">
+            <div className="flex flex-row justify-start items-start  gap-6">
               <div className="flex gap-6">
                 <Link
+                  title="Privacy Policy"
                   href="/privacy-policy"
-                  className="text-blue-200 hover:text-amber-400 transition-colors"
+                  className="text-white text-sm md:text-[15px]"
                 >
                   Privacy Policy
-                </Link>
-                <Link
-                  href="/terms-and-conditions"
-                  className="text-blue-200 hover:text-amber-400 transition-colors"
-                >
-                  Terms & Conditions
                 </Link>
               </div>
             </div>

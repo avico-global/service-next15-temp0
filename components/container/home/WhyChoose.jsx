@@ -28,7 +28,7 @@ const iconMapping = {
   ThumbsUp: ThumbsUp,
 };
 
-export default function WhyChoose({ data, image, phone }) {
+export default function WhyChoose({ data, image, contact_info }) {
   return (
     <FullContainer className="py-8">
       <Container className="">
@@ -65,8 +65,8 @@ export default function WhyChoose({ data, image, phone }) {
             </div>
 
             <div className="flex flex-wrap w-full justify-start items-center gap-4 lg:gap-7">
-              <CallButton phone={phone} />
-              <QuoteButton phone={phone} />
+              <CallButton phone={contact_info?.phone} />
+              <QuoteButton phone={contact_info?.phone} />
             </div>
           </div>
 

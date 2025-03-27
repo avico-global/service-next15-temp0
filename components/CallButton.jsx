@@ -10,6 +10,7 @@ const barlow = Barlow_Condensed({
 const CallButton = ({ phone }) => {
   return (
     <Link
+      title="Call Button"
       href={`tel:${phone}`}
       className="bg-primary flex hover:bg-secondary text-white font-barlow py-1 md:py-3 px-3 md:px-8 font-medium rounded-full items-center justify-center text-md md:text-2xl w-fit"
     >

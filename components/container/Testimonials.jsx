@@ -123,7 +123,7 @@ const Testimonials = ({ data }) => {
   
   return (
     <section className="testimonials-section py-8 overflow-hidden">
-      <Container className="mx-auto px-4">
+      <Container className="mx-auto px-4 ">
         <Heading text={data?.heading || "Our Happy Clients"} className="pb-4"/>
         
         <div 

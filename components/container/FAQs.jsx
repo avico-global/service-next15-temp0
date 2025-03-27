@@ -37,9 +37,9 @@ export default function Faqs() {
           <Heading text="FAQs" className="pb-6"/>
           <div className="mx-auto">
             {faqs.map((faq, index) => (
-              <div key={index} className="mb-3">
+              <div key={index} className="mb-2">
                 <button
-                  className={`w-full text-left py-3 px-4 bg-primary text-white rounded-md flex items-center focus:outline-none ${
+                  className={`w-full text-left py-3.5 px-4  bg-primary text-white rounded-lg flex items-center focus:outline-none ${
                     activeIndex === index ? 'bg-secondary/80' : 'bg-secondary'
                   }`}
                   onClick={() => toggleFAQ(index)}

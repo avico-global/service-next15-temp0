@@ -34,7 +34,7 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
 });
 
-export default function Contact({ phone }) {
+export default function Contact({ contact_info }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -79,13 +79,9 @@ export default function Contact({ phone }) {
   };
 
   return (
-    <FullContainer id="contact-us" className="pb-4 relative ">
+    <FullContainer id="contact-us" className="pb-4 relative">
       <Container className="relative z-10">
         <div className="">
-          <div className="text-center mb-11">
-            <Heading text="Contact Us" className="pb-6 !text-white" />
-          </div>
-
           <div className="bg-primary gap-0 rounded-[20px] overflow-hidden  mb-5">
             <div className="lg:col-span-3 p-10 lg:p-12 bg-primary text-white">
               {formSubmitted ? (

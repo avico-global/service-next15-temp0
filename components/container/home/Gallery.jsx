@@ -11,7 +11,7 @@ const barlow = Barlow({
   weight: ["400", "500", "600", "700"],
 });
 
-export default function Gallery({ phone, gallery = [], imagePath }) {
+export default function Gallery({ contact_info, gallery = [], imagePath }) {
   return (
     <FullContainer className="py-4">
       <Container className="">
@@ -44,8 +44,8 @@ export default function Gallery({ phone, gallery = [], imagePath }) {
         </div>
 
         <div className="flex w-full justify-center items-center gap-4">
-          <CallButton phone={phone} />
-          <QuoteButton phone={phone} />
+          <CallButton phone={contact_info?.phone} />
+          <QuoteButton phone={contact_info?.phone} />
         </div>
       </Container>
     </FullContainer>
