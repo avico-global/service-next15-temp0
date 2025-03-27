@@ -114,8 +114,8 @@ export default function Home({
         image={`${imagePath}/${features?.file_name}`}
         contact_info={contact_info}
       />
-      <Gallery gallery={gallery} imagePath={imagePath} />
-      <FullContainer className="pt-10 pb-6">
+      <Gallery gallery={gallery} imagePath={imagePath} contact_info={contact_info}/>
+      <FullContainer className="pt-2 pb-6">
         <Container className="grid grid-cols-2 md:grid-cols-4 md:justify-between px-16">
           {[
             {

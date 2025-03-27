@@ -7,7 +7,7 @@ import CallButton from "../CallButton";
 import QuoteButton from "../QuoteButton";
 import { useRouter } from "next/router";
 
-export default function ServiceBanner({ phone, data, image }) {
+export default function ServiceBanner({ contact_info, data, image }) {
   const router = useRouter();
   const { service } = router.query;
 
@@ -41,7 +41,7 @@ export default function ServiceBanner({ phone, data, image }) {
              (max-width: 3840px) 3840px,
              100vw"
       />
-      <Container className="h-full py-20 flex flex-col items-center relative lg:min-h-[735px] z-10 gap-6 text-center">
+      <Container className="h-full flex flex-col items-center relative lg:min-h-[600px] z-10 gap-6 text-center">
         <div className="flex items-center justify-center lg:justify-start pt-16">
           <Image
           title="Google"
@@ -51,8 +51,7 @@ export default function ServiceBanner({ phone, data, image }) {
             alt="Google"
           />
 
-          <Image
-          
+          <Image          
             title="Trustpilot"
             src="/st-images/trustpilot.webp"
             width={100}
@@ -90,8 +89,8 @@ export default function ServiceBanner({ phone, data, image }) {
           {data?.tagline}
         </p>
         <div className="flex items-center justify-center gap-6  pt-6">
-          <CallButton phone={phone} />
-          <QuoteButton phone={phone} />
+          <CallButton phone={contact_info?.phone} />
+          <QuoteButton phone={contact_info?.phone} />
         </div>
       </Container>
     </FullContainer>
