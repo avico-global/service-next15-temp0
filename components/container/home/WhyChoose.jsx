@@ -28,16 +28,17 @@ const iconMapping = {
   ThumbsUp: ThumbsUp,
 };
 
+
 export default function WhyChoose({ data, image, contact_info }) {
   return (
-    <FullContainer className="py-8">
+    <FullContainer className="py-6 md:py-8">
       <Container className="">
         <div className="flex flex-col md:flex-row h-fit gap-8 items-center">
-          <div className="w-fit flex flex-col gap-4 md:pr-10">
+          <div className="w-fit flex flex-col justify-center items-center md:items-start md:justify-start gap-4 md:pr-10">
             <div className="flex justify-start">
               <Heading text={data?.heading} className="" />
             </div>
-            <div className="space-y-1">
+            <div className="space-y-2 w-fit">
               {data?.features?.map((feature, index) => {
                 // Get the actual icon component from the mapping
                 const IconComponent = iconMapping[feature.icon] || Award; // Fallback to Award if not found
@@ -49,7 +50,7 @@ export default function WhyChoose({ data, image, contact_info }) {
                     </div>
                     <div className="flex flex-col">
                       <h3
-                        className={`text-lg md:text-xl text-primary font-extralight mb-1`}
+                        className={`font-barlow text-xl md:text-xl text-primary font-extralight mb-1`}
                       >
                         {feature.title}
                       </h3>
@@ -64,13 +65,13 @@ export default function WhyChoose({ data, image, contact_info }) {
               })}
             </div>
 
-            <div className="flex flex-wrap w-full justify-start items-center gap-4 lg:gap-7">
+            <div className="hidden md:flex flex-wrap w-full justify-start items-center gap-4 lg:gap-7">
               <CallButton phone={contact_info?.phone} />
               <QuoteButton phone={contact_info?.phone} />
             </div>
           </div>
 
-          <div className="flex-1 w-full md:w-1/2 lg:w-3/5 h-full relative">
+          <div className="flex-1 w-full md:w-1/2 lg:w-3/5 h-full relative hidden md:block">
             <div className="overflow-hidden rounded-md h-[360px] w-full relative">
               <Image
                 title="Why Choose Image"

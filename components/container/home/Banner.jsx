@@ -195,11 +195,11 @@ export default function Banner({ image, data, contact_info }) {
           </div>
 
           <div className="flex flex-col justify-center">
-            <div className="bg-white rounded-[20px] px-12 pb-12 pt-16">
-              <h3 className="text-4xl leading-7 font-bold text-center mb-2 text-primary">
+            <div className="bg-white rounded-[20px] px-4 md:px-12 pb-8 md:pb-12 pt-10 md:pt-16">
+              <h3 className="text-3xl md:text-4xl leading-7 font-bold text-center mb-2 text-primary">
                 10% Off Total Price for Online Booking
               </h3>
-              <h4 className="text-4xl pt-4 font-extrabold text-center mb-6 text-[#11121A]">
+              <h4 className="text-[26px] md:text-4xl pt-4 font-extrabold text-center mb-6 text-[#11121A]">
                 Request a Quote
               </h4>
 
@@ -264,8 +264,7 @@ export default function Banner({ image, data, contact_info }) {
                       </div>
                     </div> */}
 
-                  
-                    <div>
+                    <div className="">
                       <label
                         htmlFor="phone"
                         className="block text-md font-thin mb-1 text-gray-700 "
@@ -289,8 +288,9 @@ export default function Banner({ image, data, contact_info }) {
                         <p className="text-red-500 text-xs mt-1">{fieldErrors.phone}</p>
                       )}
                     </div>
+                  
 
-                    <div>
+                    <div className="col-span-2 md:col-span-1">
                       <label
                         htmlFor="zip"
                         className="block text-md font-thin mb-1 text-gray-700 "
@@ -311,7 +311,7 @@ export default function Banner({ image, data, contact_info }) {
                         />
                       </div>
                     </div>
-                    <div>
+                    <div className="col-span-2 md:col-span-1">
                       <label
                         htmlFor="email"
                         className="block text-md font-thin mb-1 text-gray-700 "

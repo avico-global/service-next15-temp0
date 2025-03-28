@@ -67,7 +67,7 @@ export default function Navbar({ logo, imagePath, contact_info, services }) {
   };
 
   return (
-    <FullContainer className="shadow-sm w-full sticky top-0 z-20 bg-white py-2 h-[80px] md:h-[112px]">
+    <FullContainer className="shadow-sm w-full sticky top-0 z-20 bg-white py-2 h-[82px] md:h-[112px]">
       <Container>
         <div className="flex flex-row justify-between h-full items-center w-full  md:pr-8">
           <div className="h-full flex items-center justify-center ">
@@ -139,23 +139,23 @@ export default function Navbar({ logo, imagePath, contact_info, services }) {
           </div>
 
           <div className=" flex items-center justify-end flex-row">
-            <div className="flex flex-col md:gap-2 justify-center items-center">
+            <div className="flex flex-col gap-1 md:gap-2 justify-center items-center">
               <div className="">
                 <CallButton phone={contact_info?.phone} />
               </div>
               <h2
-                className={`text-primary font-bold text-lg md:text-[25px] leading-none`}
+                className={`text-primary font-bold text-lg md:text-[25px] font-barlow leading-none`}
               >
                 Call Us Today
               </h2>
             </div>
 
-            <div className="lg:hidden text-gray-600 pl-5 cursor-pointer" onClick={toggleMenu}>
+            <div className="lg:hidden text-white pl-5 cursor-pointer" onClick={toggleMenu}>
               {isOpen ? (
                 <X className="w-6 h-6" />
               ) : (
-                <div className="bg-primary text-white p-1">
-                  <Menu className="w-6 h-6" />
+                <div className="bg-primary  pt-1.5 rounded-[3px] p-0.5">
+                  <Menu className="w-7 h-6" />
                 </div>
               )}
             </div>

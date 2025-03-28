@@ -7,7 +7,7 @@ const montserrat = Montserrat({
 export default function Heading({text, className}) {
   return (
     <div>
-        <h2 className={`text-[33px] md:text-[28px] font-[800] text-primary text-center leading-nones ${montserrat.className} ${className}`}>
+        <h2 className={`text-[35px] md:text-[28px] font-[800] text-primary text-center leading-none ${montserrat.className} ${className}`}>
         {text}
       </h2>
     </div>

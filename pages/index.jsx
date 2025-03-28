@@ -26,12 +26,11 @@ import {
 import GoogleTagManager from "@/lib/GoogleTagManager";
 import { Montserrat, Inter, Barlow } from "next/font/google";
 
-const  montserrat = Montserrat({
+const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-montserrat",
-
-}); 
+});
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -39,7 +38,7 @@ const inter = Inter({
 });
 const barlow = Barlow({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700" , "900"],
+  weight: ["400", "500", "600", "700", "900"],
 });
 export default function Home({
   contact_info,
@@ -95,78 +94,89 @@ export default function Home({
           href={`${process.env.NEXT_PUBLIC_SITE_MANAGER}/images/${imagePath}/${favicon}`}
         />
       </Head>
-
-      <Navbar
-        logo={logo}
-        imagePath={imagePath}
-        contact_info={contact_info}
-        services={services?.list}
-      />
-      <Banner
-        data={banner?.value}
-        image={`${imagePath}/${banner?.file_name}`}
-        imagePath={imagePath}
-        contact_info={contact_info}
-      />
-      <OurServices data={services} />
-      <WhyChoose
-        data={features?.value}
-        image={`${imagePath}/${features?.file_name}`}
-        contact_info={contact_info}
-      />
-      <Gallery gallery={gallery} imagePath={imagePath} contact_info={contact_info}/>
-      <FullContainer className="pt-2 pb-6">
-        <Container className="grid grid-cols-2 md:grid-cols-4 md:justify-between px-16">
-          {[
-            {
-              title: "Number Of Clients",
-              number: 1200,
-            },
-            {
-              title: "Years of Experience",
-              number: 10,
-            },
-            {
-              title: "Locations Served",
-              number: 21,
-            },
-            {
-              title: "Certifications Or Awards",
-              number: 14,
-            },
-          ].map((item, index) => (
-            <div key={index}>
-              <div className="flex flex-col items-center justify-center">
-                <h3 className={`font-[900]  text-center text-[#082347] relative z-10 ${barlow.className}`}>
-                  <Counter targetNumber={item.number} duration={3000} />
-                </h3>
-                <h2 className={`text-base sm:text-lg md:text-xl capitalize font-medium text-center text-[#082347] relative z-10 mt-2 ${inter.className}`}>
-                  {item.title}
-                </h2>
+      <div className={`${montserrat.className}`}>
+        <Navbar
+          logo={logo}
+          imagePath={imagePath}
+          contact_info={contact_info}
+          services={services?.list}
+        />
+        <Banner
+          data={banner?.value}
+          image={`${imagePath}/${banner?.file_name}`}
+          imagePath={imagePath}
+          contact_info={contact_info}
+        />
+        <OurServices data={services} />
+        <WhyChoose
+          data={features?.value}
+          image={`${imagePath}/${features?.file_name}`}
+          contact_info={contact_info}
+        />
+        <Gallery
+          gallery={gallery}
+          imagePath={imagePath}
+          contact_info={contact_info}
+        />
+        <FullContainer className="pt-2 pb-6">
+          <Container className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 md:justify-between px-2 md:px-4">
+            {[
+              {
+                title: "Number Of Clients",
+                number: 1200,
+              },
+              {
+                title: "Years of Experience",
+                number: 10,
+              },
+              {
+                title: "Locations Served",
+                number: 21,
+              },
+              {
+                title: "Certifications Or Awards",
+                number: 14,
+              },
+            ].map((item, index) => (
+              <div key={index}>
+                <div className="flex flex-col items-center justify-center">
+                  <h3
+                    className={`font-[900] text-center text-[#082347] relative z-10 font-barlow`}
+                  >
+                    <Counter targetNumber={item.number} duration={3000} className="text-7xl" />
+                  </h3>
+                  <h2
+                    className={`text-base sm:text-lg md:text-xl capitalize font-medium leading-none text-start md:text-center text-[#082347] relative z-10 mt-1 md:mt-2 ${inter.className}`}
+                  >
+                    {item.title}
+                  </h2>
+                </div>
               </div>
-            </div>
-          ))}
-        </Container>
-      </FullContainer>
+            ))}
+          </Container>
+        </FullContainer>
 
-      <About
-        services={services?.list}
-        data={about?.value}
-        image={`${imagePath}/${about?.file_name}`}
-      />
-      <ServiceBenefits
-        contact_info={contact_info}
-        data={benefits?.value}
-        image={`${imagePath}/${benefits?.file_name}`}
-      />
-      {testimonials && (
-        <Testimonials data={testimonials} />
-      )}
-      <Contact contact_info={contact_info} />
-      <FAQs />
-      <ServiceCities data={locations} />
-      <Footer data={footer} logo={logo} imagePath={imagePath} contact_info={contact_info} />
-      
+        <About
+          services={services?.list}
+          data={about?.value}
+          image={`${imagePath}/${about?.file_name}`}
+        />
+        <ServiceBenefits
+          contact_info={contact_info}
+          data={benefits?.value}
+          image={`${imagePath}/${benefits?.file_name}`}
+        />
+        {testimonials && <Testimonials data={testimonials} />}
+        <Contact contact_info={contact_info} />
+        <FAQs />
+        <ServiceCities data={locations} />
+        <Footer
+          data={footer}
+          logo={logo}
+          imagePath={imagePath}
+          contact_info={contact_info}
+        />
+      </div>
     </div>
   );
 }

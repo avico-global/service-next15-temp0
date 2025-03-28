@@ -6,6 +6,8 @@ import FullContainer from "../../common/FullContainer";
 import Heading from "../../common/Heading";
 
 
+
+
 const chimneyIcons = [
   {
     id: "chimney-inspection",
@@ -174,17 +176,17 @@ const OurServices = ({ data }) => {
   const { tagline, heading, description, list } = data;
 
   return (
-    <section className="services-section py-12">
+    <section className="services-section py-4 md:py-12">
       <Container className="container mx-auto px-4">
-      <Heading text="Services Provided" className="mb-10" />
+      <Heading text="Services Provided" className="mb-6 md:mb-10" />
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-y-[10px] gap-x-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-y-[10px] gap-x-1.5 md:gap-x-6">
           {list.map((service) => (
             <div
               key={service.id}
-              className="service-item flex items-center bg-white text-primary rounded-full py-1 md:py-[10px] px-3 md:px-5 shadow-[0_0_15px_rgba(0,0,0,0.35)] transition-all duration-300"
+              className="service-item flex items-center bg-white text-primary rounded-full py-1 md:py-[10px] px-3 md:px-5 shadow-[0_0_10px_rgba(0,0,0,0.4)] transition-all duration-300"
             >
-              <div className="service-icon mr-1 md:mr-3 text-primary ">
+              <div className="service-icon mr-3 text-primary ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 60 60"
@@ -199,7 +201,7 @@ const OurServices = ({ data }) => {
                   <path d={serviceIcons[service.title] || ""} />
                 </svg>
               </div>
-              <span className="font-medium leading-none text-md md:text-lg">{service.title}</span>
+              <span className="font-barlow font-medium leading-[1.1] text-[13px] sm:text-sm md:text-lg">{service.title}</span>
             </div>
           ))}
         </div>

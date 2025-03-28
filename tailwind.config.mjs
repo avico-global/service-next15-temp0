@@ -15,6 +15,7 @@ export default {
       },
       fontFamily: {
         montserrat: ["Montserrat", ...defaultTheme.fontFamily.sans],
+        barlow: ["Barlow", "sans-serif"],
         poppins: ["Poppins", ...defaultTheme.fontFamily.sans],
         sans: ["Helvetica", "Arial", "sans-serif"],
         bonvivant: ["BonVivant", ...defaultTheme.fontFamily.sans],

@@ -5,19 +5,15 @@ import CallButton from "@/components/CallButton";
 import QuoteButton from "@/components/QuoteButton";
 import FullContainer from "@/components/common/FullContainer";
 import Heading from "@/components/common/Heading";
-import { Barlow } from "next/font/google";
-const barlow = Barlow({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
+
 
 export default function Gallery({ contact_info, gallery = [], imagePath }) {
   return (
-    <FullContainer className="pt-4 pb-12">
-      <Container className="">
-        <div className="text-center mx-auto mb-10">
-           <Heading text="Committed to Excellence" className="mb-4" />
-          <p className={`text-gray-900 text-lg md:leading-none md:text-2xl ${barlow.className}`}>
+    <FullContainer className="pt-10 md:pt-4 pb-0 md:pb-12 ">
+      <Container className="!px-2 md:!px-4">
+        <div className="text-center mx-auto mb-4 md:mb-10">
+           <Heading text="Committed to Excellence" className="mb-2 md:mb-6" />
+          <p className={`font-barlow text-gray-900 leading-none text-[22px]`}>
             We deliver top-quality chimney solutions with precision and care.
             From cleaning and repairs to expert installations, our skilled team
             ensures safety, comfort, and lasting results for your chimney and
@@ -25,11 +21,11 @@ export default function Gallery({ contact_info, gallery = [], imagePath }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 w-full md:px-5">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 gap-y-4 md:gap-y-6 md:gap-5 mb-4 md:mb-12 w-full md:px-5">
           {gallery?.map((image, index) => (
             <div
               key={index}
-              className="relative rounded-t-xl aspect-square overflow-hidden h-64 w-full"
+              className="relative rounded-t-2xl aspect-[4/2.71] overflow-hidden w-full"
             >
               <Image
                 title={`Gallery Image ${index + 1}`}
@@ -37,13 +33,13 @@ export default function Gallery({ contact_info, gallery = [], imagePath }) {
                 alt={`Gallery Image ${index + 1}`}
                 height={1000}
                 width={1000}
-                className="object-cover aspect-square hover:scale-105 transition-transform duration-500"
+                className="object-cover hover:scale-105 h-full w-full transition-transform duration-500"
               />
             </div>
           ))}
         </div>
 
-        <div className="flex w-full justify-center items-center gap-4">
+        <div className="hidden md:flex w-full justify-center items-center gap-4">
           <CallButton phone={contact_info?.phone} />
           <QuoteButton phone={contact_info?.phone} />
         </div>
