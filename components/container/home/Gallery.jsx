@@ -7,17 +7,14 @@ import FullContainer from "@/components/common/FullContainer";
 import Heading from "@/components/common/Heading";
 
 
-export default function Gallery({ contact_info, gallery = [], imagePath }) {
+export default function Gallery({ contact_info, gallery = [], imagePath, gallery_head }) {
   return (
     <FullContainer className="pt-10 md:pt-4 pb-0 md:pb-12 ">
       <Container className="!px-2 md:!px-4">
         <div className="text-center mx-auto mb-4 md:mb-10">
-           <Heading text="Committed to Excellence" className="mb-2 md:mb-6" />
+           <Heading text={gallery_head?.title} className="mb-2 md:mb-6" />
           <p className={`font-barlow text-gray-900 leading-none text-[22px]`}>
-            We deliver top-quality chimney solutions with precision and care.
-            From cleaning and repairs to expert installations, our skilled team
-            ensures safety, comfort, and lasting results for your chimney and
-            fireplace.
+            {gallery_head?.description}
           </p>
         </div>
 

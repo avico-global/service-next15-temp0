@@ -4,39 +4,23 @@ import Container from "../common/Container";
 import { Plus, Minus } from "lucide-react";
 import FullContainer from "../common/FullContainer";
 import Heading from "../common/Heading";
-const faqs = [
-  {
-    question: "What is included in a chimney inspection?",
-    answer: "Our comprehensive chimney inspection includes examining the exterior and interior structure, checking for cracks, leaks, or damage, inspecting the chimney cap and crown, evaluating the flue lining, and assessing overall safety and functionality."
-  },
-  {
-    question: "How often should I have my chimney cleaned?",
-    answer: "Most homeowners should have their chimneys cleaned and inspected at least once per year, ideally before the heating season begins. However, if you use your fireplace frequently (more than 3 times per week during winter), more frequent cleanings may be necessary."
-  },
-  {
-    question: "What are the signs that my chimney needs repair?",
-    answer: "Common signs include water damage or leaks, white staining (efflorescence), cracked or damaged masonry, rusted damper or firebox, damaged chimney crown, and a smoky fireplace or poor drafting. If you notice any of these signs, it's best to schedule an inspection."
-  },
-  {
-    question: "Do you service gas fireplaces and furnace chimneys?",
-    answer: "Yes, we service all types of chimneys including those for gas fireplaces and furnaces. While gas burns cleaner than wood, these systems still require regular maintenance to ensure proper venting and to prevent potential hazards."
-  }
-];
 
-export default function Faqs() {
+
+export default function Faqs({faqs}) {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleFAQ = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+  console.log("faqs", faqs);
   return (
     <FullContainer className="py-4" id="faqs">
       <Container className="px-4">
         <div className="text-center ">
           <Heading text="FAQs" className="pb-6"/>
           <div className="mx-auto">
-            {faqs.map((faq, index) => (
+            {faqs?.map((faq, index) => (
               <div key={index} className="mb-2">
                 <button
                   className={`w-full text-left py-3.5 px-4  bg-primary text-white rounded-lg flex items-center focus:outline-none ${

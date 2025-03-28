@@ -56,8 +56,9 @@ export default function Home({
   favicon,
   footer,
   locations,
+  gallery_head,
+  faqs,
 }) {
-  console.log("contact_info", contact_info);
   return (
     <div className="bg-white">
       <Head>
@@ -114,6 +115,7 @@ export default function Home({
           contact_info={contact_info}
         />
         <Gallery
+          gallery_head={gallery_head}
           gallery={gallery}
           imagePath={imagePath}
           contact_info={contact_info}
@@ -168,7 +170,7 @@ export default function Home({
         />
         {testimonials && <Testimonials data={testimonials} />}
         <Contact contact_info={contact_info} />
-        <FAQs />
+        <FAQs faqs={faqs} />
         <ServiceCities data={locations} />
         <Footer
           data={footer}
@@ -183,6 +185,8 @@ export default function Home({
 
 export async function getServerSideProps({ req }) {
   const domain = getDomain(req?.headers?.host);
+  const faqs = await callBackendApi({ domain, tag: "faqs" });
+  const gallery_head = await callBackendApi({ domain, tag: "gallery_head" });
   const contact_info = await callBackendApi({ domain, tag: "contact_info" });
   const logo = await callBackendApi({ domain, tag: "logo" });
   const project_id = logo?.data[0]?.project_id || null;
@@ -207,6 +211,8 @@ export async function getServerSideProps({ req }) {
       contact_info: contact_info?.data[0]?.value || null,
       domain,
       imagePath,
+      gallery_head: gallery_head?.data[0]?.value || null,
+      faqs: faqs?.data[0]?.value || null,
       logo: logo?.data[0] || null,
       banner: banner?.data[0] || null,
       services: services?.data[0]?.value || [],

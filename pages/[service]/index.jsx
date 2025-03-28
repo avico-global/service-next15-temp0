@@ -37,6 +37,8 @@ export default function Service({
   favicon,
   locations,
   service_banner,
+  gallery_head,
+  faqs,
 }) {
 
   const router = useRouter();
@@ -118,10 +120,10 @@ export default function Service({
         data={benefits?.value}
         image={`${imagePath}/${benefits?.file_name}`}
       />
-      <Gallery contact_info={contact_info} gallery={gallery} imagePath={imagePath} />
+      <Gallery contact_info={contact_info} gallery={gallery} imagePath={imagePath} gallery_head={gallery_head} />
 
       <Contact contact_info={contact_info} />
-      <FAQs />
+      <FAQs faqs={faqs} />
       <ServiceCities data={locations} />
       <Footer data={footer} logo={logo} imagePath={imagePath} contact_info={contact_info} />
 
@@ -148,6 +150,8 @@ export default function Service({
 
 export async function getServerSideProps({ req }) {
   const domain = getDomain(req?.headers?.host);
+  const faqs = await callBackendApi({ domain, tag: "faqs" });
+  const gallery_head = await callBackendApi({ domain, tag: "gallery_head" });
   const contact_info = await callBackendApi({ domain, tag: "contact_info" });
   const logo = await callBackendApi({ domain, tag: "logo" });
   const project_id = logo?.data[0]?.project_id || null;
@@ -172,6 +176,8 @@ export async function getServerSideProps({ req }) {
   return {
     props: {
       contact_info: contact_info?.data[0]?.value || null,
+      gallery_head: gallery_head?.data[0]?.value || null,
+      faqs: faqs?.data[0]?.value || null,
       service_banner: service_banner?.data[0] || null,
       domain,
       imagePath,
