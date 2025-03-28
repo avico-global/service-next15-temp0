@@ -83,7 +83,7 @@ export default function Contact({ contact_info }) {
       <Container className="relative z-10">
         <div className="">
           <div className="bg-primary gap-0 rounded-[20px] overflow-hidden  mb-5">
-            <div className="lg:col-span-3 p-10 lg:p-12 bg-primary text-white">
+            <div className={`lg:col-span-3 p-7 pt-6 md:pt-10 md:p-10 lg:p-12 bg-primary text-white font-barlow`}>
               {formSubmitted ? (
                 <div className="h-full flex flex-col items-center justify-center text-center py-12">
                   <div className="h-24 w-24 bg-green-100 rounded-full flex items-center justify-center mb-8">
@@ -100,12 +100,12 @@ export default function Contact({ contact_info }) {
               ) : (
                 <>
                   <h4
-                    className={`text-4xl leading-7 font-bold mb-7 text-white text-center `}
+                    className={`text-3xl leading-none md:text-4xl md:leading-7 font-bold mb-7 text-white text-center`}
                   >
                     10% Off Total Price for Online Booking
                   </h4>
                   <h3
-                    className={`text-4xl leading-7 font-extrabold mb-7 text-white text-center`}
+                    className={`text-[27px] leading-none md:text-4xl md:leading-7 font-bold mb-7 text-white text-center`}
                   >
                     Ask For A Quote Here
                   </h3>

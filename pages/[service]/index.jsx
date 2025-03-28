@@ -21,6 +21,9 @@ import GoogleTagManager from "@/lib/GoogleTagManager";
 import useBreadcrumbs from "@/lib/useBreadcrumbs";
 import FullContainer from "@/components/common/FullContainer";
 import Container from "@/components/common/Container";
+import Link from "next/link";
+import { Phone, TextQuote } from "lucide-react";
+import { ScrollLink } from "react-scroll";
 
 export default function Service({
   contact_info,
@@ -142,6 +145,34 @@ export default function Service({
         <ServiceCities />
       </div>
       <Footer /> */}
+     <div className="grid md:hidden grid-cols-2 gap-2 p-2  bg-white  z-50">
+        <div className="w-full rounded-lg bg-[#01306E] flex items-center justify-center">
+          <Link
+            title="Call Button"
+            href={`tel:${contact_info?.phone}`}
+            className="bg-[radial-gradient(ellipse_at_center,_#1652A2_10%,_#01306E_100%)] 
+             flex text-white py-2 md:py-3 px-2 md:px-8 font-medium 
+             rounded-full items-center justify-center text-[19px] w-full font-barlow"
+          >
+            <Phone className="w-4 h-4 md:w-6 md:h-6 mr-2" />
+            <div className="uppercase">Call Us Now</div>
+          </Link>
+        </div>
+        <div className="w-full rounded-lg flex items-center bg-[#85B8FB] justify-center p-2">
+          <ScrollLink
+            to="contact-us"
+            spy={true}
+            smooth={true}
+            offset={-100}
+            className="flex items-center justify-center w-fit min-w-[160px] rounded-lg text-md md:text-2xl font-barlow py-1 md:py-3 px-3 md:px-6 font-bold  z-10 cursor-pointer"
+          >
+            <span className="flex items-center gap-2 z-10">
+              <TextQuote className="w-6 h-6 text-black" />
+              <h2 className="text-[19px] font-semibold text-black">GET A QUOTE</h2>
+            </span>
+          </ScrollLink>
+        </div>
+      </div>
     </div>
   );
 }

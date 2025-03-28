@@ -31,17 +31,17 @@ export default function Footer({ logo, imagePath, data, contact_info }) {
   return (
     <footer>
       <FullContainer
-        className={`bg-[#1E1B21] py-[52px] relative ${inter.className}`}
+        className={`bg-[#1E1B21] py-6 md:py-[52px] md:pb-[52px] relative ${inter.className}`}
       >
         <Image
           title="Footer Image"
           src={`${imagePath}/${data?.file_name}`}
           alt="Footer Image"
-          className="w-full absolute top-0 left-0 h-full object-cover opacity-25"
+          className="w-full absolute top-0 left-0 h-full object-cover opacity-35"
           fill
         />
         <Container className="relative z-10 ">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-24 justify-between w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-24 justify-between w-full">
             {/* Company Logos and Statement */}
             <div className="max-w-[395px] md:px-2">
               <div className="flex gap-1 mb-2">
@@ -66,7 +66,7 @@ export default function Footer({ logo, imagePath, data, contact_info }) {
 
             {/* Contact Info */}
             <div className="flex flex-row justify-center items-center md:px-2">
-              <div className="pl-4 lg:pl-[170px] w-full">
+              <div className=" lg:pl-[170px] w-full">
                 <h3 className="text-xl font-bold text-white relative">
                   Contact Info
                 </h3>
