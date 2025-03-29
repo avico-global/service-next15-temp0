@@ -3,194 +3,179 @@ import Container from '../common/Container';
 import Heading from '../common/Heading';
 
 const Testimonials = ({ data }) => {
-  // Use the API data directly from the data prop
   const testimonials = data?.list || [];
-  
   const [activeIndex, setActiveIndex] = useState(0);
-  const [slideDirection, setSlideDirection] = useState('');
   const [isDragging, setIsDragging] = useState(false);
-  const [startPos, setStartPos] = useState(0);
+  const [startX, setStartX] = useState(0);
   const [currentTranslate, setCurrentTranslate] = useState(0);
+  const [prevTranslate, setPrevTranslate] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const sliderRef = useRef(null);
+  const autoSlideRef = useRef(null);
   const animationRef = useRef(null);
   
-  // Check if mobile on mount and when window resizes
+  // Check screen size
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 1024);
     };
     
-    // Initial check
-    checkMobile();
-    
-    // Add resize listener
-    window.addEventListener('resize', checkMobile);
-    
-    // Cleanup
-    return () => window.removeEventListener('resize', checkMobile);
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
   
-  // Calculate the number of pages based on screen size
-  const itemsPerPage = isMobile ? 1 : 2;
-  const pageCount = Math.ceil(testimonials.length / itemsPerPage);
+  // Maximum index calculation (always slide one at a time)
+  const maxIndex = Math.max(0, testimonials.length - 1);
   
-  // Generate array for pagination dots
-  const paginationDots = Array.from({ length: pageCount }, (_, i) => i);
-
-  const goToSlide = (index) => {
-    // Determine slide direction
-    if (index > activeIndex) {
-      setSlideDirection('slide-left');
-    } else if (index < activeIndex) {
-      setSlideDirection('slide-right');
-    }
-    
-    // Change slide after direction is set
-    setActiveIndex(index);
-  };
-
-  // Auto-slide functionality with pause during interaction
+  // Calculate slide width as percentage
+  const slideSize = isMobile ? 100 : 50;
+  
+  // Reset position when active index changes
   useEffect(() => {
-    let interval;
+    setPrevTranslate(activeIndex * -slideSize);
+    setCurrentTranslate(activeIndex * -slideSize);
+  }, [activeIndex, slideSize]);
+  
+  // Auto slide
+  useEffect(() => {
+    const startAutoSlide = () => {
+      autoSlideRef.current = setInterval(() => {
+        if (testimonials.length > 1) {
+          setActiveIndex(prev => (prev < maxIndex ? prev + 1 : 0));
+        }
+      }, 5000);
+    };
     
     if (!isDragging) {
-      interval = setInterval(() => {
-        if (pageCount > 1) {
-          const nextIndex = (activeIndex + 1) % pageCount;
-          goToSlide(nextIndex);
-        }
-      }, 6000); // Change slides every 6 seconds
+      startAutoSlide();
     }
-
-    return () => clearInterval(interval);
-  }, [activeIndex, pageCount, isDragging]);
+    
+    return () => {
+      if (autoSlideRef.current) {
+        clearInterval(autoSlideRef.current);
+      }
+    };
+  }, [isDragging, testimonials.length, maxIndex]);
   
-  // Get current page testimonials
-  const getCurrentPageTestimonials = () => {
-    const startIndex = activeIndex * itemsPerPage;
-    return testimonials.slice(startIndex, startIndex + itemsPerPage);
+  // Animation for smooth movement
+  const animation = () => {
+    if (sliderRef.current) {
+      setSliderPosition();
+      if (isDragging) {
+        animationRef.current = requestAnimationFrame(animation);
+      }
+    }
   };
   
-  // Touch/mouse event handlers
+  const setSliderPosition = () => {
+    if (sliderRef.current) {
+      sliderRef.current.style.transform = `translateX(${currentTranslate}%)`;
+    }
+  };
+  
+  // Manual drag handlers
   const handleDragStart = (e) => {
+    e.preventDefault();
+    if (testimonials.length <= 1) return;
+    
     setIsDragging(true);
+    setStartX(getPositionX(e));
     
-    // Work with both mouse and touch events
-    const clientX = e.type.includes('mouse') 
-      ? e.clientX 
-      : e.touches[0].clientX;
+    // Cancel auto slide and start animation frame
+    if (autoSlideRef.current) {
+      clearInterval(autoSlideRef.current);
+    }
     
-    setStartPos(clientX);
-    
-    // Stop any ongoing animation
-    cancelAnimationFrame(animationRef.current);
+    animationRef.current = requestAnimationFrame(animation);
+  };
+  
+  const getPositionX = (e) => {
+    return e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
   };
   
   const handleDragMove = (e) => {
     if (!isDragging) return;
     
-    // Work with both mouse and touch events
-    const clientX = e.type.includes('mouse') 
-      ? e.clientX 
-      : e.touches[0].clientX;
+    const currentX = getPositionX(e);
+    const moveX = currentX - startX;
+    // Convert pixel movement to percentage of slide width
+    const containerWidth = sliderRef.current?.clientWidth || 1;
+    const movePercent = (moveX / containerWidth) * 100;
     
-    const currentPosition = clientX;
-    const diff = currentPosition - startPos;
-    
-    // Update translation with some resistance at the edges
-    setCurrentTranslate(diff);
-    
-    // Apply translation
-    if (sliderRef.current) {
-      const maxTranslate = 100; // Limit drag distance
-      const clampedTranslate = Math.max(Math.min(diff, maxTranslate), -maxTranslate);
-      sliderRef.current.style.transform = `translateX(${clampedTranslate}px)`;
-    }
+    // Update current translate based on movement
+    setCurrentTranslate(movePercent + prevTranslate);
   };
   
   const handleDragEnd = () => {
     if (!isDragging) return;
+    cancelAnimationFrame(animationRef.current);
     
-    const threshold = 50; // Minimum drag distance to trigger slide change
+    // Determine if we should move to next/prev slide or snap back
+    const movedPercent = currentTranslate - prevTranslate;
+    const threshold = -15; // 15% movement threshold
     
-    if (currentTranslate < -threshold && activeIndex < pageCount - 1) {
-      // Dragged left (next slide)
-      goToSlide(activeIndex + 1);
-    } else if (currentTranslate > threshold && activeIndex > 0) {
-      // Dragged right (previous slide)
-      goToSlide(activeIndex - 1);
+    if (movedPercent < threshold && activeIndex < maxIndex) {
+      // Moved right enough to go to next slide
+      setActiveIndex(activeIndex + 1);
+    } else if (movedPercent > Math.abs(threshold) && activeIndex > 0) {
+      // Moved left enough to go to previous slide
+      setActiveIndex(activeIndex - 1);
+    } else {
+      // Not enough movement, snap back
+      setCurrentTranslate(prevTranslate);
+      setSliderPosition();
     }
     
-    // Reset slider position
-    if (sliderRef.current) {
-      sliderRef.current.style.transform = '';
-    }
-    
-    // Reset drag state
     setIsDragging(false);
-    setCurrentTranslate(0);
   };
   
-  // Mouse-specific event handlers
-  const handleMouseLeave = () => {
-    if (isDragging) {
-      handleDragEnd();
+  // Get visible testimonials
+  const getCurrentTestimonials = () => {
+    if (isMobile) {
+      // On mobile, show just the active one
+      return [testimonials[activeIndex]];
+    } else {
+      // On desktop, show the active one and the next one
+      const nextIndex = (activeIndex + 1) % testimonials.length;
+      return [testimonials[activeIndex], testimonials[nextIndex]];
     }
   };
   
   return (
-    <section className="testimonials-section py-4 md:py-8 overflow-hidden bg-gradient-to-b from-white to-gray-50">
+    <section className="testimonials-section py-8 overflow-hidden bg-gradient-to-b from-white to-gray-50">
       <Container className="mx-auto px-4">
         <Heading text={data?.heading || "Our Happy Clients"} className="pb-6"/>
         
-        <div 
-          ref={sliderRef}
-          className={`slider-container ${slideDirection} ${isDragging ? 'dragging' : ''}`}
-          onTouchStart={handleDragStart}
-          onTouchMove={handleDragMove}
-          onTouchEnd={handleDragEnd}
-          onMouseDown={handleDragStart}
-          onMouseMove={handleDragMove}
-          onMouseUp={handleDragEnd}
-          onMouseLeave={handleMouseLeave}
-        >
-          <div className="slider-content flex flex-col md:flex-row gap-2.5 mb-10">
-            {getCurrentPageTestimonials().map((testimonial, index) => (
-              <div 
-                key={index} 
-                className={`flex-1 px-6 md:px-8 py-4 md:py-6 border border-blue-900 rounded-3xl flex flex-col bg-white shadow-md ${isMobile ? 'w-full' : ''}`}
-              >
-                <p className="text-center text-gray-900 italic mb-8 font-barlow text-base md:text-xl leading-relaxed">
-                  "{testimonial.quote || testimonial.text}"
-                </p>
-                
-                <div className="mt-auto text-center">
-                  <h4 className="text-2xl text-blue-800 font-bold mb-1">{testimonial.name}</h4>
-                  <p className="text-gray-600">{testimonial.location}</p>
+        <div className="testimonial-slider-container overflow-hidden mb-8">
+          <div 
+            ref={sliderRef}
+            className={`testimonial-slider ${isDragging ? 'grabbing' : ''}`}
+            style={{ transform: `translateX(${currentTranslate}%)` }}
+            onTouchStart={handleDragStart}
+            onTouchMove={handleDragMove}
+            onTouchEnd={handleDragEnd}
+            onMouseDown={handleDragStart}
+            onMouseMove={handleDragMove}
+            onMouseUp={handleDragEnd}
+            onMouseLeave={handleDragEnd}
+          >
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="testimonial-slide px-1.5">
+                <div className="flex-1 py-6 px-10 border border-blue-900 rounded-3xl flex flex-col bg-white shadow-md h-full">
+                  <p className="text-center text-gray-900 italic mb-8 text-base md:text-lg leading-relaxed">
+                    "{testimonial.quote || testimonial.text}"
+                  </p>
+                  
+                  <div className="mt-auto text-center">
+                    <h4 className="text-2xl text-blue-800 font-bold mb-1">{testimonial.name}</h4>
+                    <p className="text-gray-600">{testimonial.location}</p>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
-        
-        {/* Pagination dots */}
-        {pageCount > 1 && (
-          <div className="hidden justify-center gap-3">
-            {paginationDots.map((dotIndex) => (
-              <button
-                key={dotIndex}
-                onClick={() => goToSlide(dotIndex)}
-                className={`h-2 rounded-full transition-all ${
-                  activeIndex === dotIndex 
-                    ? 'bg-gray-800 w-3' 
-                    : 'bg-gray-300 w-2'
-                }`}
-                aria-label={`Go to page ${dotIndex + 1}`}
-              />
-            ))}
-          </div>
-        )}
       </Container>
       
       <style jsx>{`
@@ -202,6 +187,29 @@ const Testimonials = ({ data }) => {
           color: #0a3161;
           font-size: 2.25rem;
           margin-bottom: 2.5rem;
+        }
+        
+        .testimonial-slider-container {
+          overflow: hidden;
+          position: relative;
+        }
+        
+        .testimonial-slider {
+          display: flex;
+          transition: ${isDragging ? 'none' : 'transform 0.5s ease'};
+          cursor: grab;
+          will-change: transform;
+        }
+        
+        .testimonial-slider.grabbing {
+          cursor: grabbing;
+          transition: none;
+        }
+        
+        .testimonial-slide {
+          width: ${isMobile ? '100%' : '50%'};
+          box-sizing: border-box;
+          flex-shrink: 0;
         }
         
         .testimonials-section .flex-1 {
@@ -219,47 +227,6 @@ const Testimonials = ({ data }) => {
         
         .testimonials-section p.text-gray-600 {
           color: #6b7280;
-        }
-        
-        /* Slider animations */
-        .slider-container {
-          position: relative;
-          width: 100%;
-          overflow: hidden;
-          cursor: grab;
-          user-select: none;
-          touch-action: pan-y;
-        }
-        
-        .slider-container.dragging {
-          cursor: grabbing;
-          transition: none;
-        }
-        
-        .slider-content {
-          transition: transform 0.5s ease-in-out;
-        }
-        
-        .slide-left .slider-content {
-          animation: slideLeft 0.5s forwards;
-        }
-        
-        .slide-right .slider-content {
-          animation: slideRight 0.5s forwards;
-        }
-        
-        @keyframes slideLeft {
-          0% { transform: translateX(0); opacity: 1; }
-          50% { transform: translateX(-10%); opacity: 0; }
-          51% { transform: translateX(10%); opacity: 0; }
-          100% { transform: translateX(0); opacity: 1; }
-        }
-        
-        @keyframes slideRight {
-          0% { transform: translateX(0); opacity: 1; }
-          50% { transform: translateX(10%); opacity: 0; }
-          51% { transform: translateX(-10%); opacity: 0; }
-          100% { transform: translateX(0); opacity: 1; }
         }
       `}</style>
     </section>
