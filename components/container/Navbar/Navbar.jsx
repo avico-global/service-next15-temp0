@@ -23,6 +23,7 @@ export default function Navbar({ logo, imagePath, contact_info, services }) {
   };
 
   const router = useRouter();
+  const pathname = typeof window !== 'undefined' ? window.location.pathname : '/';
 
   const navLinks = [
     { title: "Locations", link: "locations" },
@@ -152,7 +153,9 @@ export default function Navbar({ logo, imagePath, contact_info, services }) {
 
             <div className="lg:hidden text-white pl-5 cursor-pointer" onClick={toggleMenu}>
               {isOpen ? (
-                <X className="w-6 h-6" />
+                <div className="bg-primary  pt-1.5 rounded-[3px] p-0.5">
+                <X className="w-7 h-6" />
+                </div>
               ) : (
                 <div className="bg-primary  pt-1.5 rounded-[3px] p-0.5">
                   <Menu className="w-7 h-6" />
@@ -164,20 +167,20 @@ export default function Navbar({ logo, imagePath, contact_info, services }) {
       </Container>
 
       {/* Mobile Menu */}
-      <div className={`lg:hidden bg-white absolute top-[80px] left-0 right-0 w-full transition-all duration-300 ${isOpen ? 'h-screen opacity-100 visible' : 'h-0 opacity-0 invisible overflow-hidden'}`}>
-        <div className="flex flex-col gap-4 p-4">
+      <div className={`lg:hidden py-2 bg-white absolute top-[75px] left-0 right-0 w-full transition-all duration-300 ${isOpen ? 'h-fit opacity-100 visible' : 'h-0 opacity-0 invisible overflow-hidden'}`}>
+        <div className="flex flex-col font-barlow font-[600] text-[18px]">
           <Link
             title="Home"
             href="/"
-            className="text-gray-600 hover:text-[#002B5B] px-4"
+            className={`px-4 py-1 ${pathname === '/' ? 'bg-primary text-white' : 'text-black bg-transparent'}`}
             onClick={() => setIsOpen(false)}
           >
             Home
           </Link>
           
-          <div className="px-4">
+          <div className="">
             <div 
-              className="text-gray-600 hover:text-[#002B5B] flex items-center gap-1 cursor-pointer"
+              className={`px-4 py-1 flex items-center cursor-pointer ${pathname.includes('/services') ? 'bg-primary text-white' : 'text-black bg-transparent'}`}
               onClick={() => setShowServices(!showServices)}
             >
               Services
@@ -185,47 +188,41 @@ export default function Navbar({ logo, imagePath, contact_info, services }) {
             </div>
             
             {showServices && (
-              <div className="pl-4 mt-2 flex flex-col gap-2">
-                {services?.map((service, index) => (
-                  <Link
-                    title={service?.title}
-                    key={index}
-                    href={sanitizeUrl(service?.title)}
-                    className="text-gray-600 hover:text-primary text-lg"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {service?.title}
-                  </Link>
-                ))}
+              <div className=" mt-2 flex flex-col max-h-[300px] overflow-y-auto gap-2">
+                {services?.map((service, index) => {
+                  const serviceUrl = sanitizeUrl(service?.title);
+                  return (
+                    <Link
+                      title={service?.title}
+                      key={index}
+                      href={serviceUrl}
+                      className={`py-1 pl-7 px-4 ${pathname.includes(serviceUrl) ? 'bg-primary text-white' : 'text-black hover:text-primary'} text-lg`}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {service?.title}
+                    </Link>
+                  );
+                })}
               </div>
             )}
           </div>
           
-          {navLinks.map((item, index) => (
-            <button
-              key={index}
-              className="text-gray-600 hover:text-[#002B5B] px-4 text-left"
-              onClick={() => {
-                handleNavigation(item.link);
-                setIsOpen(false);
-              }}
-            >
-              {item.title}
-            </button>
-          ))}
-          
-          <div className="flex flex-col gap-4 px-4 mt-4">
-            <button title="Call Button">
-              <a
-                href={`tel:${contact_info?.phone}`}
-                className="flex items-center gap-2"
+          {navLinks.map((item, index) => {
+            const linkPath = `/${item.link}`;
+            return (
+              <button
+                key={index}
+                className={`px-4 py-1 cursor-pointer text-left ${pathname.includes(linkPath) ? 'bg-primary text-white' : 'text-black bg-transparent'}`}
+                onClick={() => {
+                  handleNavigation(item.link);
+                  setIsOpen(false);
+                }}
               >
-                <Phone className="w-4 h-4" />
-                {contact_info?.phone}
-              </a>
-            </button>
-            <button className="bg-primary text-white px-4 py-2 rounded-md">GET A QUOTE</button>
-          </div>
+                {item.title}
+              </button>
+            );
+          })}
+          
         </div>
       </div>
     </FullContainer>

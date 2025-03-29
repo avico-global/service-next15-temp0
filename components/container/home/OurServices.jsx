@@ -176,7 +176,7 @@ const OurServices = ({ data }) => {
   const { tagline, heading, description, list } = data;
 
   return (
-    <section className="services-section py-4 md:py-12">
+    <section className="services-section py-6 md:py-12 ">
       <Container className="container mx-auto px-4">
       <Heading text="Services Provided" className="mb-6 md:mb-10" />
 

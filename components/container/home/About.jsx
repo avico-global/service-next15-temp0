@@ -18,8 +18,8 @@ const inter = Inter({
 });
 export default function About({ image, data }) {
   return (
-    <FullContainer className="py-8">
-      <Container className="relative overflow-hidden">
+    <FullContainer className="py-4 md:py-8 " id="about-us">
+      <Container className="relative overflow-hidden !px-0 md:!px-4">
         <div className='relative'>
           {/* Image with overlay */}
           <div className="relative">
@@ -29,7 +29,7 @@ export default function About({ image, data }) {
               alt="About" 
               width={1500} 
               height={1500} 
-              className='w-full h-[510px] sm:h-[400px] md:h-[310px] object-cover' 
+              className='w-full h-[580px] sm:h-[400px] md:h-[310px] object-cover' 
             />
             {/* Dark overlay for better text visibility */}
             <div className="absolute inset-0 bg-black/40"></div>

@@ -91,7 +91,7 @@ export default function ServiceBanner({ contact_info, data, image }) {
         <div className="flex items-center justify-center gap-6  pt-6">
           <CallButton phone={contact_info?.phone} />
           <QuoteButton phone={contact_info?.phone} />
-        </div>
+       </div>
       </Container>
     </FullContainer>
   );

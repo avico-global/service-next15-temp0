@@ -11,11 +11,29 @@ const Testimonials = ({ data }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [startPos, setStartPos] = useState(0);
   const [currentTranslate, setCurrentTranslate] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const sliderRef = useRef(null);
   const animationRef = useRef(null);
   
-  // Calculate the number of pages (showing 2 testimonials per page)
-  const pageCount = Math.ceil(testimonials.length / 2);
+  // Check if mobile on mount and when window resizes
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    // Add resize listener
+    window.addEventListener('resize', checkMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  
+  // Calculate the number of pages based on screen size
+  const itemsPerPage = isMobile ? 1 : 2;
+  const pageCount = Math.ceil(testimonials.length / itemsPerPage);
   
   // Generate array for pagination dots
   const paginationDots = Array.from({ length: pageCount }, (_, i) => i);
@@ -50,8 +68,8 @@ const Testimonials = ({ data }) => {
   
   // Get current page testimonials
   const getCurrentPageTestimonials = () => {
-    const startIndex = activeIndex * 2;
-    return testimonials.slice(startIndex, startIndex + 2);
+    const startIndex = activeIndex * itemsPerPage;
+    return testimonials.slice(startIndex, startIndex + itemsPerPage);
   };
   
   // Touch/mouse event handlers
@@ -122,9 +140,9 @@ const Testimonials = ({ data }) => {
   };
   
   return (
-    <section className="testimonials-section py-8 overflow-hidden">
-      <Container className="mx-auto px-4 ">
-        <Heading text={data?.heading || "Our Happy Clients"} className="pb-4"/>
+    <section className="testimonials-section py-4 md:py-8 overflow-hidden bg-gradient-to-b from-white to-gray-50">
+      <Container className="mx-auto px-4">
+        <Heading text={data?.heading || "Our Happy Clients"} className="pb-6"/>
         
         <div 
           ref={sliderRef}
@@ -137,19 +155,19 @@ const Testimonials = ({ data }) => {
           onMouseUp={handleDragEnd}
           onMouseLeave={handleMouseLeave}
         >
-          <div className="slider-content flex flex-col borders md:flex-row gap-3 mb-10">
+          <div className="slider-content flex flex-col md:flex-row gap-2.5 mb-10">
             {getCurrentPageTestimonials().map((testimonial, index) => (
               <div 
                 key={index} 
-                className="flex-1 py-8 px-10 border border-blue-900 rounded-3xl flex flex-col"
+                className={`flex-1 px-6 md:px-8 py-4 md:py-6 border border-blue-900 rounded-3xl flex flex-col bg-white shadow-md ${isMobile ? 'w-full' : ''}`}
               >
-                <p className="text-center text-gray-900 italic mb-8 text-lg md:text-xl leading-relaxed">
+                <p className="text-center text-gray-900 italic mb-8 font-barlow text-base md:text-xl leading-relaxed">
                   "{testimonial.quote || testimonial.text}"
                 </p>
                 
-                <div className="mt-auto text-center ">
-                  <h4 className="text-4xl text-blue-800 font-bold  leading-none">{testimonial.name}</h4>
-                  <p className="text-primary text-xl leading-none">{testimonial.location}</p>
+                <div className="mt-auto text-center">
+                  <h4 className="text-2xl text-blue-800 font-bold mb-1">{testimonial.name}</h4>
+                  <p className="text-gray-600">{testimonial.location}</p>
                 </div>
               </div>
             ))}
@@ -158,7 +176,7 @@ const Testimonials = ({ data }) => {
         
         {/* Pagination dots */}
         {pageCount > 1 && (
-          <div className="flex justify-center gap-3">
+          <div className="hidden justify-center gap-3">
             {paginationDots.map((dotIndex) => (
               <button
                 key={dotIndex}
@@ -176,6 +194,10 @@ const Testimonials = ({ data }) => {
       </Container>
       
       <style jsx>{`
+        .testimonials-section {
+          background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+        }
+        
         .testimonials-section h2 {
           color: #0a3161;
           font-size: 2.25rem;
@@ -184,9 +206,9 @@ const Testimonials = ({ data }) => {
         
         .testimonials-section .flex-1 {
           border-radius: 20px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+          background-color: white;
         }
-      
         
         .testimonials-section h4 {
           color: #0a3161;
@@ -242,6 +264,6 @@ const Testimonials = ({ data }) => {
       `}</style>
     </section>
   );
-};      
+};
 
 export default Testimonials;

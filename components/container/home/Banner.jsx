@@ -134,19 +134,20 @@ export default function Banner({ image, data, contact_info }) {
     }
   };
 
-  console.log("image", image);
+
   return (
-    <FullContainer className="relative overflow-hidden">
+    <FullContainer className="relative bg-white overflow-hidden md:!h-[790px]">
       <Image
         src={image}
         title={data?.imageTitle || data?.title || "Banner"}
         alt={data?.altImage || data?.tagline || "No Banner Found"}
         priority={true}
-        fill={true}
-        className="object-cover object-left"
+        height={1000}
+        width={1920}
+        className="object-cover h-[500px] md:h-[1000px] absolute top-0 left-0 w-full  object-left"
       />
-      <div className="absolute inset-0 bg-gray-900/50"></div>
-      <Container className="py-20  relative z-10">
+      <div className="absolute inset-0 h-[500px] md:h-[790px] bg-gray-900/60"></div>
+      <Container className="py-20  font-barlow relative z-10">
         <div className="w-full grid grid-cols-1 md:grid-cols-banner gap-[66px] text-white lg:min-h-[630px]">
           <div className="relative -mt-10 flex flex-col lg:pr-10 justify-center">
             <div className="flex items-center md:items-start  justify-center md:justify-start mb-4">
@@ -195,8 +196,8 @@ export default function Banner({ image, data, contact_info }) {
           </div>
 
           <div className="flex flex-col justify-center">
-            <div className="bg-white rounded-[20px] px-4 md:px-12 pb-8 md:pb-12 pt-10 md:pt-16">
-              <h3 className="text-3xl md:text-4xl leading-7 font-bold text-center mb-2 text-primary">
+            <div className="bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] font-barlow rounded-[20px] px-4 md:px-12 pb-8 md:pb-12 pt-10 md:pt-14">
+              <h3 className="text-3xl md:text-4xl leading-7 md:leading-[30px] font-bold text-center mb-2 text-primary">
                 10% Off Total Price for Online Booking
               </h3>
               <h4 className="text-[26px] md:text-4xl pt-4 font-extrabold text-center mb-6 text-[#11121A]">

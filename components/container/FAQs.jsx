@@ -19,12 +19,12 @@ export default function Faqs({faqs}) {
       <Container className="px-4">
         <div className="text-center ">
           <Heading text="FAQs" className="pb-6"/>
-          <div className="mx-auto">
-            {faqs?.map((faq, index) => (
+          <div className="mx-auto font-barlow text-[16px]">
+            {faqs.map((faq, index) => (
               <div key={index} className="mb-2">
                 <button
                   className={`w-full text-left py-3.5 px-4  bg-primary text-white rounded-lg flex items-center focus:outline-none ${
-                    activeIndex === index ? 'bg-secondary/80' : 'bg-secondary'
+                    activeIndex === index ? 'bg-[#1E64C1]' : 'bg-secondary'
                   }`}
                   onClick={() => toggleFAQ(index)}
                   aria-expanded={activeIndex === index}
@@ -63,7 +63,7 @@ export default function Faqs({faqs}) {
                       </svg>
                     )}
                   </span>
-                  <span className="font-medium">{faq.question}</span>
+                  <span className="font-thin">{faq.question}</span>
                 </button>
                 
                 {/* Answer panel with smooth transition */}
@@ -73,7 +73,7 @@ export default function Faqs({faqs}) {
                   }`}
                 >
                   <div className="bg-white p-4 border border-gray-200 border-t-0 rounded-b">
-                    <p className="text-gray-700 text-start">{faq.answer}</p>
+                    <p className="text-gray-900 text-start">{faq.answer}</p>
                   </div>
                 </div>
               </div>
