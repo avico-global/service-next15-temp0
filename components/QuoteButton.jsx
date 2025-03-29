@@ -349,7 +349,8 @@ export default function QuoteButton({ phone }) {
                     <p className="text-sm text-gray-500 text-center pt-3">
                       By submitting, you agree to our{" "}
                       <Link
-                        href="#"
+                        title="terms and conditions"
+                        href="/terms-and-conditions"
                         className="text-blue-600 hover:underline font-medium"
                       >
                         terms & privacy policy
@@ -369,9 +370,7 @@ export default function QuoteButton({ phone }) {
       >
         <div className="flex items-center gap-2 ">
           <TextQuote className="w-6 h-6 " />
-          <h2 className="text-md font-thin md:text-2xl">
-            GET A QUOTE
-          </h2>
+          <h2 className="text-md font-thin md:text-2xl">GET A QUOTE</h2>
         </div>
       </button>
     </div>

@@ -181,7 +181,7 @@ export default function Home({
         <div id="contact-us">
           <Contact contact_info={contact_info} />
         </div>
-        <FAQs />
+        <FAQs faqs={faqs} />
         <ServiceCities data={locations} />
         <Footer
           data={footer}
@@ -213,7 +213,9 @@ export default function Home({
           >
             <span className="flex items-center gap-2 z-10">
               <TextQuote className="w-6 h-6 text-black" />
-              <h2 className="text-[19px] font-semibold text-black">GET A QUOTE</h2>
+              <h2 className="text-[19px] font-semibold text-black">
+                GET A QUOTE
+              </h2>
             </span>
           </ScrollLink>
         </div>
