@@ -28,6 +28,7 @@ export default function PrivacyPolicy({
   meta,
   footer,
   policy,
+  gtmId,
 }) {
   const markdownIt = new MarkdownIt();
   const content = markdownIt.render(policy || "");
@@ -54,7 +55,7 @@ export default function PrivacyPolicy({
         <link rel="manifest" href="/manifest.json" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <GoogleTagManager />
+        <GoogleTagManager id={gtmId} />
         <meta
           name="google-site-verification"
           content="zbriSQArMtpCR3s5simGqO5aZTDqEZZi9qwinSrsRPk"
@@ -105,7 +106,7 @@ export async function getServerSideProps({ req }) {
   const logo = await callBackendApi({ domain, tag: "logo" });
   const project_id = logo?.data[0]?.project_id || null;
   const imagePath = await getImagePath(project_id, domain);
-
+  const gtmId = await callBackendApi({ domain, tag: "gtmId" });
   const banner = await callBackendApi({ domain, tag: "banner" });
   const phone = await callBackendApi({ domain, tag: "phone" });
   const services = await callBackendApi({ domain, tag: "services_list" });
@@ -140,6 +141,7 @@ export async function getServerSideProps({ req }) {
       footer: footer?.data[0] || null,
       locations: locations?.data[0]?.value || [],
       policy: policy?.data[0]?.value || null,
+      gtmId: gtmId?.data[0]?.value || null,
     },
   };
 }

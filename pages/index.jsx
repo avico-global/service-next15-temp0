@@ -63,6 +63,7 @@ export default function Home({
   locations,
   gallery_head,
   faqs,
+  gtmId,
 }) {
   return (
     <div className="bg-white">
@@ -77,7 +78,7 @@ export default function Home({
         <link rel="manifest" href="/manifest.json" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <GoogleTagManager />
+        <GoogleTagManager id={gtmId} />
         <meta
           name="google-site-verification"
           content="zbriSQArMtpCR3s5simGqO5aZTDqEZZi9qwinSrsRPk"
@@ -232,6 +233,7 @@ export async function getServerSideProps({ req }) {
   const logo = await callBackendApi({ domain, tag: "logo" });
   const project_id = logo?.data[0]?.project_id || null;
   const imagePath = await getImagePath(project_id, domain);
+  const gtmId = await callBackendApi({ domain, tag: "gtmId" });
 
   const banner = await callBackendApi({ domain, tag: "banner" });
   const services = await callBackendApi({ domain, tag: "services_list" });
@@ -252,6 +254,7 @@ export async function getServerSideProps({ req }) {
       contact_info: contact_info?.data[0]?.value || null,
       domain,
       imagePath,
+      gtmId: gtmId?.data[0]?.value || null,
       gallery_head: gallery_head?.data[0]?.value || null,
       faqs: faqs?.data[0]?.value || null,
       logo: logo?.data[0] || null,
