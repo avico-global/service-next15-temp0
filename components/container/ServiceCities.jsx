@@ -35,7 +35,7 @@ export default function ServiceCities({ data }) {
             {cities.map((city, index) => (
               <div key={index} className="flex items-center">
                <div className="w-[14px] h-[14px] md:w-[20px] md:h-[20px] mr-[10px]">
-                <Image src={location_image} alt={city.name} width={500} height={500} className="w-full h-full" /> 
+                <Image title="Location Image" src={location_image} alt={city.name} width={500} height={500} className="w-full h-full" /> 
                </div>
                 <div className="text-primary text-[13.5px] md:text-[19.5px] font-barlow font-[500] leading-tight md:leading-none transition-colors cursor-pointer">
                   {city}

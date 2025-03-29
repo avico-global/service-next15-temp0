@@ -26,7 +26,6 @@ const inter = Inter({
   weight: ["400", "500", "600", "700"],
 });
 export default function Footer({ logo, imagePath, data, contact_info }) {
-  console.log("contact_info", contact_info);
   const companies = [image1, image2, image3, image4, image5];
   return (
     <footer>
@@ -40,7 +39,7 @@ export default function Footer({ logo, imagePath, data, contact_info }) {
           className="w-full absolute top-0 left-0 h-full object-cover opacity-35"
           fill
         />
-        <Container className="relative z-10 ">
+        <Container className="relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-24 justify-between w-full">
             {/* Company Logos and Statement */}
             <div className="max-w-[395px] md:px-2">
@@ -109,7 +108,7 @@ export default function Footer({ logo, imagePath, data, contact_info }) {
           </div>
 
           {/* Bottom Bar */}
-          <div className="mt-6 pt-4 border-t border-white/30 w-full">
+          <div className="mt-6 pt-4 border-t border-white/30 w-full pb-16 md:pb-0">
             <div className="flex flex-row justify-start items-start  gap-6">
               <div className="flex gap-6">
                 <Link

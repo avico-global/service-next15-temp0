@@ -147,7 +147,7 @@ export default function Service({
         <ServiceCities />
       </div>
       <Footer /> */}
-     <div className="grid md:hidden grid-cols-2 gap-2 p-2  bg-white  z-50">
+     <div className="grid md:hidden fixed bottom-0 left-0 right-0 grid-cols-2 gap-2 p-2  bg-white  z-50">
         <div className="w-full rounded-lg bg-[#01306E] flex items-center justify-center">
           <Link
             title="Call Button"

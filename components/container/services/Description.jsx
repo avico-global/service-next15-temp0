@@ -55,7 +55,7 @@ function About({ service, images }) {
             className=" rounded-t-2xl  aspect-9/6 overflow-hidden"
           >
             <Image
-              title={`About Image ${index + 1}`}
+              title="About Image"
               src={image.src}
               alt="About Image"
               className="object-cover aspect-9/6 hover:scale-105 transition-transform duration-500"

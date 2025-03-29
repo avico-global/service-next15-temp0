@@ -105,7 +105,7 @@ export default function Contact({ contact_info }) {
                     10% Off Total Price for Online Booking
                   </h4>
                   <h3
-                    className={`text-[27px] leading-none md:text-4xl md:leading-7 font-bold mb-7 text-white text-center`}
+                    className={`text-[25px] leading-none md:text-4xl md:leading-7 font-bold mb-7 text-white text-center`}
                   >
                     Ask For A Quote Here
                   </h3>

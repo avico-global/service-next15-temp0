@@ -144,11 +144,11 @@ export default function Banner({ image, data, contact_info }) {
         priority={true}
         height={1000}
         width={1920}
-        className="object-cover h-[500px] md:h-[1000px] absolute top-0 left-0 w-full  object-left"
+        className="object-cover h-[460px] md:h-[1000px] absolute top-0 left-0 w-full  object-left"
       />
-      <div className="absolute inset-0 h-[500px] md:h-[790px] bg-gray-900/60"></div>
+      <div className="absolute inset-0 h-[460px] md:h-[790px] bg-gray-900/60"></div>
       <Container className="py-20  font-barlow relative z-10">
-        <div className="w-full grid grid-cols-1 md:grid-cols-banner gap-[66px] text-white lg:min-h-[630px]">
+        <div className="w-full grid grid-cols-1 md:grid-cols-banner gap-10 md:gap-[66px] text-white lg:min-h-[630px]">
           <div className="relative -mt-10 flex flex-col lg:pr-10 justify-center">
             <div className="flex items-center md:items-start  justify-center md:justify-start mb-4">
               <Image
@@ -157,7 +157,7 @@ export default function Banner({ image, data, contact_info }) {
                 width={100}
                 height={30}
                 alt="Google"
-                className="w-[75px] md:w-[100px] h-[25px] md:h-[30px]"
+                className="w-[67.5px] md:w-[100px] h-[22.5px] md:h-[30px]"
               />
 
               <Image
@@ -166,7 +166,7 @@ export default function Banner({ image, data, contact_info }) {
                 width={100}
                 height={30}
                 alt="Trustpilot"
-                className="ml-6 w-[75px] md:w-[100px] h-[25px] md:h-[30px]"
+                className="ml-2 md:ml-6 w-[67.5px] md:w-[100px] h-[22.5px] md:h-[30px]"
               />
 
               <Image
@@ -175,21 +175,21 @@ export default function Banner({ image, data, contact_info }) {
                 width={100}
                 height={30}
                 alt="Capterra"
-                className="ml-6 w-[75px] md:w-[100px] h-[25px] md:h-[30px]"
+                className="ml-2 w-[67.5px] md:w-[100px] h-[22.5px] md:h-[30px]"
               />
             </div>
-            <h1 className="font-[900] uppercase text-3xl md:text-6xl leading-tight text-center md:text-start lg:text-left text-shadow-lg">
+            <h1 className="font-[900] uppercase text-[28px] px-4 md:px-0 md:text-6xl leading-tight text-center md:text-start lg:text-left text-shadow-lg">
               {data?.title}
             </h1>
-            <h2 className="text-3xl md:text-6xl uppercase font-[900] text-[#90D4E1] text-center md:text-start lg:text-left mt-2">
+            <h2 className="text-[28px] md:px-0 md:text-6xl uppercase font-[900] leading-tight text-[#90D4E1] text-center md:text-start lg:text-left mt-2">
               {data?.tagline}
             </h2>
-            <p className="text-sm md:text-3xl text-center md:text-start lg:text-left mt-4 mb-1">
+            <p className="text-[16px] md:text-3xl text-center md:text-start lg:text-left mt-4 mb-1">
               {data?.description}
             </p>
             <div className="flex flex-col items-center md:items-start pt-3">
               <CallButton phone={contact_info?.phone} />
-              <p className="text-xl md:text-4xl leading-none mt-2 font-bold">
+              <p className="text-[22px] md:text-4xl leading-none mt-4 md:mt-2 font-bold">
                 Call Us Today
               </p>
             </div>

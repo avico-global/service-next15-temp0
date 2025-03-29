@@ -11,7 +11,6 @@ export default function ServiceBanner({ contact_info, data, image }) {
   const router = useRouter();
   const { service } = router.query;
 
-  console.log("data", data);
   return (
     <FullContainer
       className="relative overflow-hidden"

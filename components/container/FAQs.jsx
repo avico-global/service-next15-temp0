@@ -12,7 +12,6 @@ export default function Faqs({ faqs = [] }) {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
-  console.log("faqs", faqs);
   return (
     <FullContainer className="py-4" id="faqs">
       <Container className="px-4">
