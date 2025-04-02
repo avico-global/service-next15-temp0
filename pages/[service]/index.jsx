@@ -24,7 +24,8 @@ import Container from "@/components/common/Container";
 import Link from "next/link";
 import { Phone, TextQuote } from "lucide-react";
 import { ScrollLink } from "react-scroll";
-
+import ServiceAbout from "@/components/container/services/ServiceAbout";
+import ServiceText from "@/components/container/services/ServiceText";
 export default function Service({
   contact_info,
   logo,
@@ -114,17 +115,9 @@ export default function Service({
           <Breadcrumbs breadcrumbs={breadcrumbs} className="pt-7" />
         </Container>
       </FullContainer>
-      <About
-        services={services?.list}
-        data={about?.value}
-        image={`${imagePath}/${about?.file_name}`}
-      />
-      <ServiceBenefits
-        contact_info={contact_info}
-        data={benefits?.value}
-        image={`${imagePath}/${benefits?.file_name}`}
-      />
+      <ServiceAbout data={about?.value} image={`${imagePath}/${about?.file_name}`} contact_info={contact_info} />
       <Gallery contact_info={contact_info} gallery={gallery} imagePath={imagePath} gallery_head={gallery_head} />
+     <ServiceText contact_info={contact_info} />
 
       <Contact contact_info={contact_info} />
       <FAQs faqs={faqs} />
