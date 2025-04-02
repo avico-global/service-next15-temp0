@@ -128,6 +128,8 @@ import Heading from "../../common/Heading";
 
 // Define the SVG paths for each service icon
 const serviceIcons = {
+  "default":
+  "M5,25 L55,25 M15,15 L15,35 M30,15 L30,35 M45,15 L45,35 M5,15 L55,15 M5,35 L55,35 M55,25 C60,20 60,30 55,25",
   "Chimney Inspection":
     "M10,40 L20,5 L40,5 L50,40 Z M25,40 L25,25 M35,40 L35,25 M25,20 L35,20 M15,45 L45,45 M20,50 L40,50 M30,5 L30,0",
   "Chimney Repair":
@@ -180,6 +182,8 @@ const serviceIcons = {
     "M5,20 L55,20 M5,40 L55,40 M15,20 L15,40 M30,20 L30,40 M45,20 L45,40 M15,30 C25,25 35,35 45,30 M55,25 C52,28 52,32 55,35",
   "Air Duct Vent inspection":
     "M5,20 L55,20 M5,40 L55,40 M15,20 L15,40 M30,20 L30,40 M45,20 L45,40 M50,15 C55,20 55,10 45,15",
+  "Air Duct Inspection":
+    "M5,20 L55,20 M5,40 L55,40 M15,20 L15,40 M30,20 L30,40 M45,20 L45,40 M50,15 C55,20 55,10 45,15 M40,50 L45,45 L50,50",
   "Ac Cleaning":
     "M10,10 L50,10 L50,40 L10,40 Z M10,25 L50,25 M20,10 L20,25 M40,10 L40,25 M15,32 C25,28 35,36 45,32",
   "Uv Disinfection":
@@ -198,6 +202,8 @@ const serviceIcons = {
     "M10,15 L50,15 L50,45 L10,45 Z M15,20 L45,20 M15,40 L45,40 M25,15 C20,5 40,5 35,15 M25,45 C20,55 40,55 35,45",
   "Mattress Cleaning":
     "M10,15 L50,15 L50,45 L10,45 Z M10,30 L50,30 M15,15 C20,5 40,5 45,15 M15,45 C20,55 40,55 45,45",
+  "Shampoo Carpet Cleaning":
+    "M10,15 L50,15 L50,45 L10,45 Z M15,20 L45,20 M15,40 L45,40 M20,25 C30,20 40,30 45,25 M15,35 C25,30 35,40 40,35",
   "Dryer Cleaning":
     "M10,15 L50,15 L50,45 L10,45 Z M15,15 L15,45 M45,15 L45,45 M25,15 L25,45 M35,15 L35,45 M15,25 L45,25 M15,35 L45,35",
   "House Vent Cleaning":
@@ -258,6 +264,8 @@ const serviceIcons = {
     "M20,40 C15,35 15,25 20,20 C25,15 35,15 40,20 C45,25 45,35 40,40 C35,45 25,45 20,40 M25,25 C30,30 35,25 30,20 M20,30 C25,35 30,30 25,25",
   "Sewage Backup Cleanup":
     "M10,25 L50,25 M15,20 C20,15 30,25 35,20 C40,15 45,20 50,15 M15,30 C20,25 30,35 35,30 C40,25 45,30 50,25 M15,40 C20,35 30,45 35,40 C40,35 45,40 50,35",
+  "Storm & Flood Damage Restoration":
+    "M5,25 L55,25 M10,20 C15,15 25,25 30,20 C35,15 45,25 50,20 M10,30 C15,25 25,35 30,30 C35,25 45,35 50,30 M10,40 C15,35 25,45 30,40 C35,35 45,45 50,40",
   "New Garage Door Installation":
     "M5,10 L55,10 L55,40 L5,40 Z M10,15 L50,15 L50,35 L10,35 Z M15,15 L15,35 M25,15 L25,35 M35,15 L35,35 M45,15 L45,35",
   "Garage Door Replacement":
@@ -266,6 +274,8 @@ const serviceIcons = {
     "M5,10 L55,10 L55,40 L5,40 Z M10,15 L50,15 L50,35 L10,35 Z M15,15 C25,25 35,15 45,25 M15,25 C25,35 35,25 45,35",
   "Garage Door Spring Repair":
     "M10,15 L50,15 L50,35 L10,35 Z M20,15 L20,35 M40,15 L40,35 M25,25 C30,20 35,30 40,25",
+  "Garage Door Spring Replacement":
+    "M10,15 L50,15 L50,35 L10,35 Z M20,15 L20,35 M40,15 L40,35 M25,25 C28,20 32,27 35,22 C38,17 42,24 45,25",
   "Garage Door Opener Repair":
     "M10,15 L50,15 L50,35 L10,35 Z M15,15 L15,35 M45,15 L45,35 M30,35 L30,45 M25,15 L35,15 L35,25 L25,25 Z",
   "Garage Door Cable Repair":
@@ -291,7 +301,31 @@ const serviceIcons = {
   "Opener Replacement":
     "M10,15 L50,15 L50,35 L10,35 Z M30,35 L30,45 M20,15 L20,25 L40,25 L40,15 M20,25 L20,35 M40,25 L40,35",
   "Garage Door Off-Track Repair":
-    "M10,10 L10,40 M50,10 L50,40 M15,15 L45,15 M15,35 L45,35 M40,20 L45,15 M40,30 L45,25"
+    "M10,10 L10,40 M50,10 L50,40 M15,15 L45,15 M15,35 L45,35 M40,20 L45,15 M40,30 L45,25",
+  "Local Moving":
+    "M5,35 L15,15 L45,15 L55,35 M10,35 L50,35 M20,35 L20,45 M40,35 L40,45 M25,25 L35,25 M25,20 L35,20",
+  "Long-Distance Moving":
+    "M5,35 L15,15 L45,15 L55,35 M10,35 L50,35 M15,25 L45,25 M20,35 L20,45 M40,35 L40,45 M15,20 L25,10 M35,20 L45,10",
+  "Residential Moving":
+    "M5,30 L30,5 L55,30 M15,30 L15,45 L45,45 L45,30 M25,45 L25,35 L35,35 L35,45 M15,35 L45,35",
+  "Commercial/Office Moving":
+    "M10,10 L50,10 L50,45 L10,45 Z M10,20 L50,20 M10,30 L50,30 M10,40 L50,40 M20,10 L20,45 M30,10 L30,45 M40,10 L40,45",
+  "Furniture Moving":
+    "M10,20 L50,20 L50,45 L10,45 Z M15,20 L15,45 M45,20 L45,45 M15,30 L45,30 M25,45 L25,35 L35,35 L35,45",
+  "Piano Moving":
+    "M10,25 L50,25 L50,45 L10,45 Z M15,25 L15,45 M45,25 L45,45 M15,35 L45,35 M20,25 L20,15 M40,25 L40,15 M20,15 L40,15",
+  "Military Moving":
+    "M15,45 L45,45 L45,15 L15,15 Z M15,30 L45,30 M25,15 L25,30 M35,15 L35,30 M25,15 L25,10 L35,10 L35,15",
+  "Full-Service Packing & Unpacking":
+    "M15,15 L45,15 L45,45 L15,45 Z M15,25 L45,25 M20,15 L20,45 M30,15 L30,45 M40,15 L40,45 M25,10 L35,10 M25,5 L35,5",
+  "Storage Solutions":
+    "M10,15 L50,15 L50,45 L10,45 Z M15,15 L15,45 M25,15 L25,45 M35,15 L35,45 M45,15 L45,45 M10,25 L50,25 M10,35 L50,35",
+  "Last-Minute Or Emergency Moves":
+    "M30,10 C40,10 50,20 50,30 C50,40 40,50 30,50 C20,50 10,40 10,30 C10,20 20,10 30,10 M30,20 L30,30 L40,30 M15,20 L45,45",
+  "Apartment Moving":
+    "M10,10 L50,10 L50,45 L10,45 Z M10,20 L50,20 M10,30 L50,30 M10,40 L50,40 M30,10 L30,45 M25,40 L35,40",
+  "Senior Moving Services":
+    "M15,45 L45,45 L45,15 L15,15 Z M20,15 L20,45 M40,15 L40,45 M15,30 L45,30 M25,10 C30,5 35,10 40,15"
 };
 
 const OurServices = ({ data }) => {
@@ -322,7 +356,7 @@ const OurServices = ({ data }) => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
-                  <path d={serviceIcons[service.title] || ""} />
+                  <path d={serviceIcons[service.title] || serviceIcons["default"]} />
                 </svg>
               </div>
               <span className="font-barlow font-medium leading-[1.1] text-[13px] sm:text-sm md:text-lg">{service.title}</span>
