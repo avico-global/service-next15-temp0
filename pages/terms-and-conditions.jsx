@@ -29,6 +29,7 @@ export default function TermsAndConditions({
   footer,
   terms,
   gtmId,
+  contact_info,
 }) {
   const markdownIt = new MarkdownIt();
   const content = markdownIt.render(terms || "");
@@ -83,6 +84,7 @@ export default function TermsAndConditions({
       </Head>
 
       <Navbar
+        contact_info={contact_info}
         logo={logo}
         imagePath={imagePath}
         phone={phone}
@@ -98,8 +100,9 @@ export default function TermsAndConditions({
           />
         </Container>
       </FullContainer>
+    
 
-      <Footer data={footer} logo={logo} imagePath={imagePath} />
+      <Footer data={footer} logo={logo} imagePath={imagePath} contact_info={contact_info} />
     </main>
   );
 }
@@ -110,7 +113,7 @@ export async function getServerSideProps({ req }) {
   const project_id = logo?.data[0]?.project_id || null;
   const imagePath = await getImagePath(project_id, domain);
   const gtmId = await callBackendApi({ domain, tag: "gtmId" });
-
+  const contact_info = await callBackendApi({ domain, tag: "contact_info" });
   const banner = await callBackendApi({ domain, tag: "banner" });
   const phone = await callBackendApi({ domain, tag: "phone" });
   const services = await callBackendApi({ domain, tag: "services_list" });
@@ -146,6 +149,7 @@ export async function getServerSideProps({ req }) {
       locations: locations?.data[0]?.value || [],
       terms: terms?.data[0]?.value || null,
       gtmId: gtmId?.data[0]?.value || null,
+      contact_info: contact_info?.data[0]?.value || null,
     },
   };
 }

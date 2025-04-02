@@ -29,6 +29,7 @@ export default function PrivacyPolicy({
   footer,
   policy,
   gtmId,
+  contact_info,
 }) {
   const markdownIt = new MarkdownIt();
   const content = markdownIt.render(policy || "");
@@ -82,8 +83,8 @@ export default function PrivacyPolicy({
       <Navbar
         logo={logo}
         imagePath={imagePath}
-        phone={phone}
         services={services?.list}
+        contact_info={contact_info}
       />
       <FullContainer>
         <Container>
@@ -95,8 +96,7 @@ export default function PrivacyPolicy({
           />
         </Container>
       </FullContainer>
-
-      <Footer data={footer} logo={logo} imagePath={imagePath} />
+      <Footer data={footer} logo={logo} imagePath={imagePath} contact_info={contact_info} />
     </main>
   );
 }
@@ -120,6 +120,7 @@ export async function getServerSideProps({ req }) {
   const footer = await callBackendApi({ domain, tag: "footer" });
   const locations = await callBackendApi({ domain, tag: "locations" });
   const policy = await callBackendApi({ domain, tag: "policy" });
+  const contact_info = await callBackendApi({ domain, tag: "contact_info" });
 
   robotsTxt({ domain });
 
@@ -142,6 +143,7 @@ export async function getServerSideProps({ req }) {
       locations: locations?.data[0]?.value || [],
       policy: policy?.data[0]?.value || null,
       gtmId: gtmId?.data[0]?.value || null,
+      contact_info: contact_info?.data[0]?.value || null,
     },
   };
 }

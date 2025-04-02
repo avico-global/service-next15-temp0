@@ -118,6 +118,13 @@ export default function Footer({ logo, imagePath, data, contact_info }) {
                 >
                   Privacy Policy
                 </Link>
+                <Link
+                title="Terms and conditions"
+                href="terms-and-conditions"
+                className="text-white text-sm md:text-[15px]"
+                >
+                Terms and conditions
+                </Link>
               </div>
             </div>
           </div>
