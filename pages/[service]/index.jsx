@@ -24,7 +24,7 @@ import Container from "@/components/common/Container";
 import Link from "next/link";
 import { Phone, TextQuote } from "lucide-react";
 import { ScrollLink } from "react-scroll";
-import ServiceAbout from "@/components/container/services/ServiceAbout";
+import ServiceDescription from "@/components/container/services/ServiceDescription";
 import ServiceText from "@/components/container/services/ServiceText";
 export default function Service({
   contact_info,
@@ -44,6 +44,7 @@ export default function Service({
   gallery_head,
   faqs,
   gtmId,
+  service_text,
 }) {
 
   const router = useRouter();
@@ -115,9 +116,9 @@ export default function Service({
           <Breadcrumbs breadcrumbs={breadcrumbs} className="pt-7" />
         </Container>
       </FullContainer>
-      <ServiceAbout data={about?.value} image={`${imagePath}/${about?.file_name}`} contact_info={contact_info} />
+      <ServiceDescription data={about?.value} image={`${imagePath}/${about?.file_name}`} contact_info={contact_info} />
       <Gallery contact_info={contact_info} gallery={gallery} imagePath={imagePath} gallery_head={gallery_head} />
-     <ServiceText contact_info={contact_info} />
+     <ServiceText contact_info={contact_info} data={service_text} />
 
       <Contact contact_info={contact_info} />
       <FAQs faqs={faqs} />
@@ -176,6 +177,7 @@ export default function Service({
 export async function getServerSideProps({ req }) {
   const domain = getDomain(req?.headers?.host);
   const faqs = await callBackendApi({ domain, tag: "faqs" });
+  const service_text = await callBackendApi({ domain, tag: "service_text" });
   const gallery_head = await callBackendApi({ domain, tag: "gallery_head" });
   const contact_info = await callBackendApi({ domain, tag: "contact_info" });
   const logo = await callBackendApi({ domain, tag: "logo" });
@@ -204,6 +206,7 @@ export async function getServerSideProps({ req }) {
       contact_info: contact_info?.data[0]?.value || null,
       gallery_head: gallery_head?.data[0]?.value || null,
       faqs: faqs?.data[0]?.value || null,
+      service_text: service_text?.data[0]?.value || null,
       service_banner: service_banner?.data[0] || null,
       gtmId: gtmId?.data[0]?.value || null,
       domain,
