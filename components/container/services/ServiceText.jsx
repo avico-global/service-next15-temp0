@@ -15,13 +15,21 @@ const montserrat = Montserrat({
 export default function ServiceText({ contact_info, data = " ", service , data2 = " "}) {
     const markdown = new MarkdownIt();
     const markdown2 = new MarkdownIt();
+
+    const capitalizeFirstLetterOfEachWord = (string) => {
+        return string
+          ?.split(" ")
+          ?.map((word) => word?.charAt(0)?.toUpperCase() + word?.slice(1))
+          ?.join(" ");
+      };
+      
     
     // Ensure data is a string before processing
     const content = typeof data === 'string' 
       ? markdown.render(
           data.replaceAll(
             "##service##",
-            service ? service.replaceAll("-", " ") : ""
+            capitalizeFirstLetterOfEachWord(service?.replaceAll("-", " "))
           )
         )
       : "";
@@ -31,7 +39,7 @@ export default function ServiceText({ contact_info, data = " ", service , data2 
       ? markdown2.render(
           data2.replaceAll(
             "##service##",
-            service ? service.replaceAll("-", " ") : ""
+            capitalizeFirstLetterOfEachWord(service?.replaceAll("-", " "))
           )
         )
       : "";
