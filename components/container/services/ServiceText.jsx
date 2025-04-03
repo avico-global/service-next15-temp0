@@ -20,7 +20,7 @@ const montserrat = Montserrat({
   
 export default function ServiceText({ contact_info, data }) {
     const markdownIt = new MarkdownIt();
-  const content = markdownIt.render(data[0].markdown_data1 || "");
+  const content = markdownIt?.render(data[0]?.markdown_data1 || "");
 
   return (
     <>
