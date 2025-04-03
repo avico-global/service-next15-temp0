@@ -40,7 +40,7 @@ export default function ServiceBanner({ contact_info, data, image }) {
              (max-width: 3840px) 3840px,
              100vw"
       />
-      <Container className="h-full flex flex-col items-center relative lg:min-h-[600px] z-10 gap-6 text-center">
+      <Container className="h-full flex flex-col items-center relative lg:min-h-[630px] z-10 gap-6 text-center">
         <div className="flex items-center justify-center lg:justify-start pt-16">
           <Image
           title="Google"
