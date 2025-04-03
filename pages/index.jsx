@@ -121,7 +121,7 @@ export default function Home({
           contact_info={contact_info}
         />
         <Gallery
-          gallery_head={gallery_head}
+          data={gallery_head}
           gallery={gallery}
           imagePath={imagePath}
           contact_info={contact_info}

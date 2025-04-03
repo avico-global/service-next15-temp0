@@ -44,9 +44,11 @@ export default function Service({
   gallery_head,
   faqs,
   gtmId,
-  service_text,
+  service_text1,
+  service_text2,
   service_description,
   city_name,
+  service_gallery_head,
 }) {
   const router = useRouter();
   const { service } = router.query;
@@ -117,21 +119,23 @@ export default function Service({
           <Breadcrumbs breadcrumbs={breadcrumbs} className="pt-7" />
         </Container>
       </FullContainer>
-      <ServiceDescription
-        data={service_description?.value}
-        image={`${imagePath}/${service_description?.file_name}`}
-        contact_info={contact_info}
-        service={service}
-        city={city_name}
-      />
+      {service_description?.value && (
+        <ServiceDescription
+          data={service_description?.value}
+          image={`${imagePath}/${service_description?.file_name}`}
+          contact_info={contact_info}
+          service={service}
+          city={city_name}
+        />
+      )}
       <Gallery
         contact_info={contact_info}
         gallery={gallery}
         imagePath={imagePath}
-        gallery_head={gallery_head}
+        service={service}
+        data={service_gallery_head}
       />
-      <ServiceText contact_info={contact_info} data={service_text} />
-
+      <ServiceText contact_info={contact_info} data={service_text1} service={service} data2={service_text2}/>
       <Contact contact_info={contact_info} />
       <FAQs faqs={faqs} />
       <ServiceCities data={locations} />
@@ -196,7 +200,8 @@ export default function Service({
 export async function getServerSideProps({ req }) {
   const domain = getDomain(req?.headers?.host);
   const faqs = await callBackendApi({ domain, tag: "faqs" });
-  const service_text = await callBackendApi({ domain, tag: "service_text" });
+  const service_text1 = await callBackendApi({ domain, tag: "service_text1" });
+  const service_text2 = await callBackendApi({ domain, tag: "service_text2" });
   const gallery_head = await callBackendApi({ domain, tag: "gallery_head" });
   const contact_info = await callBackendApi({ domain, tag: "contact_info" });
   const logo = await callBackendApi({ domain, tag: "logo" });
@@ -215,6 +220,7 @@ export async function getServerSideProps({ req }) {
   const favicon = await callBackendApi({ domain, tag: "favicon" });
   const footer = await callBackendApi({ domain, tag: "footer" });
   const locations = await callBackendApi({ domain, tag: "locations" });
+  const service_gallery_head = await callBackendApi({ domain, tag: "service_gallery_head" });
   const service_banner = await callBackendApi({
     domain,
     tag: "service_banner",
@@ -234,8 +240,10 @@ export async function getServerSideProps({ req }) {
     props: {
       contact_info: contact_info?.data[0]?.value || null,
       gallery_head: gallery_head?.data[0]?.value || null,
+      service_gallery_head: service_gallery_head?.data[0]?.value || null,
       faqs: faqs?.data[0]?.value || null,
-      service_text: service_text?.data[0]?.value || null,
+      service_text1: service_text1?.data[0]?.value || null,
+      service_text2: service_text2?.data[0]?.value || null,
       service_banner: service_banner?.data[0] || null,
       gtmId: gtmId?.data[0]?.value || null,
       domain,

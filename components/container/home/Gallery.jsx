@@ -5,18 +5,34 @@ import CallButton from "@/components/CallButton";
 import QuoteButton from "@/components/QuoteButton";
 import FullContainer from "@/components/common/FullContainer";
 import Heading from "@/components/common/Heading";
+import MarkdownIt from "markdown-it";
 
-
-export default function Gallery({ contact_info, gallery = [], imagePath, gallery_head }) {
+export default function Gallery({
+  contact_info,
+  gallery = " ",
+  imagePath,
+  data,
+  service,
+}) {
+  const markdown = new MarkdownIt();
+  const content = data 
+    ? markdown.render(
+        data.replaceAll(
+          "##service##", 
+          service ? service.replaceAll("-", " ") : ""
+        )
+      )
+    : "";
+  
   return (
     <FullContainer className="pt-10 md:pt-4 pb-0 md:pb-12 ">
       <Container className="!px-2 md:!px-4">
-        <div className="text-center mx-auto mb-4 md:mb-10">
-           <Heading text={gallery_head?.title} className="mb-2 md:mb-6" />
-          <p className={`font-barlow text-gray-900 leading-none text-[22px]`}>
-            {gallery_head?.description}
-          </p>
-        </div>
+        {data && (
+          <div
+            className="w-full prose prose-h3:!text-center prose-p:!text-center max-w-none text-primary"
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
+        )}
 
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 gap-y-4 md:gap-y-6 md:gap-5 mb-4 md:mb-12 w-full md:px-5">
           {gallery?.map((image, index) => (
