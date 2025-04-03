@@ -45,8 +45,9 @@ export default function Service({
   faqs,
   gtmId,
   service_text,
+  service_description,
+  city_name,
 }) {
-
   const router = useRouter();
   const { service } = router.query;
   const breadcrumbs = useBreadcrumbs();
@@ -116,14 +117,30 @@ export default function Service({
           <Breadcrumbs breadcrumbs={breadcrumbs} className="pt-7" />
         </Container>
       </FullContainer>
-      <ServiceDescription data={about?.value} image={`${imagePath}/${about?.file_name}`} contact_info={contact_info} />
-      <Gallery contact_info={contact_info} gallery={gallery} imagePath={imagePath} gallery_head={gallery_head} />
-     <ServiceText contact_info={contact_info} data={service_text} />
+      <ServiceDescription
+        data={service_description?.value}
+        image={`${imagePath}/${service_description?.file_name}`}
+        contact_info={contact_info}
+        service={service}
+        city={city_name}
+      />
+      <Gallery
+        contact_info={contact_info}
+        gallery={gallery}
+        imagePath={imagePath}
+        gallery_head={gallery_head}
+      />
+      <ServiceText contact_info={contact_info} data={service_text} />
 
       <Contact contact_info={contact_info} />
       <FAQs faqs={faqs} />
       <ServiceCities data={locations} />
-      <Footer data={footer} logo={logo} imagePath={imagePath} contact_info={contact_info} />
+      <Footer
+        data={footer}
+        logo={logo}
+        imagePath={imagePath}
+        contact_info={contact_info}
+      />
 
       {/* <FullContainer>
         <Container>
@@ -142,7 +159,7 @@ export default function Service({
         <ServiceCities />
       </div>
       <Footer /> */}
-     <div className="grid md:hidden fixed bottom-0 left-0 right-0 grid-cols-2 gap-2 p-2  bg-white  z-50">
+      <div className="grid md:hidden fixed bottom-0 left-0 right-0 grid-cols-2 gap-2 p-2  bg-white  z-50">
         <div className="w-full rounded-lg bg-[#01306E] flex items-center justify-center">
           <Link
             title="Call Button"
@@ -165,7 +182,9 @@ export default function Service({
           >
             <span className="flex items-center gap-2 z-10">
               <TextQuote className="w-6 h-6 text-black" />
-              <h2 className="text-[19px] font-semibold text-black">GET A QUOTE</h2>
+              <h2 className="text-[19px] font-semibold text-black">
+                GET A QUOTE
+              </h2>
             </span>
           </ScrollLink>
         </div>
@@ -196,8 +215,18 @@ export async function getServerSideProps({ req }) {
   const favicon = await callBackendApi({ domain, tag: "favicon" });
   const footer = await callBackendApi({ domain, tag: "footer" });
   const locations = await callBackendApi({ domain, tag: "locations" });
-  const service_banner = await callBackendApi({ domain, tag: "service_banner" });
-  
+  const service_banner = await callBackendApi({
+    domain,
+    tag: "service_banner",
+  });
+  const service_description = await callBackendApi({
+    domain,
+    tag: "service_description",
+  });
+  const city_name = await callBackendApi({
+    domain,
+    tag: "city_name",
+  });
 
   robotsTxt({ domain });
 
@@ -223,7 +252,8 @@ export async function getServerSideProps({ req }) {
       favicon: favicon?.data[0]?.file_name || null,
       footer: footer?.data[0] || null,
       locations: locations?.data[0]?.value || [],
+      service_description: service_description?.data[0] || null,
+      city_name: city_name?.data[0]?.value || null,
     },
   };
 }
-
