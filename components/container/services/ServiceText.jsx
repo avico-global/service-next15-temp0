@@ -12,24 +12,29 @@ const montserrat = Montserrat({
   subsets: ["latin"],
 });
 
-export default function ServiceText({ contact_info, data, service , data2}) {
+export default function ServiceText({ contact_info, data = " ", service , data2 = " "}) {
     const markdown = new MarkdownIt();
     const markdown2 = new MarkdownIt();
-    const content = markdown.render(
-      data
-        ?.replaceAll(
-          "##service##",
-          service?.replaceAll("-", " ")
+    
+    // Ensure data is a string before processing
+    const content = typeof data === 'string' 
+      ? markdown.render(
+          data.replaceAll(
+            "##service##",
+            service ? service.replaceAll("-", " ") : ""
+          )
         )
-
-    );
-    const content2 = markdown2.render(
-      data2
-        ?.replaceAll(
-          "##service##",
-          service?.replaceAll("-", " ")
+      : "";
+      
+    // Ensure data2 is a string before processing
+    const content2 = typeof data2 === 'string'
+      ? markdown2.render(
+          data2.replaceAll(
+            "##service##",
+            service ? service.replaceAll("-", " ") : ""
+          )
         )
-    );
+      : "";
     
 
   return (
