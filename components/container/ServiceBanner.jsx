@@ -69,7 +69,7 @@ export default function ServiceBanner({ contact_info, data, image }) {
           />
         </div>
 
-        <h1 className="flex flex-col text-4xl md:text-5xl lg:text-6xl font-bold ">
+        <h1 className="flex flex-col max-w-3xl text-4xl md:text-5xl lg:text-6xl font-bold ">
           <span className="text-3xl md:text-6xl uppercase font-[900] text-[#89CFF0] text-center md:text-start lg:text-left mt-2">
             {service?.replace(/-/g, " ")}
           </span>
