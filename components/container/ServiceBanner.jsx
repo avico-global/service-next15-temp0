@@ -40,43 +40,44 @@ export default function ServiceBanner({ contact_info, data, image }) {
              (max-width: 3840px) 3840px,
              100vw"
       />
-      <Container className="h-full flex flex-col items-center relative lg:min-h-[630px] z-10 gap-6 text-center">
-        <div className="flex items-center justify-center lg:justify-start pt-16">
-          <Image
-          title="Google"
-            src="/st-images/google.webp"
-            width={100}
-            height={30}
-            alt="Google"
-          />
+      <Container className="h-full flex flex-col pb-5 items-center relative lg:min-h-[630px] z-10 gap-0 md:gap-6 text-center">
+      <div className="flex items-center md:items-start pt-10 justify-center md:justify-start mb-4 ">
+              <Image
+                title="Google"
+                src="/st-images/google.webp"
+                width={100}
+                height={30}
+                alt="Google"
+                className="w-[67.5px] md:w-[100px] h-[22.5px] md:h-[30px]"
+              />
 
-          <Image          
-            title="Trustpilot"
-            src="/st-images/trustpilot.webp"
-            width={100}
-            height={30}
-            alt="Trustpilot"
-            className="ml-6"
-          />
+              <Image
+                title="Trustpilot"
+                src="/st-images/trustpilot.webp"
+                width={100}
+                height={30}
+                alt="Trustpilot"
+                className="ml-2 md:ml-6 w-[67.5px] md:w-[100px] h-[22.5px] md:h-[30px]"
+              />
 
-          <Image
-            title="Capterra"
-            src="/st-images/capterra.webp"
-            width={100}
-            height={30}
-            alt="Capterra"
-            className="ml-6"
-          />
-        </div>
+              <Image
+                title="Capterra"
+                src="/st-images/capterra.webp"
+                width={100}
+                height={30}
+                alt="Capterra"
+                className="ml-2 w-[67.5px] md:w-[100px] h-[22.5px] md:h-[30px]"
+              />
+            </div>
 
         <h1 className="flex flex-col  max-w-3xl text-4xl md:text-5xl lg:text-6xl font-bold ">
-          <span className="text-3xl md:text-6xl uppercase font-[900] text-[#89CFF0] text-center  mt-2">
+          <span className="leading-none text-3xl md:text-6xl uppercase font-[900] text-[#89CFF0] text-center  mt-2">
             {service?.replace(/-/g, " ")}
           </span>
         </h1>
 
         <span className="block mb-3 max-w-3xl capitalize text-3xl lg:leading-[55px] md:text-4xl lg:text-[50px] font-semibold drop-shadow-lg text-white">
-          <span className="text-white">
+          <span className="text-white leading-none">
             {data?.heading?.replaceAll(
               "##service##",
               service?.replace(/-/g, " ")
@@ -87,7 +88,7 @@ export default function ServiceBanner({ contact_info, data, image }) {
         <p className="text-xl md:text-3xl text-white font-light drop-shadow-md max-w-2xl">
           {data?.tagline}
         </p>
-        <div className="flex items-center justify-center gap-6  pt-6">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6  pt-6">
           <CallButton phone={contact_info?.phone} />
           <QuoteButton phone={contact_info?.phone} />
        </div>
