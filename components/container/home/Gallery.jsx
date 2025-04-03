@@ -15,15 +15,15 @@ export default function Gallery({
   service,
 }) {
   const markdown = new MarkdownIt();
-  const content = data 
+  const content = data
     ? markdown.render(
-        data.replaceAll(
-          "##service##", 
+        data?.replaceAll(
+          "##service##",
           service ? service.replaceAll("-", " ") : ""
         )
       )
     : "";
-  
+
   return (
     <FullContainer className="pt-10 md:pt-4 pb-0 md:pb-12 ">
       <Container className="!px-2 md:!px-4">
