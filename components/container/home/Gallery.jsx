@@ -15,11 +15,18 @@ export default function Gallery({
   service,
 }) {
   const markdown = new MarkdownIt();
+  const capitalizeFirstLetterOfEachWord = (string) => {
+    return string
+      ?.split(" ")
+      ?.map((word) => word?.charAt(0)?.toUpperCase() + word?.slice(1))
+      ?.join(" ");
+  };
+  
   const content = data
     ? markdown.render(
         data?.replaceAll(
           "##service##",
-          service ? service.replaceAll("-", " ") : ""
+          capitalizeFirstLetterOfEachWord(service?.replaceAll("-", " "))
         )
       )
     : "";
