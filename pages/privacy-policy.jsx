@@ -91,7 +91,7 @@ export default function PrivacyPolicy({
           <Breadcrumbs breadcrumbs={breadcrumbs} className="py-7" />
 
           <div
-            className="prose max-w-full w-full mb-5"
+            className="prose prose-h2:!text-start prose-p:!text-[20px]  text-primary max-w-full w-full mb-5"
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </Container>
