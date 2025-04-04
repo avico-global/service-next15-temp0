@@ -45,6 +45,8 @@ const barlow = Barlow({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "900"],
 });
+ 
+
 export default function Home({
   contact_info,
   logo,
@@ -65,6 +67,15 @@ export default function Home({
   faqs,
   gtmId,
 }) {
+
+  
+  const faviconUrl = favicon ? 
+    (imagePath.startsWith('http') ? 
+      `${imagePath}/${favicon}` : 
+      `/images/${imagePath}/${favicon}`) : 
+    '/favicon.ico';
+  
+  console.log("Favicon URL:", faviconUrl);
   return (
     <div className="bg-white">
       <Head>
@@ -78,6 +89,7 @@ export default function Home({
         <link rel="manifest" href="/manifest.json" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href={faviconUrl} />
         <GoogleTagManager id={gtmId} />
         <meta
           name="google-site-verification"
@@ -86,19 +98,19 @@ export default function Home({
         <link
           rel="apple-touch-icon"
           sizes="180x180"
-          href={`${process.env.NEXT_PUBLIC_SITE_MANAGER}/images/${imagePath}/${favicon}`}
+          href={faviconUrl}
         />
         <link
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href={`${process.env.NEXT_PUBLIC_SITE_MANAGER}/images/${imagePath}/${favicon}`}
+          href={faviconUrl}
         />
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href={`${process.env.NEXT_PUBLIC_SITE_MANAGER}/images/${imagePath}/${favicon}`}
+          href={faviconUrl}
         />
       </Head>
       <div className={`${montserrat.className}`}>
