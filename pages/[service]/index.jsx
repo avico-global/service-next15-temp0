@@ -17,7 +17,6 @@ import Gallery from "@/components/container/home/Gallery";
 import About from "@/components/container/home/About";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import GoogleTagManager from "@/lib/GoogleTagManager";
 import useBreadcrumbs from "@/lib/useBreadcrumbs";
 import FullContainer from "@/components/common/FullContainer";
 import Container from "@/components/common/Container";
@@ -84,7 +83,6 @@ export default function Service({
         <link rel="manifest" href="/manifest.json" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <GoogleTagManager id={gtmId} />
         <meta
           name="google-site-verification"
           content="zbriSQArMtpCR3s5simGqO5aZTDqEZZi9qwinSrsRPk"
@@ -214,6 +212,8 @@ export async function getServerSideProps({ req }) {
   const project_id = logo?.data[0]?.project_id || null;
   const imagePath = await getImagePath(project_id, domain);
   const gtmId = await callBackendApi({ domain, tag: "gtmId" });
+  const gtm_head = await callBackendApi({ domain, tag: "gtm_head" });
+  const gtm_body = await callBackendApi({ domain, tag: "gtm_body" });
 
   const banner = await callBackendApi({ domain, tag: "banner" });
   const services = await callBackendApi({ domain, tag: "services_list" });
@@ -252,6 +252,9 @@ export async function getServerSideProps({ req }) {
       service_text2: service_text2?.data[0]?.value || null,
       service_banner: service_banner?.data[0] || null,
       gtmId: gtmId?.data[0]?.value || null,
+      gtm_head: gtm_head?.data[0]?.value || null,
+      gtm_body: gtm_body?.data[0]?.value || null,
+
       domain,
       imagePath,
       logo: logo?.data[0] || null,

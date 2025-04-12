@@ -12,7 +12,6 @@ import {
   getImagePath,
   robotsTxt,
 } from "@/lib/myFun";
-import GoogleTagManager from "@/lib/GoogleTagManager";
 import FullContainer from "@/components/common/FullContainer";
 import Breadcrumbs from "@/components/common/Breadcrumbs";
 import useBreadcrumbs from "@/lib/useBreadcrumbs";
@@ -56,7 +55,6 @@ export default function PrivacyPolicy({
         <link rel="manifest" href="/manifest.json" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <GoogleTagManager id={gtmId} />
         <meta
           name="google-site-verification"
           content="zbriSQArMtpCR3s5simGqO5aZTDqEZZi9qwinSrsRPk"
@@ -107,6 +105,9 @@ export async function getServerSideProps({ req }) {
   const project_id = logo?.data[0]?.project_id || null;
   const imagePath = await getImagePath(project_id, domain);
   const gtmId = await callBackendApi({ domain, tag: "gtmId" });
+  const gtm_head = await callBackendApi({ domain, tag: "gtm_head" });
+  const gtm_body = await callBackendApi({ domain, tag: "gtm_body" });
+
   const banner = await callBackendApi({ domain, tag: "banner" });
   const phone = await callBackendApi({ domain, tag: "phone" });
   const services = await callBackendApi({ domain, tag: "services_list" });
@@ -128,6 +129,8 @@ export async function getServerSideProps({ req }) {
     props: {
       domain,
       imagePath,
+      gtm_head: gtm_head?.data[0]?.value || null,
+      gtm_body: gtm_body?.data[0]?.value || null,
       logo: logo?.data[0] || null,
       banner: banner?.data[0] || null,
       phone: phone?.data[0]?.value || null,

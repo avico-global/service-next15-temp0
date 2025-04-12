@@ -12,8 +12,6 @@ import Footer from "../components/container/Footer";
 import Contact from "../components/container/Contact";
 import ServiceBenefits from "../components/container/home/ServiceBenefits";
 import { useEffect, useState } from "react";
-import CallButton from "@/components/CallButton";
-import QuoteButton from "@/components/QuoteButton";
 import Gallery from "@/components/container/home/Gallery";
 import Container from "@/components/common/Container";
 import FullContainer from "@/components/common/FullContainer";
@@ -26,7 +24,6 @@ import {
   getImagePath,
   robotsTxt,
 } from "@/lib/myFun";
-import GoogleTagManager from "@/lib/GoogleTagManager";
 
 import { Montserrat, Inter, Barlow } from "next/font/google";
 import { Link as ScrollLink } from "react-scroll";
@@ -45,7 +42,6 @@ const barlow = Barlow({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "900"],
 });
- 
 
 export default function Home({
   contact_info,
@@ -65,17 +61,13 @@ export default function Home({
   locations,
   gallery_head,
   faqs,
-  gtmId,
 }) {
+  const faviconUrl = favicon
+    ? imagePath.startsWith("http")
+      ? `${imagePath}/${favicon}`
+      : `/images/${imagePath}/${favicon}`
+    : "/favicon.ico";
 
-  
-  const faviconUrl = favicon ? 
-    (imagePath.startsWith('http') ? 
-      `${imagePath}/${favicon}` : 
-      `/images/${imagePath}/${favicon}`) : 
-    '/favicon.ico';
-  
-  console.log("Favicon URL:", faviconUrl);
   return (
     <div className="bg-white">
       <Head>
@@ -90,29 +82,17 @@ export default function Home({
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href={faviconUrl} />
-        <GoogleTagManager id={gtmId} />
+
         <meta
           name="google-site-verification"
           content="zbriSQArMtpCR3s5simGqO5aZTDqEZZi9qwinSrsRPk"
         />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href={faviconUrl}
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href={faviconUrl}
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href={faviconUrl}
-        />
+        <link rel="apple-touch-icon" sizes="180x180" href={faviconUrl} />
+        <link rel="icon" type="image/png" sizes="32x32" href={faviconUrl} />
+        <link rel="icon" type="image/png" sizes="16x16" href={faviconUrl} />
       </Head>
+
+     
       <div className={`${montserrat.className}`}>
         <Navbar
           logo={logo}
@@ -246,6 +226,8 @@ export async function getServerSideProps({ req }) {
   const project_id = logo?.data[0]?.project_id || null;
   const imagePath = await getImagePath(project_id, domain);
   const gtmId = await callBackendApi({ domain, tag: "gtmId" });
+  const gtm_head = await callBackendApi({ domain, tag: "gtm_head" });
+  const gtm_body = await callBackendApi({ domain, tag: "gtm_body" });
 
   const banner = await callBackendApi({ domain, tag: "banner" });
   const services = await callBackendApi({ domain, tag: "services_list" });
@@ -267,6 +249,9 @@ export async function getServerSideProps({ req }) {
       domain,
       imagePath,
       gtmId: gtmId?.data[0]?.value || null,
+      gtm_head: gtm_head?.data[0]?.value || null,
+      gtm_body: gtm_body?.data[0]?.value || null,
+
       gallery_head: gallery_head?.data[0]?.value || null,
       faqs: faqs?.data[0]?.value || null,
       logo: logo?.data[0] || null,
