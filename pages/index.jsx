@@ -92,7 +92,6 @@ export default function Home({
         <link rel="icon" type="image/png" sizes="16x16" href={faviconUrl} />
       </Head>
 
-     
       <div className={`${montserrat.className}`}>
         <Navbar
           logo={logo}
@@ -102,7 +101,7 @@ export default function Home({
         />
         <Banner
           data={banner?.value}
-          image={`${imagePath}/${banner?.file_name}`}
+          image={`${imagePath}${banner?.file_name}`}
           imagePath={imagePath}
           contact_info={contact_info}
         />
