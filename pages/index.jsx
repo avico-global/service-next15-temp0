@@ -68,6 +68,8 @@ export default function Home({
       : `/images/${imagePath}/${favicon}`
     : "/favicon.ico";
 
+  console.log("Banner Image", `${imagePath}/${banner?.file_name}`);
+
   return (
     <div className="bg-white">
       <Head>
@@ -101,7 +103,7 @@ export default function Home({
         />
         <Banner
           data={banner?.value}
-          image={`${imagePath}${banner?.file_name}`}
+          image={`${imagePath}/${banner?.file_name}`}
           imagePath={imagePath}
           contact_info={contact_info}
         />

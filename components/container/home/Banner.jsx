@@ -30,7 +30,7 @@ export default function Banner({ image, data, contact_info }) {
   });
 
   const [fieldErrors, setFieldErrors] = useState({
-    phone: ""
+    phone: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -50,16 +50,16 @@ export default function Banner({ image, data, contact_info }) {
     }));
 
     // Validate phone field as user types
-    if (name === 'phone') {
+    if (name === "phone") {
       if (value.length > 0 && !validatePhone(value)) {
-        setFieldErrors(prev => ({
+        setFieldErrors((prev) => ({
           ...prev,
-          phone: "Phone number must be exactly 10 digits"
+          phone: "Phone number must be exactly 10 digits",
         }));
       } else {
-        setFieldErrors(prev => ({
+        setFieldErrors((prev) => ({
           ...prev,
-          phone: ""
+          phone: "",
         }));
       }
     }
@@ -67,16 +67,16 @@ export default function Banner({ image, data, contact_info }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Validate phone before submission
     if (!validatePhone(formData.phone)) {
-      setFieldErrors(prev => ({
+      setFieldErrors((prev) => ({
         ...prev,
-        phone: "Phone number must be exactly 10 digits"
+        phone: "Phone number must be exactly 10 digits",
       }));
       return; // Prevent form submission
     }
-    
+
     setIsSubmitting(true);
     setError(null);
 
@@ -134,20 +134,21 @@ export default function Banner({ image, data, contact_info }) {
     }
   };
 
-
   return (
     <FullContainer className="relative bg-white overflow-hidden md:!h-[790px]">
-      <Image
-        src={image}
-        title={data?.imageTitle || data?.title || "Banner"}
-        alt={data?.altImage || data?.tagline || "No Banner Found"}
-        priority={true}
-        height={1000}
-        width={1920}
-        className="object-cover h-[460px] md:h-[1000px] absolute top-0 left-0 w-full  object-left"
-      />
-      <div className="absolute inset-0 h-[460px] md:h-[790px] bg-gray-900/60"></div>
-      <Container className="py-20  font-barlow relative z-10">
+      <div className="absolute inset-0 h-[460px] md:h-[790px] overflow-hidden">
+        <Image
+          src={image}
+          title={data?.imageTitle || data?.title || "Banner"}
+          alt={data?.altImage || data?.tagline || "No Banner Found"}
+          priority={true}
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gray-900/60"></div>
+      </div>
+      <Container className="py-20 font-barlow relative z-10">
         <div className="w-full grid grid-cols-1 md:grid-cols-banner gap-10 md:gap-[66px] text-white lg:min-h-[630px]">
           <div className="relative -mt-10 flex flex-col lg:pr-10 justify-center">
             <div className="flex items-center md:items-start  justify-center md:justify-start mb-4">
@@ -280,16 +281,21 @@ export default function Banner({ image, data, contact_info }) {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className={`w-full pl-3 py-2 bg-white border ${fieldErrors.phone ? 'border-red-500' : 'border-gray-200'} rounded-md outline-none`}
+                          className={`w-full pl-3 py-2 bg-white border ${
+                            fieldErrors.phone
+                              ? "border-red-500"
+                              : "border-gray-200"
+                          } rounded-md outline-none`}
                           placeholder="(123) 456-7890"
                           required
                         />
                       </div>
                       {fieldErrors.phone && (
-                        <p className="text-red-500 text-xs mt-1">{fieldErrors.phone}</p>
+                        <p className="text-red-500 text-xs mt-1">
+                          {fieldErrors.phone}
+                        </p>
                       )}
                     </div>
-                  
 
                     <div className="col-span-2 md:col-span-1">
                       <label
@@ -343,8 +349,7 @@ export default function Banner({ image, data, contact_info }) {
                       Message
                     </label>
                     <div className="relative">
-                      <div className="absolute top-3 left-3 pointer-events-none">
-                      </div>
+                      <div className="absolute top-3 left-3 pointer-events-none"></div>
                       <textarea
                         id="message"
                         name="message"
