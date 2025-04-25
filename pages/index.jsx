@@ -113,7 +113,7 @@ export default function Home({
 
         <FullMonthPromotion/>
 
-        <OurServices data={services} />
+        <OurServices phone={contact_info?.phone} data={services} />
         <WhyChoose
           data={features?.value}
           image={`${imagePath}/${features?.file_name}`}
@@ -177,7 +177,8 @@ export default function Home({
           data={benefits?.value}
           image={`${imagePath}/${benefits?.file_name}`}
         />
-        {testimonials && <Testimonials data={testimonials} />}
+        {}
+        {testimonials && <Testimonials logo={logo} imagePath={imagePath} data={testimonials} />}
         <div id="contact-us">
           <Contact contact_info={contact_info} />
         </div>

@@ -5,131 +5,10 @@ import Container from "../../common/Container";
 import FullContainer from "../../common/FullContainer";
 import Heading from "../../common/Heading";
 
-
-
-
-// const chimneyIcons = [
-//   {
-//     id: "chimney-inspection",
-//     name: "Chimney Inspection",
-//     path: "M10,40 L20,5 L40,5 L50,40 Z M25,40 L25,25 M35,40 L35,25 M25,20 L35,20 M15,45 L45,45 M20,50 L40,50 M30,5 L30,0",
-//   },
-//   {
-//     id: "chimney-repair",
-//     name: "Chimney Repair",
-//     path: "M15,45 L15,15 L35,15 L35,45 Z M10,15 L40,15 M10,10 L40,10 M15,35 L35,35 M15,25 L35,25 M42,30 L48,24 M48,30 C45,27 42,30 45,33",
-//   },
-//   {
-//     id: "furnace-chimney-cleaning",
-//     name: "Furnace Chimney Cleaning",
-//     path: "M20,50 L20,10 L40,10 L40,50 Z M15,10 L45,10 M15,5 L45,5 M25,10 L25,20 M35,10 L35,20 M30,20 C25,30 35,30 30,40 M25,35 L35,35",
-//   },
-//   {
-//     id: "chimney-lining",
-//     name: "Chimney Lining",
-//     path: "M15,45 L15,5 L35,5 L35,45 Z M10,5 L40,5 M10,45 L40,45 M20,5 L20,45 M30,5 L30,45 M15,15 L35,15 M15,25 L35,25 M15,35 L35,35",
-//   },
-//   {
-//     id: "chimney-cap-repair",
-//     name: "Chimney Cap Repair",
-//     path: "M10,30 L20,10 L40,10 L50,30 Z M5,30 L55,30 M20,30 L20,50 M40,30 L40,50 M15,5 L45,5 M25,5 L25,10 M35,5 L35,10",
-//   },
-//   {
-//     id: "fireplace-refacing",
-//     name: "Fireplace Refacing",
-//     path: "M10,10 L10,45 L50,45 L50,10 Z M15,15 L45,15 L45,40 L15,40 Z M25,40 L25,30 L35,30 L35,40 M28,25 C30,20 32,25 30,30",
-//   },
-//   {
-//     id: "chimney-rebuild",
-//     name: "Chimney Rebuild",
-//     path: "M15,45 L15,5 L35,5 L35,45 Z M10,5 L40,5 M10,45 L40,45 M15,15 L35,15 M15,25 L35,25 M15,35 L35,35 M45,20 L50,15 M45,25 L50,20",
-//   },
-//   {
-//     id: "chimney-liner",
-//     name: "Chimney Liner",
-//     path: "M15,50 L15,10 L35,10 L35,50 Z M10,10 L40,10 M10,5 L40,5 M20,10 L20,50 M30,10 L30,50 M15,20 L35,20 M15,30 L35,30 M15,40 L35,40",
-//   },
-//   {
-//     id: "chimney-maintenance",
-//     name: "Chimney Maintenance",
-//     path: "M15,45 L25,5 L35,5 L45,45 Z M20,45 L40,45 M15,35 L45,35 M15,25 L45,25 M15,15 L45,15 M10,45 L50,45 M48,25 L52,20 L48,15",
-//   },
-//   {
-//     id: "gas-fireplace-repair",
-//     name: "Gas Fireplace Repair",
-//     path: "M10,10 L10,40 L50,40 L50,10 Z M15,15 L45,15 L45,35 L15,35 Z M25,35 L25,25 L35,25 L35,35 M20,20 C25,15 35,15 40,20 M30,35 L30,45",
-//   },
-//   {
-//     id: "chimney-cap-installation",
-//     name: "Chimney Cap Installation",
-//     path: "M15,35 L15,15 L35,15 L35,35 Z M10,15 L40,15 M10,10 L40,10 M10,35 L40,35 M15,45 L35,45 M20,35 L20,45 M30,35 L30,45 M5,5 L15,15 M45,5 L35,15",
-//   },
-//   {
-//     id: "chimney-flashing-repair",
-//     name: "Chimney Flashing Repair",
-//     path: "M20,50 L20,10 L40,10 L40,50 Z M15,10 L45,10 M15,50 L45,50 M15,30 L45,30 L50,25 L45,20 L15,20 L10,25 L15,30 Z M30,10 L30,0",
-//   },
-//   {
-//     id: "wood-fireplace-repair",
-//     name: "Wood Fireplace Repair",
-//     path: "M10,10 L10,45 L50,45 L50,10 Z M15,15 L45,15 L45,40 L15,40 Z M25,40 L25,30 L35,30 L35,40 M25,25 L30,20 L35,25 M30,25 L30,20",
-//   },
-//   {
-//     id: "chimney-crown-repair",
-//     name: "Chimney Crown Repair",
-//     path: "M15,45 L15,15 L35,15 L35,45 Z M10,15 L40,15 M10,10 L40,10 M5,10 L10,5 L40,5 L45,10 M45,25 L50,20 L45,15",
-//   },
-//   {
-//     id: "chimney-damper-repair",
-//     name: "Chimney Damper Repair",
-//     path: "M15,45 L15,10 L35,10 L35,45 Z M10,10 L40,10 M10,45 L40,45 M10,25 L40,25 M10,30 L40,30 M20,25 C25,30 30,25 35,30",
-//   },
-//   {
-//     id: "wood-burning-stove-cleaning",
-//     name: "Wood Burning Stove Cleaning",
-//     path: "M15,45 L15,20 L35,20 L35,45 Z M15,20 C15,15 35,15 35,20 M10,45 L40,45 M20,45 L20,30 M30,45 L30,30 M20,25 L30,25 M20,35 L30,35",
-//   },
-//   {
-//     id: "chimney-flue-installation",
-//     name: "Chimney Flue Installation",
-//     path: "M20,50 L20,10 L40,10 L40,50 Z M15,10 L45,10 M15,5 L45,5 M25,10 L25,50 M35,10 L35,50 M25,20 L35,20 M25,30 L35,30 M25,40 L35,40",
-//   },
-// ];
-
-// const ChimneyServices = () => {
-//   return (
-//     <div className="services-container">
-//       <h2 className="services-heading">Our Services</h2>
-//       <div className="services-grid">
-//         {chimneyIcons.map((service) => (
-//           <div key={service.id} className="service-item">
-//             <div className="service-icon">
-//               <svg
-//                 xmlns="http://www.w3.org/2000/svg"
-//                 viewBox="0 0 60 60"
-//                 width="40"
-//                 height="40"
-//                 fill="none"
-//                 stroke="currentColor"
-//                 strokeWidth="2"
-//                 strokeLinecap="round"
-//                 strokeLinejoin="round"
-//               >
-//                 <path d={service.path} />
-//               </svg>
-//             </div>
-//             <span className="service-name">{service.name}</span>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
 // Define the SVG paths for each service icon
 const serviceIcons = {
-  "default":
-  "M5,25 L55,25 M15,15 L15,35 M30,15 L30,35 M45,15 L45,35 M5,15 L55,15 M5,35 L55,35 M55,25 C60,20 60,30 55,25",
+  default:
+    "M5,25 L55,25 M15,15 L15,35 M30,15 L30,35 M45,15 L45,35 M5,15 L55,15 M5,35 L55,35 M55,25 C60,20 60,30 55,25",
   "Chimney Inspection":
     "M10,40 L20,5 L40,5 L50,40 Z M25,40 L25,25 M35,40 L35,25 M25,20 L35,20 M15,45 L45,45 M20,50 L40,50 M30,5 L30,0",
   "Chimney Repair":
@@ -325,53 +204,114 @@ const serviceIcons = {
   "Apartment Moving":
     "M10,10 L50,10 L50,45 L10,45 Z M10,20 L50,20 M10,30 L50,30 M10,40 L50,40 M30,10 L30,45 M25,40 L35,40",
   "Senior Moving Services":
-    "M15,45 L45,45 L45,15 L15,15 Z M20,15 L20,45 M40,15 L40,45 M15,30 L45,30 M25,10 C30,5 35,10 40,15"
+    "M15,45 L45,45 L45,15 L15,15 Z M20,15 L20,45 M40,15 L40,45 M15,30 L45,30 M25,10 C30,5 35,10 40,15",
 };
 
-const OurServices = ({ data }) => {
+const OurServices = ({ data,phone }) => {
   if (!data) return null;
 
   const { tagline, heading, description, list = [] } = data;
 
   return (
-    <section className="services-section py-6 md:py-12 ">
-      <Container className="container mx-auto px-4">
-      <Heading text="Services Provided" className="mb-6 md:mb-10" />
+    <>
+      {data.service ? (
+        <section className="services-section py-12 bg-white">
+          <Container className="container mx-auto px-4">
+            <Heading text="Services Provided" className="text-center text-[2rem] font-bold text-blue-900 mb-8" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {list?.map((service) => (
+                <div key={service.id} className="service-card bg-white rounded-lg overflow-hidden border border-gray-100">
+                  {/* Service Image */}
+                  <div className="aspect-[4/3] w-full overflow-hidden">
+                    <img 
+                      src={service.image || "/placeholder-service.jpg"} 
+                      alt={service.title} 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  
+                  {/* Service Content */}
+                  <div className="p-4 text-center">
+                    <h3 className="text-lg font-semibold text-[#002B5B] mb-2">
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-4 min-h-[40px]">
+                      {service.description}
+                    </p>
+                    <Link
+                           href={`tel:${phone}`}
 
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-y-[10px] gap-x-1.5 md:gap-x-6">
-          {list?.map((service) => (
-            <Link
-              href={`/${sanitizeUrl(service.title.toLowerCase().replace(/\s+/g, '-'))}`}
-              key={service.id}
-              className="service-item flex items-center bg-white text-primary rounded-full py-1 md:py-[10px] px-3 md:px-5 shadow-[0_0_10px_rgba(0,0,0,0.4)] transition-all duration-300"
-            >
-              <div className="service-icon mr-3 text-primary ">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 60 60"
-                  width="30"
-                  height="30"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                      className="inline-block bg-[#002B5B] text-white px-6 py-2 rounded-full text-sm hover:bg-blue-900 transition-colors"
+                    >
+                      Call Us Today
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Container>
+          
+          <style jsx>{`
+            .service-card {
+              box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            .service-card:hover {
+              box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+              transform: translateY(-2px);
+              transition: all 0.3s ease;
+            }
+          `}</style>
+        </section>
+      ) : (
+        <section className="services-section py-6 md:py-12 ">
+          <Container className="container mx-auto px-4">
+            <Heading text="Services Provided" className="mb-6 md:mb-10" />
+
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-y-[10px] gap-x-1.5 md:gap-x-6">
+              {list?.map((service) => (
+                <Link
+                  href={`/${sanitizeUrl(
+                    service.title.toLowerCase().replace(/\s+/g, "-")
+                  )}`}
+                  key={service.id}
+                  className="service-item flex items-center bg-white text-primary rounded-full py-1 md:py-[10px] px-3 md:px-5 shadow-[0_0_10px_rgba(0,0,0,0.4)] transition-all duration-300"
                 >
-                  <path d={serviceIcons[service.title] || serviceIcons["default"]} />
-                </svg>
-              </div>
-              <span className="font-barlow font-medium leading-[1.1] text-[13px] sm:text-sm md:text-lg">{service.title}</span>
-            </Link>
-          ))}
-        </div>
-      </Container>
+                  <div className="service-icon mr-3 text-primary ">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 60 60"
+                      width="30"
+                      height="30"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path
+                        d={
+                          serviceIcons[service.title] || serviceIcons["default"]
+                        }
+                      />
+                    </svg>
+                  </div>
+                  <span className="font-barlow font-medium leading-[1.1] text-[13px] sm:text-sm md:text-lg">
+                    {service.title}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </Container>
 
-      <style jsx>{`
-        .service-icon {
-          color: #0047ab;
-        }
-      `}</style>
-    </section>
+          <style jsx>{`
+            .service-icon {
+              color: #0047ab;
+            }
+          `}</style>
+        </section>
+      )}
+    </>
   );
 };
 
