@@ -27,6 +27,7 @@ import {
 
 import { Montserrat, Inter, Barlow } from "next/font/google";
 import { Link as ScrollLink } from "react-scroll";
+import FullMonthPromotion from "@/components/Promotion";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -107,6 +108,11 @@ export default function Home({
           imagePath={imagePath}
           contact_info={contact_info}
         />
+
+        
+
+        <FullMonthPromotion/>
+
         <OurServices data={services} />
         <WhyChoose
           data={features?.value}

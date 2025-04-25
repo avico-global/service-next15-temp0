@@ -151,34 +151,41 @@ export default function Banner({ image, data, contact_info }) {
       <Container className="py-20 font-barlow relative z-10">
         <div className="w-full grid grid-cols-1 md:grid-cols-banner gap-10 md:gap-[66px] text-white lg:min-h-[630px]">
           <div className="relative -mt-10 flex flex-col lg:pr-10 justify-center">
-            <div className="flex items-center md:items-start  justify-center md:justify-start mb-4">
-              <Image
-                title="Google"
-                src="/st-images/google.webp"
-                width={100}
-                height={30}
-                alt="Google"
-                className="w-[67.5px] md:w-[100px] h-[22.5px] md:h-[30px]"
-              />
+            {data.price ? (
+              <div className="bg-gradient-to-r  from-blue-800 via-blue-500 to-blue-300 rounded-full p-3 text-7xl font-bold aspect-square h-32 w-32 flex items-center justify-center">
+                <span className="text-5xl font-semibold">$</span>80
+              </div>
+            ) : (
+              <div className="flex items-center md:items-start  justify-center md:justify-start mb-4">
+                <Image
+                  title="Google"
+                  src="/st-images/google.webp"
+                  width={100}
+                  height={30}
+                  alt="Google"
+                  className="w-[67.5px] md:w-[100px] h-[22.5px] md:h-[30px]"
+                />
 
-              <Image
-                title="Trustpilot"
-                src="/st-images/trustpilot.webp"
-                width={100}
-                height={30}
-                alt="Trustpilot"
-                className="ml-2 md:ml-6 w-[67.5px] md:w-[100px] h-[22.5px] md:h-[30px]"
-              />
+                <Image
+                  title="Trustpilot"
+                  src="/st-images/trustpilot.webp"
+                  width={100}
+                  height={30}
+                  alt="Trustpilot"
+                  className="ml-2 md:ml-6 w-[67.5px] md:w-[100px] h-[22.5px] md:h-[30px]"
+                />
 
-              <Image
-                title="Capterra"
-                src="/st-images/capterra.webp"
-                width={100}
-                height={30}
-                alt="Capterra"
-                className="ml-2 w-[67.5px] md:w-[100px] h-[22.5px] md:h-[30px]"
-              />
-            </div>
+                <Image
+                  title="Capterra"
+                  src="/st-images/capterra.webp"
+                  width={100}
+                  height={30}
+                  alt="Capterra"
+                  className="ml-2 w-[67.5px] md:w-[100px] h-[22.5px] md:h-[30px]"
+                />
+              </div>
+            )}
+
             <h1 className="font-[900] uppercase text-[28px] px-4 md:px-0 md:text-6xl leading-tight text-center md:text-start lg:text-left text-shadow-lg">
               {data?.title}
             </h1>
@@ -188,15 +195,34 @@ export default function Banner({ image, data, contact_info }) {
             <p className="text-[16px] md:text-3xl text-center md:text-start lg:text-left mt-4 mb-1">
               {data?.description}
             </p>
-            <div className="flex flex-col items-center md:items-start pt-3">
-              <CallButton phone={contact_info?.phone} />
-              <p className="text-[22px] md:text-4xl leading-none mt-4 md:mt-2 font-bold">
-                Call Us Today
-              </p>
-            </div>
+
+            {data?.list?.length > 0 ? (
+              <ul className="flex flex-col gap-2">
+                {data.list.map((item, index) => (
+                  <li key={index} className="flex items-center text-xl font-semibold  gap-2">
+                    <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div className="flex flex-col items-center md:items-start pt-3">
+                <CallButton phone={contact_info?.phone} />
+                <p className="text-[22px] md:text-4xl leading-none mt-4 md:mt-2 font-bold">
+                  Call Us Today
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="flex flex-col justify-center">
+            {data.price ? (
+              <div className="bg-gradient-to-r relative from-blue-800 via-blue-500 to-blue-300 -mb-9 -ml-8 rounded-full p-3 text-5xl font-bold aspect-square h-24 w-24 flex items-center justify-center text-white">
+                <span className="text-3xl font-semibold">$</span>80
+              </div>
+            ) : null}
             <div className="bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] font-barlow rounded-[20px] px-4 md:px-12 pb-8 md:pb-12 pt-10 md:pt-14">
               <h3 className="text-3xl md:text-4xl leading-7 md:leading-[30px] font-bold text-center mb-2 text-primary">
                 10% Off Total Price for Online Booking
